@@ -11,12 +11,14 @@ import br.com.fatecmogidascruzes.saph.dao.AlternativeDAO;
 import br.com.fatecmogidascruzes.saph.dao.EvaluatedItemDAO;
 import br.com.fatecmogidascruzes.saph.dao.KnowledgeAreaDAO;
 import br.com.fatecmogidascruzes.saph.dao.QuestionDAO;
+import br.com.fatecmogidascruzes.saph.dao.TestDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.IDAO;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
+import br.com.fatecmogidascruzes.saph.model.Test;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,5 +49,6 @@ public class DAOFactory {
         map.put(EvaluatedItem.class, EvaluatedItemDAO.getInstance());
         map.put(Alternative.class, AlternativeDAO.getInstance());
         map.put(Question.class, QuestionDAO.getInstance());
+        map.put(Test.class, TestDAO.getInstance());
     }
 }
