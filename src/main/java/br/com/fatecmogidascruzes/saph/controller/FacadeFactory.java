@@ -13,6 +13,7 @@ import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import br.com.fatecmogidascruzes.saph.model.Test;
+import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ public class FacadeFactory {
         map.put(Alternative.class, AlternativeFacade.getInstance());
         map.put(Question.class, QuestionFacade.getInstance());
         map.put(Test.class, TestFacade.getInstance());
+        map.put(TestApplication.class, TestApplicationFacade.getInstance());
     }
     
 }

@@ -11,6 +11,7 @@ import br.com.fatecmogidascruzes.saph.controller.AlternativeFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.controller.KnowledgeAreaFacade;
 import br.com.fatecmogidascruzes.saph.controller.QuestionFacade;
+import br.com.fatecmogidascruzes.saph.controller.TestApplicationFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestFacade;
 import br.com.fatecmogidascruzes.saph.dao.AbstractDAO;
 import br.com.fatecmogidascruzes.saph.model.Ability;
@@ -52,11 +53,45 @@ public class Teste {
 //        teste4();
         //teste5();
 //        teste6();
-        teste7();
+//        teste7();
+        teste8();
         
         System.exit(0);
     }
-
+    private static void teste8(){
+        
+        TestApplicationFacade facade = (TestApplicationFacade) FacadeFactory.getInstance().getFacade(TestApplication.class);
+        
+        TestApplication ta = new TestApplication();
+        Test test = new Test();
+        
+        QuestionText queTxt1 = new QuestionText();
+        queTxt1.setText("Pergunta 1");
+        QuestionText queTxt2 = new QuestionText();
+        queTxt2.setText("Pergunta 2");
+        QuestionText queTxt3 = new QuestionText();
+        queTxt3.setText("Pergunta 3");
+        QuestionText queTxt4 = new QuestionText();
+        queTxt4.setText("Pergunta 4");
+        
+        Question que1 = new Question();
+        que1.setQuestionText(queTxt1);
+        Question que2 = new Question();
+        que2.setQuestionText(queTxt2);
+        Question que3 = new Question();
+        que3.setQuestionText(queTxt3);
+        Question que4 = new Question();
+        que4.setQuestionText(queTxt4);
+        
+        test.addQuestion(que1);
+        test.addQuestion(que2);
+        test.addQuestion(que3);
+        test.addQuestion(que4);
+        
+        ta.setTest(test);
+        
+        facade.save(ta);
+    }
     private static void teste7(){
         
         TestFacade facade = (TestFacade) FacadeFactory.getInstance().getFacade(Test.class);
