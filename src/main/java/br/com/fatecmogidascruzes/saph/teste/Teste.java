@@ -36,9 +36,17 @@ import br.com.fatecmogidascruzes.saph.model.Teacher;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -56,9 +64,37 @@ public class Teste {
 //        teste6();
 //        teste7();
 //        teste8();
-        teste9();
+//        teste9();
+        teste10();
         
-        System.exit(0);
+//        System.exit(0);
+    }
+    
+    private static void teste11(){
+
+    }
+    private static void teste10(){
+        
+        TestResultFacade facade = (TestResultFacade) FacadeFactory.getInstance().getFacade(TestResult.class);
+        TestResult tr1 = new TestResult();
+        TestResult tr2 = new TestResult();
+        TestResult tr3 = new TestResult();
+        
+        Student st1 = new Student();
+        st1.setName("Marcelo");
+        Student st2 = new Student();
+        st2.setName("Tabata");
+        
+        tr1.setStudent(st1);
+        tr2.setStudent(st2);
+        tr3.setStudent(st2);
+        
+        facade.save(tr1);
+        facade.save(tr2);
+        facade.save(tr3);
+        
+        List results = facade.getTestResultsByStudent(st1);
+        List results1 = facade.getTestResultsByStudent(st2);
     }
     private static void teste9(){
         

@@ -1,6 +1,11 @@
 package br.com.fatecmogidascruzes.saph.dao;
 
+import br.com.fatecmogidascruzes.saph.config.HSession;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultFacade;
+import br.com.fatecmogidascruzes.saph.model.Student;
+import br.com.fatecmogidascruzes.saph.model.TestResult;
+import java.util.List;
+import org.hibernate.Query;
 
 /**
  * All fonts were produced for author's graduation project
@@ -18,5 +23,17 @@ public class TestResultDAO extends AbstractDAO implements ITestResultFacade{
         } else {
             return dao;
         }
+    }
+
+    @Override
+    public List<TestResult> getTestResultsByStudent(Student student) {
+        
+        session = HSession.getSession();
+        String hql = "from TestResult tr WHERE " + student.getId() + " = tr.student.id";
+        Query q = session.createQuery(hql);
+        
+        List entities = q.list();
+        session.close();
+        return entities;
     }
 }

@@ -2,6 +2,9 @@ package br.com.fatecmogidascruzes.saph.controller;
 
 import br.com.fatecmogidascruzes.saph.dao.TestResultDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultFacade;
+import br.com.fatecmogidascruzes.saph.model.Student;
+import br.com.fatecmogidascruzes.saph.model.TestResult;
+import java.util.List;
 
 /**
  * All fonts were produced for author's graduation project
@@ -22,5 +25,10 @@ public class TestResultFacade extends AbstractFacade implements ITestResultFacad
     }
     private TestResultFacade(){
         dao = new TestResultDAO();
+    }
+
+    @Override
+    public List<TestResult> getTestResultsByStudent(Student student) {
+        return dao.getTestResultsByStudent(student);
     }
 }
