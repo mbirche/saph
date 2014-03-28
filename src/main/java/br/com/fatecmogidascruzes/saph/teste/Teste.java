@@ -8,6 +8,7 @@ package br.com.fatecmogidascruzes.saph.teste;
 import br.com.fatecmogidascruzes.saph.controller.AbilityFacade;
 import br.com.fatecmogidascruzes.saph.controller.AbstractFacade;
 import br.com.fatecmogidascruzes.saph.controller.AlternativeFacade;
+import br.com.fatecmogidascruzes.saph.controller.ClassAssignmentFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.controller.KnowledgeAreaFacade;
 import br.com.fatecmogidascruzes.saph.controller.QuestionFacade;
@@ -36,17 +37,9 @@ import br.com.fatecmogidascruzes.saph.model.Teacher;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -65,13 +58,77 @@ public class Teste {
 //        teste7();
 //        teste8();
 //        teste9();
-        teste10();
+//        teste10();
+        teste11();
         
-//        System.exit(0);
+        System.exit(0);
     }
     
     private static void teste11(){
 
+        ClassAssignmentFacade facade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
+        
+        ClassAssignment ca = new ClassAssignment();
+        
+        Teacher t1 = new Teacher();
+        t1.setName("Marcelo");
+        Teacher t2 = new Teacher();
+        t2.setName("Tabata");
+        
+        Course c1 = new Course();
+        c1.setName("ADS");
+        Course c2 = new Course();
+        c2.setName("AGRO");
+        
+        Discipline d1 = new Discipline();
+        d1.setName("OO");
+        Discipline d2 = new Discipline();
+        d2.setName("ADM");
+        
+        StudentClass sc1 = new StudentClass();
+        StudentClass sc2 = new StudentClass();
+        
+        Student st1 = new Student();
+        st1.setName("Alis");
+        Student st2 = new Student();
+        st2.setName("Vinicius");
+        
+        sc1.addStudent(st1);
+        sc1.addStudent(st2);
+        sc1.addClassAssignment(ca);
+        
+        sc2.addStudent(st2);
+        sc2.addClassAssignment(ca);
+        
+        ca.addStudentClass(sc1);
+//        ca.addStudentClass(sc2);
+        
+        ca.addTeacher(t1);
+        ca.addTeacher(t2);
+        
+        ca.setCourse(c2);
+        
+        ca.setDiscipline(d2);
+        
+        facade.save(ca);
+        
+//        List cas1 = facade.getClassAssignmentsByTeacher(t1);
+//        List cas2 = facade.getClassAssignmentsByTeacher(t2);
+        
+//        List cas3 = facade.getClassAssignmentsByCourse(c1);
+//        List cas4 = facade.getClassAssignmentsByCourse(c2);
+        
+//        List cas5 = facade.getClassAssignmentsByDiscipline(d1);
+//        List cas6 = facade.getClassAssignmentsByDiscipline(d2);
+        
+//        List cas5 = facade.getClassAssignmentsByStudentClass(sc1);
+//        List cas6 = facade.getClassAssignmentsByStudentClass(sc2);
+        
+        List cas7 = facade.getClassAssignmentsByStudent(st1);
+        List cas8 = facade.getClassAssignmentsByStudent(st2);
+        
+        System.out.println("Será?");
+        
     }
     private static void teste10(){
         
