@@ -14,6 +14,7 @@ import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import br.com.fatecmogidascruzes.saph.model.Student;
+import br.com.fatecmogidascruzes.saph.model.StudentClass;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
@@ -52,6 +53,7 @@ public class FacadeFactory {
         map.put(TestResult.class, TestResultFacade.getInstance());
         map.put(Student.class, StudentFacade.getInstance());
         map.put(ClassAssignment.class, ClassAssignmentFacade.getInstance());
+        map.put(StudentClass.class, StudentClassFacade.getInstance());
     }
     
 }

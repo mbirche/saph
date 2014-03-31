@@ -12,6 +12,7 @@ import br.com.fatecmogidascruzes.saph.dao.ClassAssignmentDAO;
 import br.com.fatecmogidascruzes.saph.dao.EvaluatedItemDAO;
 import br.com.fatecmogidascruzes.saph.dao.KnowledgeAreaDAO;
 import br.com.fatecmogidascruzes.saph.dao.QuestionDAO;
+import br.com.fatecmogidascruzes.saph.dao.StudentClassDAO;
 import br.com.fatecmogidascruzes.saph.dao.StudentDAO;
 import br.com.fatecmogidascruzes.saph.dao.TestApplicationDAO;
 import br.com.fatecmogidascruzes.saph.dao.TestDAO;
@@ -24,6 +25,7 @@ import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import br.com.fatecmogidascruzes.saph.model.Student;
+import br.com.fatecmogidascruzes.saph.model.StudentClass;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
@@ -62,5 +64,6 @@ public class DAOFactory {
         map.put(TestResult.class, TestResultDAO.getInstance());
         map.put(Student.class, StudentDAO.getInstance());
         map.put(ClassAssignment.class, ClassAssignmentDAO.getInstance());
+        map.put(StudentClass.class, StudentClassDAO.getInstance());
     }
 }

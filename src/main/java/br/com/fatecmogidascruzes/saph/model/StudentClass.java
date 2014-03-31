@@ -24,7 +24,7 @@ public class StudentClass extends Entity {
 
     
     @Cascade(CascadeType.ALL)
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="studentclass_student",
             schema="saph", 
             joinColumns=@JoinColumn(name="id_studentclass"), 

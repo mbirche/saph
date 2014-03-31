@@ -12,6 +12,8 @@ import br.com.fatecmogidascruzes.saph.controller.ClassAssignmentFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.controller.KnowledgeAreaFacade;
 import br.com.fatecmogidascruzes.saph.controller.QuestionFacade;
+import br.com.fatecmogidascruzes.saph.controller.StudentClassFacade;
+import br.com.fatecmogidascruzes.saph.controller.StudentFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestApplicationFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestResultFacade;
@@ -59,11 +61,42 @@ public class Teste {
 //        teste8();
 //        teste9();
 //        teste10();
-        teste11();
+//        teste11();
+          teste12();
         
         System.exit(0);
     }
-    
+    private static void teste12(){
+        StudentFacade studentFacade = (StudentFacade) FacadeFactory.getInstance().getFacade(Student.class);
+        StudentClassFacade classFacade = (StudentClassFacade) FacadeFactory.getInstance().getFacade(StudentClass.class);
+        
+        StudentClass sc1 = new StudentClass();
+        StudentClass sc2 = new StudentClass();
+        StudentClass sc3 = new StudentClass();
+        StudentClass sc4 = new StudentClass();
+        
+        Student st1 = new Student();
+        st1.setName("Alis");
+        Student st2 = new Student();
+        st2.setName("Vinicius");
+        
+        sc1.addStudent(st1);
+        sc1.addStudent(st2);
+        sc2.addStudent(st1);
+        sc3.addStudent(st1);
+        sc4.addStudent(st2);
+        
+        classFacade.save(sc1);
+        classFacade.save(sc2);
+        classFacade.save(sc3);
+        classFacade.save(sc4);
+        
+        List l1 = studentFacade.getStudentClasses(st1);
+        List l2 = studentFacade.getStudentClasses(st2);
+        
+        System.out.println("Será?");
+        
+    }
     private static void teste11(){
 
         ClassAssignmentFacade facade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
