@@ -9,6 +9,7 @@ import br.com.fatecmogidascruzes.saph.controller.AbilityFacade;
 import br.com.fatecmogidascruzes.saph.controller.AbstractFacade;
 import br.com.fatecmogidascruzes.saph.controller.AlternativeFacade;
 import br.com.fatecmogidascruzes.saph.controller.ClassAssignmentFacade;
+import br.com.fatecmogidascruzes.saph.controller.CourseFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.controller.KnowledgeAreaFacade;
 import br.com.fatecmogidascruzes.saph.controller.QuestionFacade;
@@ -62,9 +63,50 @@ public class Teste {
 //        teste9();
 //        teste10();
 //        teste11();
-          teste12();
+//          teste12();
+        teste13();
         
         System.exit(0);
+    }
+    
+    private static void teste13(){
+        
+        CourseFacade facade = (CourseFacade) FacadeFactory.getInstance().getFacade(Course.class);
+        Course c1 = new Course();
+        c1.setName("ADS");
+        
+        Coordinator cd = new Coordinator();
+        cd.setName("Luciano");
+        
+        Discipline d1 = new Discipline();
+        d1.setName("Eng Software 1");
+        d1.setCourse(c1);
+        
+        c1.addDiscipline(d1);
+        c1.setCoordinator(cd);
+        
+        Course c2 = new Course();
+        c2.setName("Agro");
+        
+        Coordinator cd1 = new Coordinator();
+        cd1.setName("Mark");
+        
+        Discipline d2 = new Discipline();
+        d2.setName("Adm Geral");
+        d2.setCourse(c2);
+        
+        c2.addDiscipline(d2);
+        c2.setCoordinator(cd1);
+        
+        facade.save(c1);
+        facade.save(c2);
+        
+//        List corses1 = facade.getCoursesByCoordinator(cd);
+//        List courses2 = facade.getCoursesByCoordinator(cd1);
+        
+        List corses3 = facade.getCoursesByDiscipline(d1);
+        List courses4 = facade.getCoursesByDiscipline(d2);
+        
     }
     private static void teste12(){
         StudentFacade studentFacade = (StudentFacade) FacadeFactory.getInstance().getFacade(Student.class);

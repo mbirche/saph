@@ -10,6 +10,7 @@ import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
+import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
@@ -54,6 +55,7 @@ public class FacadeFactory {
         map.put(Student.class, StudentFacade.getInstance());
         map.put(ClassAssignment.class, ClassAssignmentFacade.getInstance());
         map.put(StudentClass.class, StudentClassFacade.getInstance());
+        map.put(Course.class, CourseFacade.getInstance());
     }
     
 }
