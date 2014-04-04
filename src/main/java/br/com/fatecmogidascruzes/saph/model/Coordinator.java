@@ -4,6 +4,7 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
+import br.com.fatecmogidascruzes.saph.interfaces.ICoordinable;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
@@ -12,7 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @javax.persistence.Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Coordinator extends User {
+public class Coordinator extends User implements ICoordinable{
  
 }
  

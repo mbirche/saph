@@ -3,7 +3,6 @@ package br.com.fatecmogidascruzes.saph.dao;
 import br.com.fatecmogidascruzes.saph.config.HSession;
 import br.com.fatecmogidascruzes.saph.interfaces.IQuestionFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
-import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import java.util.List;
 import org.hibernate.Query;

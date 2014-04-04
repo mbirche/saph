@@ -4,6 +4,7 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
+import br.com.fatecmogidascruzes.saph.interfaces.ICoordinable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.FetchType;
@@ -18,7 +19,7 @@ import org.hibernate.annotations.CascadeType;
  */
 @javax.persistence.Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Teacher extends User {
+public class Teacher extends User implements ICoordinable{
 
     @Cascade(CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER)

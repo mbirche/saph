@@ -9,12 +9,14 @@ import br.com.fatecmogidascruzes.saph.controller.AbilityFacade;
 import br.com.fatecmogidascruzes.saph.controller.AbstractFacade;
 import br.com.fatecmogidascruzes.saph.controller.AlternativeFacade;
 import br.com.fatecmogidascruzes.saph.controller.ClassAssignmentFacade;
+import br.com.fatecmogidascruzes.saph.controller.CoordinatorFacade;
 import br.com.fatecmogidascruzes.saph.controller.CourseFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.controller.KnowledgeAreaFacade;
 import br.com.fatecmogidascruzes.saph.controller.QuestionFacade;
 import br.com.fatecmogidascruzes.saph.controller.StudentClassFacade;
 import br.com.fatecmogidascruzes.saph.controller.StudentFacade;
+import br.com.fatecmogidascruzes.saph.controller.TeacherFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestApplicationFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestFacade;
 import br.com.fatecmogidascruzes.saph.controller.TestResultFacade;
@@ -64,11 +66,80 @@ public class Teste {
 //        teste10();
 //        teste11();
 //          teste12();
-        teste13();
+//        teste13();
+//        teste14();
+        teste15();
         
         System.exit(0);
     }
     
+    private static void teste15(){
+        TeacherFacade teacherFacade = (TeacherFacade) FacadeFactory.getInstance().getFacade(Teacher.class);
+        ClassAssignmentFacade caFacade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
+        
+        Teacher t1 = new Teacher();
+        t1.setName("Leandro");
+        Teacher t2 = new Teacher();
+        t2.setName("Rodrigo");
+        Teacher t3 = new Teacher();
+        t3.setName("Luciano");
+        
+        ClassAssignment ca1 = new ClassAssignment();
+        ClassAssignment ca2 = new ClassAssignment();
+        ClassAssignment ca3 = new ClassAssignment();
+        ClassAssignment ca4 = new ClassAssignment();
+        
+        ca1.addTeacher(t1);
+        ca1.addTeacher(t2);
+        
+        ca2.addTeacher(t3);
+        
+        ca3.addTeacher(t1);
+        
+        ca4.addTeacher(t3);
+        
+        caFacade.save(ca1);
+        caFacade.save(ca2);
+        caFacade.save(ca3);
+        caFacade.save(ca4);
+        
+        List cas1 = teacherFacade.getClassAssignmentByTeacher(t1);
+        List cas2 = teacherFacade.getClassAssignmentByTeacher(t2);
+        List cas3 = teacherFacade.getClassAssignmentByTeacher(t3);
+    }
+    private static void teste14(){
+        
+        CourseFacade courseFacade = (CourseFacade) FacadeFactory.getInstance().getFacade(Course.class);
+        CoordinatorFacade coordinatorFacade = (CoordinatorFacade) FacadeFactory.getInstance().getFacade(Coordinator.class);
+        
+        Course c1 = new Course();        
+        
+        Course c2 = new Course();
+        
+        Course c3 = new Course();
+        
+        Coordinator cd1 = new Coordinator();
+        cd1.setName("Leandro");
+        Coordinator cd2 = new Coordinator();
+        cd2.setName("Rodrigo");
+        Coordinator cd3 = new Coordinator();
+        cd3.setName("Luciano");
+        
+        c1.setCoordinator(cd1);
+        c2.setCoordinator(cd1);
+        c3.setCoordinator(cd2);
+        
+        courseFacade.save(c1);
+        courseFacade.save(c2);
+        courseFacade.save(c3);
+        
+        List courses1 = coordinatorFacade.getCoursesByCoordinator(cd1);
+        List courses2 = coordinatorFacade.getCoursesByCoordinator(cd2);
+        List courses3 = coordinatorFacade.getCoursesByCoordinator(cd3);
+        
+        
+        
+    }
     private static void teste13(){
         
         CourseFacade facade = (CourseFacade) FacadeFactory.getInstance().getFacade(Course.class);

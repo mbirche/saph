@@ -4,12 +4,35 @@
  */
 package br.com.fatecmogidascruzes.saph.controller;
 
-import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
+import br.com.fatecmogidascruzes.saph.dao.TeacherDAO;
+import br.com.fatecmogidascruzes.saph.interfaces.ITeacherFacade;
+import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
+import br.com.fatecmogidascruzes.saph.model.Discipline;
+import br.com.fatecmogidascruzes.saph.model.Teacher;
+import java.util.List;
 
 /**
  *
  * @author Birche
  */
-public class TeacherFacade extends AbstractFacade{
+public class TeacherFacade extends AbstractFacade implements ITeacherFacade{
     
+    private static TeacherFacade facade;
+    private TeacherDAO dao;
+    public static TeacherFacade getInstance(){
+        if(facade == null){
+            facade = new TeacherFacade();
+            return facade;
+        }else{
+            return facade;
+        }
+    }
+    private TeacherFacade(){
+        dao = new TeacherDAO();
+    }
+
+    @Override
+    public List<ClassAssignment> getClassAssignmentByTeacher(Teacher teacher) {
+        return dao.getClassAssignmentByTeacher(teacher);
+    }
 }

@@ -10,12 +10,14 @@ import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
+import br.com.fatecmogidascruzes.saph.model.Coordinator;
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import br.com.fatecmogidascruzes.saph.model.Student;
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
+import br.com.fatecmogidascruzes.saph.model.Teacher;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
@@ -56,6 +58,8 @@ public class FacadeFactory {
         map.put(ClassAssignment.class, ClassAssignmentFacade.getInstance());
         map.put(StudentClass.class, StudentClassFacade.getInstance());
         map.put(Course.class, CourseFacade.getInstance());
+        map.put(Coordinator.class, CoordinatorFacade.getInstance());
+        map.put(Teacher.class, TeacherFacade.getInstance());
     }
     
 }

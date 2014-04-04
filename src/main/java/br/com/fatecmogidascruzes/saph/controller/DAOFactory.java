@@ -9,12 +9,14 @@ package br.com.fatecmogidascruzes.saph.controller;
 import br.com.fatecmogidascruzes.saph.dao.AbilityDAO;
 import br.com.fatecmogidascruzes.saph.dao.AlternativeDAO;
 import br.com.fatecmogidascruzes.saph.dao.ClassAssignmentDAO;
+import br.com.fatecmogidascruzes.saph.dao.CoordinatorDAO;
 import br.com.fatecmogidascruzes.saph.dao.CourseDAO;
 import br.com.fatecmogidascruzes.saph.dao.EvaluatedItemDAO;
 import br.com.fatecmogidascruzes.saph.dao.KnowledgeAreaDAO;
 import br.com.fatecmogidascruzes.saph.dao.QuestionDAO;
 import br.com.fatecmogidascruzes.saph.dao.StudentClassDAO;
 import br.com.fatecmogidascruzes.saph.dao.StudentDAO;
+import br.com.fatecmogidascruzes.saph.dao.TeacherDAO;
 import br.com.fatecmogidascruzes.saph.dao.TestApplicationDAO;
 import br.com.fatecmogidascruzes.saph.dao.TestDAO;
 import br.com.fatecmogidascruzes.saph.dao.TestResultDAO;
@@ -22,12 +24,14 @@ import br.com.fatecmogidascruzes.saph.interfaces.IDAO;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
+import br.com.fatecmogidascruzes.saph.model.Coordinator;
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import br.com.fatecmogidascruzes.saph.model.Student;
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
+import br.com.fatecmogidascruzes.saph.model.Teacher;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
@@ -68,5 +72,7 @@ public class DAOFactory {
         map.put(ClassAssignment.class, ClassAssignmentDAO.getInstance());
         map.put(StudentClass.class, StudentClassDAO.getInstance());
         map.put(Course.class, CourseDAO.getInstance());
+        map.put(Coordinator.class, CoordinatorDAO.getInstance());
+        map.put(Teacher.class, TeacherDAO.getInstance());
     }
 }
