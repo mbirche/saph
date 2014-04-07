@@ -65,17 +65,17 @@ public class Teste {
 //        teste9();
 //        teste10();
 //        teste11();
-//          teste12();
+          teste12();
 //        teste13();
 //        teste14();
-        teste15();
+//        teste15();
         
         System.exit(0);
     }
     
     private static void teste15(){
         TeacherFacade teacherFacade = (TeacherFacade) FacadeFactory.getInstance().getFacade(Teacher.class);
-        ClassAssignmentFacade caFacade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
+        TestApplicationFacade taFacade = (TestApplicationFacade) FacadeFactory.getInstance().getFacade(TestApplication.class);
         
         Teacher t1 = new Teacher();
         t1.setName("Leandro");
@@ -98,14 +98,31 @@ public class Teste {
         
         ca4.addTeacher(t3);
         
-        caFacade.save(ca1);
-        caFacade.save(ca2);
-        caFacade.save(ca3);
-        caFacade.save(ca4);
+        
+        
+        
+        TestApplication ta1 = new TestApplication();
+        TestApplication ta2 = new TestApplication();
+        TestApplication ta3 = new TestApplication();
+        TestApplication ta4 = new TestApplication();
+        
+        ta1.setClassAssignment(ca1);
+        ta2.setClassAssignment(ca2);
+        ta3.setClassAssignment(ca3);
+        ta4.setClassAssignment(ca4);
+        
+        taFacade.save(ta1);
+        taFacade.save(ta2);
+        taFacade.save(ta3);
+        taFacade.save(ta4);
         
         List cas1 = teacherFacade.getClassAssignmentByTeacher(t1);
         List cas2 = teacherFacade.getClassAssignmentByTeacher(t2);
         List cas3 = teacherFacade.getClassAssignmentByTeacher(t3);
+        
+        List tas1 = teacherFacade.getTestApplicationsByTeacher(t1);
+        List tas2 = teacherFacade.getTestApplicationsByTeacher(t2);
+        List tas3 = teacherFacade.getTestApplicationsByTeacher(t3);
     }
     private static void teste14(){
         
@@ -182,6 +199,7 @@ public class Teste {
     private static void teste12(){
         StudentFacade studentFacade = (StudentFacade) FacadeFactory.getInstance().getFacade(Student.class);
         StudentClassFacade classFacade = (StudentClassFacade) FacadeFactory.getInstance().getFacade(StudentClass.class);
+        ClassAssignmentFacade caFacade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
         
         StudentClass sc1 = new StudentClass();
         StudentClass sc2 = new StudentClass();
@@ -204,8 +222,27 @@ public class Teste {
         classFacade.save(sc3);
         classFacade.save(sc4);
         
-        List l1 = studentFacade.getStudentClasses(st1);
-        List l2 = studentFacade.getStudentClasses(st2);
+//        List l1 = studentFacade.getStudentClasses(st1);
+//        List l2 = studentFacade.getStudentClasses(st2);
+        
+        ClassAssignment ca1 = new ClassAssignment();
+        ClassAssignment ca2 = new ClassAssignment();
+        ClassAssignment ca3 = new ClassAssignment();
+        
+        ca1.addStudentClass(sc1);
+        ca1.addStudentClass(sc4);
+        ca2.addStudentClass(sc2);
+        ca3.addStudentClass(sc3);
+        
+               
+        caFacade.save(ca1);
+        caFacade.save(ca2);
+        caFacade.save(ca3);
+        
+        List l3 = studentFacade.getStudentAssignments(st1);
+        List l4 = studentFacade.getStudentAssignments(st2);
+ 
+        
         
         System.out.println("Será?");
         

@@ -5,6 +5,7 @@ import br.com.fatecmogidascruzes.saph.interfaces.ITeacherFacade;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
 import br.com.fatecmogidascruzes.saph.model.Teacher;
+import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import java.util.List;
 import org.hibernate.Query;
 
@@ -31,6 +32,18 @@ public class TeacherDAO extends AbstractDAO implements ITeacherFacade{
         
         session = HSession.getSession();
         String hql = "from ClassAssignment ca WHERE " + teacher.getId() + " IN (SELECT teachers.id from ca.teachers as teachers)";
+        Query q = session.createQuery(hql);
+        
+        List entities = q.list();
+        session.close();
+        return entities;
+    }
+
+    @Override
+    public List<TestApplication> getTestApplicationsByTeacher(Teacher teacher) {
+        
+        session = HSession.getSession();
+        String hql = "from TestApplication ta WHERE " + teacher.getId() + " IN (SELECT teachers.id from ta.classAssignment.teachers as teachers)";
         Query q = session.createQuery(hql);
         
         List entities = q.list();

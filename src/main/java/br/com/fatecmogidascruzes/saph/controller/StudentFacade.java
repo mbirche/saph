@@ -42,7 +42,7 @@ public class StudentFacade extends AbstractFacade implements IStudentFacade{
 
     @Override
     public List<ClassAssignment> getStudentAssignments(Student student) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return dao.getStudentAssignments(student);
     }
 
     @Override

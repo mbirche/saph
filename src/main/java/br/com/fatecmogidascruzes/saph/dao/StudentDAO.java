@@ -43,7 +43,13 @@ public class StudentDAO extends AbstractDAO implements IStudentFacade{
 
     @Override
     public List<ClassAssignment> getStudentAssignments(Student student) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        session = HSession.getSession();
+        String hql = "from ClassAssignment ca WHERE " + student.getId() + " IN (SELECT students.id FROM ca.studentClasses as classes JOIN classes.students as students)";
+        Query q = session.createQuery(hql);
+        List entities = q.list();
+        session.close();
+        return entities;
     }
 
     @Override
