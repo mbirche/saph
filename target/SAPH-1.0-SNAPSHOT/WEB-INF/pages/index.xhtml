@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+            <style type="text/css">
+                .ui-panelgrid td, .ui-panelgrid tr{
+                    /*border: none !important;*/
+                }
+                body{
+                    font-size: 12px;
+                }
+            </style>
+            <!--<link type="html/css"/>-->
+        </h:head>
+
+        <h:body style="font-size: 10px !important">
+            <h:form id="formPrincipal">
+                <p:layout fullPage="true">
+                    
+                    <p:layoutUnit position="north" size="50" resizable="true" closable="true" collapsible="true">
+                        Tabata
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                        Footer
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="west" size="175" header="Menu" collapsible="true">
+                        <p:menu>
+                            <p:submenu label="Professor">
+
+<!--                                <p:menuitem value="Inicio" update="pnlCentral" actionListener="#{indexMB.setPaginaAtual('boasVindas.xhtml')}"/>                                
+                                <p:menuitem value="Questões" update="pnlCentral" action="#{questaoMB.populaQuestoes()}" actionListener="#{indexMB.setPaginaAtual('listaQuestoes.xhtml')}"/>
+                                <p:menuitem value="Disciplinas" update="pnlCentral" action="#{disciplinaMB.buscarDisciplinas()}" actionListener="#{indexMB.setPaginaAtual('listaDisciplinas.xhtml')}"/>
+                                <p:menuitem value="Cursos" update="pnlCentral" actionListener="#{indexMB.setPaginaAtual('listaCursos.xhtml')}"/>
+                                <p:menuitem value="Habilidades" update="pnlCentral"  action="#{habilidadeMB.popularDados()}" actionListener="#{indexMB.setPaginaAtual('listaHabilidades.xhtml')}"/>
+                                <p:menuitem value="Áreas de Conhecimento" update="pnlCentral" action="#{areaConhecimentoMB.buscarAreasConhecimento()}" actionListener="#{indexMB.setPaginaAtual('listaAreaConhecimento.xhtml')}"/>
+                                <p:menuitem value="Professores" update="pnlCentral"  action="#{professorMB.buscarProfessores()}" actionListener="#{indexMB.setPaginaAtual('listaProfessores.xhtml')}"/>-->
+
+                            </p:submenu>
+                            <p:submenu label="Aluno">
+<!--                                <p:menuitem value="Minhas Provas" update="pnlCentral" actionListener="#{indexMB.setPaginaAtual('cadastroProfessor.xhtml')}"/>
+                                <p:menuitem value="Resultados" update="pnlCentral" actionListener="#{indexMB.setPaginaAtual('cadastroProfessor.xhtml')}"/>-->
+                            </p:submenu>
+                        </p:menu>
+                    </p:layoutUnit>
+
+
+                    <p:layoutUnit position="center" style="font-size: 12px">
+                        <h:panelGroup id="pnlCentral">
+                            <!--<ui:include src="#{indexMB.paginaAtual}"/>-->
+                        </h:panelGroup>
+                    </p:layoutUnit>
+
+
+                </p:layout>
+            </h:form>
+        </h:body>
+
+    </f:view>
+</html>
+
