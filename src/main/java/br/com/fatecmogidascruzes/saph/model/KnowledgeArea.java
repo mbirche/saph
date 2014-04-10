@@ -12,6 +12,7 @@ package br.com.fatecmogidascruzes.saph.model;
 public class KnowledgeArea extends Entity {
 
     private String name;
+    private String description;
 
     public String getName() {
         return name;
@@ -19,5 +20,13 @@ public class KnowledgeArea extends Entity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

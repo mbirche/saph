@@ -1,0 +1,31 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/04/2014, 16:33:48
+    Author     : marcelo
+*/
+.ui-panelgrid td, .ui-panelgrid tr{
+    /*border: none !important;*/
+}
+.cssPainel .ui-layout-unit-content{
+    background-color: aquamarine !important;
+}
+.ui-layout-unit-content{
+    font-size: 12px !important;
+    padding: 0px !important;
+}
+.ui-layout-resizer{
+    background-color: #0099ff !important;
+}
+.ui-layout-unit{
+    border: none !important;
+}
+.ui-layout-toggler{
+    background-color: black !important;
+}
+body{
+    
+}

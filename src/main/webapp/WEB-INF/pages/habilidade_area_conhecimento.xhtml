@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition id="uiAreaConhecimento">
+        
+        <h:outputText value="Áreas de Conhecimento e Habilidades"/>
+        <p>
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <h:outputText value="Nome"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="Descrição"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+<!--                        <p:inputText value="#{areaConhecimentoMB.area.nome}"/>-->
+                    </p:column>
+                    <p:column>
+<!--                        <p:inputTextarea value="#{areaConhecimentoMB.area.descricao}" cols="120"/>-->
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:commandButton value="Adicionar"/>
+
+                                         
+                        <p:commandButton value="Cancelar" /> 
+                  
+                                        
+                    </p:column>
+                </p:row>
+
+            </p:panelGrid>
+        </p>   
+    </ui:composition>
+</html>
