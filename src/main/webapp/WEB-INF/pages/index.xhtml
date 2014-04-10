@@ -15,34 +15,54 @@
                 .ui-panelgrid td, .ui-panelgrid tr{
                     /*border: none !important;*/
                 }
+                .cssPainel .ui-layout-unit-content{
+                    background-color: aquamarine !important;
+                }
                 body{
                     font-size: 12px;
                 }
             </style>
-            
+
         </h:head>
 
         <h:body style="font-size: 10px !important">
             <h:form id="formPrincipal">
                 <p:layout fullPage="true">
-                    
-                    <p:layoutUnit position="north" size="50" resizable="true" closable="true" collapsible="true">
-                        Tabata
+
+                    <p:layoutUnit position="north" size="50" resizable="true" 
+                                  closable="true" collapsible="true"
+                                  style="background-color: aquamarine !important; text-align: center"
+                                  styleClass="cssPainel">
+                        <p:graphicImage  url="/images/saph.png"/>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
                         Footer
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="west" size="175" header="Menu">
+                    <p:layoutUnit position="west" size="175" header="Menu" styleClass="cssPainel"
+                                  style="background-color: aquamarine !important;">
                         <p:menu>
+                            <p:submenu label="Geral">                               
+                                <p:menuitem value="Atualizar Dados Pessoais"/>                             
+                            </p:submenu>
+                            <p:submenu label="Coordenador">
+                                <p:menuitem value="Manter Professores"/>
+                                <p:menuitem value="Manter Cursos"/>
+                                <p:menuitem value="Manter Disciplinas"/>
+                                <p:menuitem value="Manter Áreas de Conhecimento"/>
+                                <p:menuitem value="Manter Habilidades"/>
+                            </p:submenu>
                             <p:submenu label="Professor">
-
-                         
-
+                                <p:menuitem value="Manter Questões"/>
+                                <p:menuitem value="Manter Avaliações"/>
+                                <p:menuitem value="Analisar Avaliações"/>
+                                <p:menuitem value="Manter Alunos"/>
+                                <p:menuitem value="Manter Turmas"/>
                             </p:submenu>
                             <p:submenu label="Aluno">
-                              
+                                <p:menuitem value="Responder Avaliações"/>
+                                <p:menuitem value="Avaliações Analisadas"/>
                             </p:submenu>
                         </p:menu>
                     </p:layoutUnit>
@@ -50,7 +70,7 @@
 
                     <p:layoutUnit position="center" style="font-size: 12px">
                         <h:panelGroup id="pnlCentral">
-                          
+
                         </h:panelGroup>
                     </p:layoutUnit>
 
