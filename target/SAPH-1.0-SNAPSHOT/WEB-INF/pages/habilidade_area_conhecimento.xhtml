@@ -11,38 +11,41 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition id="uiAreaConhecimento">
-        
-        <h:outputText value="Áreas de Conhecimento e Habilidades"/>
+
+        <h:outputText value="Áreas de Conhecimento" styleClass="tituloSecao"/>
         <p>
-            <p:panelGrid>
+            <p:panelGrid style="width: 100%;" styleClass="gridComBorda">
                 <p:row>
-                    <p:column>
-                        <h:outputText value="Nome"/>
+                    <p:column style="width: 50%;">
+                        <p:panelGrid style="width: 100%;">
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Nome" styleClass="labelTxt"/>
+                                    <p:inputText style="width: 100%;"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="Descrição" styleClass="labelTxt"/>
+                                    <p:inputTextarea style="width: 100%;"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
                     </p:column>
                     <p:column>
-                        <h:outputText value="Descrição"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-<!--                        <p:inputText value="#{areaConhecimentoMB.area.nome}"/>-->
-                    </p:column>
-                    <p:column>
-<!--                        <p:inputTextarea value="#{areaConhecimentoMB.area.descricao}" cols="120"/>-->
+                        <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
+                        <p:dataTable>
+
+                        </p:dataTable>
                     </p:column>
                 </p:row>
                 <p:row>
                     <p:column colspan="2">
                         <p:commandButton value="Adicionar"/>
-
-                                         
                         <p:commandButton value="Cancelar" /> 
-                  
-                                        
                     </p:column>
                 </p:row>
-
             </p:panelGrid>
-        </p>   
+        </p>
+        <p:separator/>
+        <h:outputText value="Habilidades" styleClass="tituloSecao"/>
     </ui:composition>
 </html>

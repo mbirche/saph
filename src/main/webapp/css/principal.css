@@ -8,13 +8,22 @@ and open the template in the editor.
     Author     : marcelo
 */
 .ui-panelgrid td, .ui-panelgrid tr{
-    /*border: none !important;*/
+    /*border: none;*/
+}
+.gridComBorda .ui-panelgrid td{
+    border: 1px !important;
+}
+.gridComBorda .ui-panelgrid tr{
+    border: 1px !important;
+}
+td{
+    vertical-align: top;
 }
 .cssPainel .ui-layout-unit-content{
     background-color: aquamarine !important;
 }
 .ui-layout-unit-content{
-    font-size: 12px !important;
+    font-size: 10px !important;
     padding: 0px !important;
 }
 .ui-layout-resizer{
@@ -28,4 +37,29 @@ and open the template in the editor.
 }
 body{
     
+}
+.tituloSecao{
+    font-size: 14px;
+    font-weight: bold;
+}
+.ui-layout-unit-header-title{
+    font-size: 14px;
+}
+
+.labelTxt{
+    display: block !important;
+    font-weight: bold;
+}
+.cssPnlCentral .ui-layout-unit-content{
+    background-color: #ccffff;
+}
+.ui-widget-content .ui-panelgrid-even{
+    background-color: #ccffff;
+}
+.ui-widget-content .ui-panelgrid-odd{
+    background-color: #ccffff;
+}
+
+button{
+    margin: 10px !important;
 }

@@ -34,7 +34,7 @@
 
                     <p:layoutUnit position="west" size="175" header="Menu" styleClass="cssPainel"
                                   style="background-color: aquamarine !important;">
-                        <p:menu>
+                        <p:menu id="menuEsquerdo" style="width: 159px;">
                             <p:submenu label="Aluno">
                                 <p:menuitem value="Responder Avaliações"/>
                                 <p:menuitem value="Avaliações Analisadas"/>
@@ -59,7 +59,8 @@
                     </p:layoutUnit>
 
 
-                    <p:layoutUnit position="center" style="font-size: 12px">
+                    <p:layoutUnit position="center" styleClass="cssPnlCentral" 
+                                  style="background-color: #ccffff !important;">
                         <h:panelGroup id="pnlCentral">
                             <ui:include src="habilidade_area_conhecimento.xhtml"/>
                         </h:panelGroup>
