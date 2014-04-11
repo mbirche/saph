@@ -7,14 +7,19 @@ and open the template in the editor.
     Created on : 10/04/2014, 16:33:48
     Author     : marcelo
 */
-.ui-panelgrid td, .ui-panelgrid tr{
-    /*border: none;*/
+.ui-panelgrid td{
+    border-width: 2px;
+    border-color: #0099ff;
 }
-.gridComBorda .ui-panelgrid td{
-    border: 1px !important;
+.ui-panelgrid tr{
+    border-width: 2px;
+    border-color: #0099ff;
 }
-.gridComBorda .ui-panelgrid tr{
-    border: 1px !important;
+.gridSemBorda td{
+    border: none !important;
+}
+.gridSemBorda tr{
+    border: none !important;
 }
 td{
     vertical-align: top;
@@ -30,10 +35,7 @@ td{
     background-color: #0099ff !important;
 }
 .ui-layout-unit{
-    border: none !important;
-}
-.ui-layout-toggler{
-    background-color: black !important;
+    border: none;
 }
 body{
     
@@ -49,6 +51,7 @@ body{
 .labelTxt{
     display: block !important;
     font-weight: bold;
+    font-size: 12px !important;
 }
 .cssPnlCentral .ui-layout-unit-content{
     background-color: #ccffff;
