@@ -14,4 +14,23 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class IndexMB {
 
+    private String paginaAtual;
+
+    public IndexMB() {
+        
+        paginaAtual = "login.xhtml";
+//        paginaAtual = "habilidade_area_conhecimento.xhtml";
+        //paginaAtual = "cursos.xhtml";
+    }
+
+    public String getPaginaAtual() {
+        return paginaAtual;
+    }
+    public void fazNada(){
+        System.out.println("Fazendo nada!");
+    }
+    public String setPaginaAtual(String paginaAtual) {
+        this.paginaAtual = paginaAtual;
+        return paginaAtual;
+    }
 }

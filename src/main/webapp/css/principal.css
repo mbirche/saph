@@ -25,7 +25,7 @@ td{
     vertical-align: top;
 }
 .cssPainel .ui-layout-unit-content{
-    background-color: aquamarine !important;
+    background-color: #006699 !important;
 }
 .ui-layout-unit-content{
     font-size: 10px !important;
@@ -36,6 +36,9 @@ td{
 }
 .ui-layout-unit{
     border: none;
+}
+img{
+    margin-top: 5px;
 }
 body{
     
@@ -54,15 +57,17 @@ body{
     font-size: 12px !important;
 }
 .cssPnlCentral .ui-layout-unit-content{
-    background-color: #ccffff;
+    background-color: #99ccff;
 }
 .ui-widget-content .ui-panelgrid-even{
-    background-color: #ccffff;
+    background-color: #99ccff;
 }
 .ui-widget-content .ui-panelgrid-odd{
-    background-color: #ccffff;
+    background-color: #99ccff;
 }
-
+.ui-menuitem{
+    background-color: #99ccff;
+}
 button{
     margin: 10px !important;
 }
