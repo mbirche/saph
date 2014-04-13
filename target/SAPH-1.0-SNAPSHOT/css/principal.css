@@ -46,6 +46,7 @@ body{
 .tituloSecao{
     font-size: 14px;
     font-weight: bold;
+    display: block;
 }
 .ui-layout-unit-header-title{
     font-size: 14px;

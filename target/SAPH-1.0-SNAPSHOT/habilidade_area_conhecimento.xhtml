@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition id="uiAreaConhecimento">
+
+        <h:outputText value="Áreas de Conhecimento" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+            <p:row>
+                <p:column>
+                    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+                        <p:row>
+                            <p:column  style="width: 30%;">
+                                <h:outputText value="Nome" styleClass="labelTxt"/>
+                                <p:inputText style="width: 100%;"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="Descrição" styleClass="labelTxt"/>
+                                <p:inputTextarea style="width: 100%;"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+            </p:row>
+            
+            <p:row>
+                <p:column colspan="2">
+                    <p:commandButton value="Salvar Área de Conhecimento"/>
+                    <p:commandButton value="Cancelar" /> 
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column style="width: 30%;">
+                    <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 30%;">
+
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+
+        <p:separator style="border-color: black;"/>
+
+        <h:outputText value="Habilidades" styleClass="tituloSecao"/>
+
+        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+            <p:row>
+                <p:column style="width: 50%;">
+                    <p:panelGrid id="pnlCadastroHabilidade" style="width: 100%;" styleClass="gridSemBorda">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Nome" styleClass="labelTxt"/>
+                                <p:inputText style="width: 100%;"/>
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:outputLabel value="Descrição" styleClass="labelTxt"/>
+                                <p:inputTextarea style="width: 100%;"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
+                                <p:dataList/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Áreas de Conhecimento Selecionadas" styleClass="labelTxt"/>
+                                <p:dataList/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+                <p:column>
+                    <p:outputLabel value="Habilidades Cadastradas" styleClass="labelTxt"/>
+                    <p:dataList/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column colspan="2">
+                    <p:commandButton value="Salvar Habilidade"/>                                   
+                    <p:commandButton value="Cancelar"/>                 
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        <p:remoteCommand name="pickListAjax"/>
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition id="uiAreaConhecimento">
+
+        <h:outputText value="Cursos" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%;">
+            <p:row>
+                <p:column style="width: 30%;">
+                    <p:outputLabel value="Nome:" styleClass="labelTxt"/>
+                    <p:inputText style="width: 100%"/>
+                </p:column>
+                <p:column>
+                    <p:outputLabel value="Descrição:" styleClass="labelTxt"/>
+                    <p:inputTextarea cols="120" style="width: 100%"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Escolha o professor coordenador" styleClass="labelTxt"/>
+                    <p:selectOneMenu/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar Curso"/>
+                    <p:commandButton value="Cancelar"/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        
+        <p:separator style="border-color: black;"/>
+        
+        
+    </ui:composition>
+</html>
