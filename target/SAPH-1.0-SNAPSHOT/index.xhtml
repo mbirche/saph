@@ -21,15 +21,18 @@
             <h:form id="formPrincipal">
                 <p:layout fullPage="true">
 
-                    <p:layoutUnit position="north" size="60" resizable="true" 
-                                  closable="true" collapsible="true"
+                    <p:layoutUnit position="north" size="60" resizable="false" 
+                                  closable="false" collapsible="false"
                                   style="background-color: #006699 !important; text-align: center;"
                                   styleClass="cssPainel">
                         <p:graphicImage  url="/images/saph1.png"/>
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                        Footer
+                    <p:layoutUnit position="south" size="60" resizable="false" 
+                                  closable="false" collapsible="false"
+                                  style="background-color: #006699 !important; text-align: center;"
+                                  styleClass="cssPainel">
+                        <h:outputText value="Construido por Marcelo B. Ferri" style="float: right; color: white; margin-top: 20px"/>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="west" size="175" header="Menu" styleClass="cssPainel"
@@ -42,11 +45,11 @@
                                 <p:menuitem value="Avaliações Analisadas"/>
                             </p:submenu>
                             <p:submenu label="Coordenador">
-                                <p:menuitem value="Professores e Coordenadores"/>
-                                <p:menuitem value="Alunos"/>
-                                <p:menuitem value="Turmas"/>
-                                <p:menuitem value="Cursos"/>
-                                <p:menuitem value="Disciplinas" update="pnlCentral"
+                                <p:menuitem value="Professores e Coordenadores" update="pnlCentral"
+                                            actionListener="#{indexMB.setPaginaAtual('professor_coordenador.xhtml')}"/>
+                                <p:menuitem value="Alunos e Turmas" update="pnlCentral"
+                                            actionListener="#{indexMB.setPaginaAtual('aluno_turma.xhtml')}"/>
+                                <p:menuitem value="Cursos e Disciplinas" update="pnlCentral"
                                             actionListener="#{indexMB.setPaginaAtual('curso_disciplina.xhtml')}"/>
                                 <p:menuitem value="Áreas de Conhecimento e Habilidades" update="pnlCentral"
                                             actionListener="#{indexMB.setPaginaAtual('habilidade_area_conhecimento.xhtml')}"/>

@@ -69,6 +69,12 @@ body{
 .ui-menuitem{
     background-color: #99ccff;
 }
+.ui-separator{
+    border-color: #0099ff !important;
+}
 button{
     margin: 10px !important;
+}
+.unresizable{
+    resize: none !important;
 }

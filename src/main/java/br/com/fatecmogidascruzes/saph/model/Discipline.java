@@ -16,6 +16,7 @@ public class Discipline extends Entity {
     @OneToOne
     private Course course;
     private String name;
+    private String description;
 
     public Course getCourse() {
         return course;
@@ -33,4 +34,11 @@ public class Discipline extends Entity {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
