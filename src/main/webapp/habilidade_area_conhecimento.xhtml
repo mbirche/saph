@@ -34,7 +34,7 @@ and open the template in the editor.
             <p:row>
                 <p:column>
                     <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom"
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Área de Conhecimento Cadastrada">
 
                     </p:dataTable>
@@ -60,12 +60,12 @@ and open the template in the editor.
             <p:row>
                 <p:column>
                     <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
-<!--                    <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
+                    <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
                                 moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir"
                                 removeAllLabel="Remover Todas" value="#{habilidadeAreaMB.dualListModel}"
-                                var="teste" itemLabel="teste">
+                                var="teste" itemLabel="#{teste}" itemValue="#{teste}">
                         
-                    </p:pickList>-->
+                    </p:pickList>
                 </p:column>
             </p:row>
             <p:row>
@@ -77,7 +77,7 @@ and open the template in the editor.
             <p:row>
                 <p:column>
                     <p:outputLabel value="Habilidades Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom"
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada">
                         
                     </p:dataTable>

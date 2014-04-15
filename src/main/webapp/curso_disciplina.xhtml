@@ -8,27 +8,19 @@
         <h:outputText value="Cursos" styleClass="tituloSecao"/>
         <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
             <p:row>
-                <p:column style="width: 50%;">
+                <p:column style="width: 30%;">
                     <p:outputLabel value="Nome:" styleClass="labelTxt"/>
                     <p:inputText style="width: 100%"/>
                 </p:column>
-                <p:column>
-                    <h:outputText value="Cursos Cadastrados" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;">
-
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
+                <p:column rowspan="2">
                     <p:outputLabel value="Descrição:" styleClass="labelTxt"/>
-                    <p:inputTextarea cols="120" style="width: 100%"/>
+                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
                 </p:column>
-            </p:row>
+            </p:row>     
             <p:row>
                 <p:column>
                     <p:outputLabel value="Escolha o professor coordenador" styleClass="labelTxt"/>
-                    <p:selectOneMenu style="width: 50%"/>
+                    <p:selectOneMenu style="width: 100%"/>
                 </p:column>
             </p:row>
             <p:row>
@@ -37,6 +29,15 @@
                     <p:commandButton value="Cancelar"/>
                 </p:column>
             </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Cursos Cadastrados" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Curso Cadastrado">
+
+                    </p:dataTable>
+                </p:column>            
+            </p:row>
         </p:panelGrid>
         
         <p:separator/>
@@ -44,23 +45,16 @@
         <h:outputText value="Disciplinas" styleClass="tituloSecao"/>
         <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
             <p:row>
-                <p:column style="width: 50%">
+                <p:column style="width: 30%">
                     <p:outputLabel value="Nome:" styleClass="labelTxt"/>
                     <p:inputText style="width: 100%;"/>
                 </p:column>
-                <p:column>
-                    <h:outputText value="Disciplinas Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;">
-
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
+                <p:column rowspan="2">
                     <p:outputLabel value="Descrição:" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;"/>
+                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
                 </p:column>
             </p:row>
+            
             <p:row>
                 <p:column>
                     <p:outputLabel value="Escolha o curso" styleClass="labelTxt"/>
@@ -71,6 +65,15 @@
                 <p:column>
                     <p:commandButton value="Salvar Disciplina"/>
                     <p:commandButton value="Cancelar"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Disciplinas Cadastradas" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Disciplina Cadastrada">
+
+                    </p:dataTable>
                 </p:column>
             </p:row>
         </p:panelGrid>
