@@ -1,0 +1,150 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition id="uiProfessorCoordenador">
+        
+        <p:panelGrid>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Nome"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="Sobrenome"/>        
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:inputText/>
+                </p:column>
+                <p:column>
+                    <p:inputText/>        
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Registro Funcional"/>
+                </p:column>
+
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:inputText/>
+                </p:column>
+
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <h:panelGroup id="edicaoTelefone">
+                        <p:panelGrid id="gridTelefone">
+
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Tipo de telefone"/>
+                                </p:column>
+
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <p:selectOneRadio>
+                                        <f:selectItem itemLabel="Fixo" itemValue="FIXO"/>
+                                        <f:selectItem itemLabel="Celular" itemValue="CELULAR"/>
+                                        <p:ajax update="mskTelefone"/>
+                                    </p:selectOneRadio>
+                                </p:column>
+
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Telefone"/>
+                                </p:column>
+
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <p:inputMask id="mskDDD" mask="99" size="3">
+                                        <p:ajax/>
+                                        <p:watermark value="DDD" for="mskDDD"/>
+                                    </p:inputMask>
+                                    <p:inputMask id="mskTelefone" mask="" size="15">
+                                        <p:ajax/>
+                                        <p:watermark value="Telefone" for="mskTelefone"/>
+                                    </p:inputMask>
+                                    <p:commandButton update="listaTelefones, mskTelefone, mskDDD" value="Adicionar"/>
+
+                                </p:column>
+                            </p:row>
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </p:column>
+                <p:column>
+                    <p:dataTable id="listaTelefones" var="tel" rows="5"
+                                 paginator="true" paginatorPosition="bottom">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DDD"/>
+                            </f:facet>
+                            <h:outputText/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Número"/>
+                            </f:facet>
+                            <h:outputText/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apagar"/>
+                            </f:facet>
+                            <p:commandButton update="listaTelefones" value="Apagar"/>
+
+                        </p:column>
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Email:"/>
+                </p:column>
+                <p:column rowspan="2">
+                    <p:dataTable id="listaEmails" var="email" rows="5"
+                                 paginator="true" paginatorPosition="bottom">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            <h:outputText/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apagar"/>
+                            </f:facet>
+                            <p:commandButton update="listaEmails" value="Apagar"/>
+
+                        </p:column>
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:inputText id="txtEmail"/>
+                    <p:commandButton value="Adicionar" update="listaEmails, txtEmail"/>
+                </p:column>
+
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar"  update="formPrincipal:pnlCentral"/>
+                    <p:commandButton value="Cancelar" update="formPrincipal:pnlCentral"/>
+                </p:column>
+            </p:row>
+
+        </p:panelGrid>
+    </ui:composition>
+</html>
