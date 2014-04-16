@@ -6,7 +6,7 @@
 
     <ui:composition id="uiAlunoProfessorCoordenador">
 
-        <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+        <p:panelGrid style="width: 100%" styleClass="">
             <p:row>
                 <p:column style="width: 50%;">
                     <h:outputText value="Nome" styleClass="labelTxt"/>
@@ -14,9 +14,7 @@
                     <h:outputText value="Sobrenome" styleClass="labelTxt"/>
                     <p:inputText style="width: 80%"/>    
                 </p:column>
-                <p:column>
-                    
-                    
+                <p:column style="width: 50%;">               
                     <h:panelGroup id="edicaoTelefone">
                         <p:panelGrid id="gridTelefone" style="width: 100%" styleClass="">
 
@@ -59,17 +57,16 @@
                         </p:panelGrid>
                     </h:panelGroup>
                 </p:column>
-
             </p:row>
             <p:row>
                 <p:column>
-                    <p:panelGrid style="width: 100%" styleClass="">
+                    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
                         <p:row>
                             <p:column style="width: 50%">
 
                                 <h:outputText value="Tipo de Usuário" styleClass="labelTxt"/>
                                 <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
-                                            moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickList"
+                                            moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickPequeno"
                                             removeAllLabel="Remover Todas" value="#{usuarioMB.dualListModel}"
                                             var="teste" itemLabel="#{teste}" itemValue="#{teste}">
 

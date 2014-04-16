@@ -3,7 +3,25 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <ui:composition id="uiAlunoTurma">
-        
+    <ui:composition id="uiTurma">
+
+        <p:panelGrid style="width: 100%" styleClass="">
+            <p:row>
+                <p:column>
+                   <h:outputText value="Nome" styleClass="labelTxt"/>
+                   <p:inputText style="width: 100%"/>
+                </p:column>    
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Escolha os alunos para a turma" styleClass="labelTxt"/>
+                    <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
+                            moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickList"
+                            removeAllLabel="Remover Todas" value="#{turmaMB.dualListModel}"
+                            var="teste" itemLabel="#{teste}" itemValue="#{teste}">
+                </p:pickList>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
     </ui:composition>
 </html>

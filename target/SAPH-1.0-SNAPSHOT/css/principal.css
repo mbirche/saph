@@ -41,7 +41,7 @@ img{
     margin-top: 5px;
 }
 body{
-    
+
 }
 .tituloSecao{
     font-size: 14px;
@@ -73,18 +73,36 @@ body{
     border-color: #0099ff !important;
 }
 button{
-    margin: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .unresizable{
     resize: none !important;
 }
-.ui-picklist.pickList button{
+.ui-picklist.pickPequeno button{
     margin: 3px;
+    height: 15px;
+    width: 17px;
+}
+.ui-picklist td{
+    padding: 3px;
+}
+.pickList button{
+    margin: 3px !important;
+}
+.pickPequeno button{
+    margin: 3px !important;
 }
 .ui-picklist.pickList .ui-picklist-list{
-    height: 100px;
-   
+    height: 130px;
 }
-.ui-picklist.pickUsuario{
-/*    width: 100%;*/
+.ui-picklist.pickPequeno .ui-picklist-list{
+    height: 80px;
+    width: 120px;
+}
+.ui-picklist tbody{
+    width: 100px;
+}
+.ui-picklist ui-button{
+    margin: 3px !important;
 }

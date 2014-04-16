@@ -23,4 +23,10 @@ public class Student extends User {
     public void setRn(String rn) {
         this.rn = rn;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+    
 }
