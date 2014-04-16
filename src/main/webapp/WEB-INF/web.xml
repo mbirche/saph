@@ -28,6 +28,7 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
+        <!--<welcome-file>aluno_professor_coordenador.xhtml</welcome-file>-->
     </welcome-file-list>
     <resource-ref>
         <description>Database para o SAPH</description>

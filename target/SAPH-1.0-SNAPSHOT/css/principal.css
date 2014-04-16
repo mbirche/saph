@@ -73,8 +73,18 @@ body{
     border-color: #0099ff !important;
 }
 button{
-    margin: 10px !important;
+    margin: 10px;
 }
 .unresizable{
     resize: none !important;
+}
+.ui-picklist.pickList button{
+    margin: 3px;
+}
+.ui-picklist.pickList .ui-picklist-list{
+    height: 100px;
+   
+}
+.ui-picklist.pickUsuario{
+/*    width: 100%;*/
 }

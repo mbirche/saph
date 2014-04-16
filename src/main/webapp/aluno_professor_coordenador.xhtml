@@ -3,148 +3,135 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <ui:composition id="uiProfessorCoordenador">
-        
-        <p:panelGrid>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Nome"/>
-                </p:column>
-                <p:column>
-                    <h:outputText value="Sobrenome"/>        
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:inputText/>
-                </p:column>
-                <p:column>
-                    <p:inputText/>        
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Registro Funcional"/>
-                </p:column>
 
-            </p:row>
+    <ui:composition id="uiAlunoProfessorCoordenador">
+
+        <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
             <p:row>
-                <p:column>
-                    <p:inputText/>
+                <p:column style="width: 50%;">
+                    <h:outputText value="Nome" styleClass="labelTxt"/>
+                    <p:inputText style="width: 80%"/>
+                    <h:outputText value="Sobrenome" styleClass="labelTxt"/>
+                    <p:inputText style="width: 80%"/>    
                 </p:column>
-
-            </p:row>
-
-            <p:row>
                 <p:column>
+                    
+                    
                     <h:panelGroup id="edicaoTelefone">
-                        <p:panelGrid id="gridTelefone">
+                        <p:panelGrid id="gridTelefone" style="width: 100%" styleClass="">
 
                             <p:row>
-                                <p:column>
-                                    <h:outputText value="Tipo de telefone"/>
-                                </p:column>
-
-                            </p:row>
-                            <p:row>
-                                <p:column>
+                                <p:column style="width: 30%">
+                                    <h:outputText value="Tipo de telefone" styleClass="labelTxt"/>
                                     <p:selectOneRadio>
                                         <f:selectItem itemLabel="Fixo" itemValue="FIXO"/>
                                         <f:selectItem itemLabel="Celular" itemValue="CELULAR"/>
-                                        <p:ajax update="mskTelefone"/>
+<!--                                        <p:ajax update="mskTelefone"/>-->
                                     </p:selectOneRadio>
                                 </p:column>
+                                <p:column rowspan="2">
+                                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Telefone Cadastrado">
+                                        
+                                     
+                                    </p:dataTable>
+                              </p:column>  
 
                             </p:row>
                             <p:row>
                                 <p:column>
-                                    <h:outputText value="Telefone"/>
-                                </p:column>
-
-                            </p:row>
-                            <p:row>
-                                <p:column>
-                                    <p:inputMask id="mskDDD" mask="99" size="3">
+                                    <h:outputText value="Telefone" styleClass="labelTxt"/>
+<!--                                    <p:inputMask id="mskDDD" mask="99">
                                         <p:ajax/>
                                         <p:watermark value="DDD" for="mskDDD"/>
                                     </p:inputMask>
-                                    <p:inputMask id="mskTelefone" mask="" size="15">
+                                    <p:inputMask id="mskTelefone" mask="99999">
                                         <p:ajax/>
                                         <p:watermark value="Telefone" for="mskTelefone"/>
-                                    </p:inputMask>
-                                    <p:commandButton update="listaTelefones, mskTelefone, mskDDD" value="Adicionar"/>
-
+                                    </p:inputMask>-->
+                                    <!--<p:commandButton update="mskTelefone, mskDDD" value="Adicionar"/>-->
                                 </p:column>
                             </p:row>
-
+                            
+                            
+                            
+                            
                         </p:panelGrid>
                     </h:panelGroup>
                 </p:column>
-                <p:column>
-                    <p:dataTable id="listaTelefones" var="tel" rows="5"
-                                 paginator="true" paginatorPosition="bottom">
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="DDD"/>
-                            </f:facet>
-                            <h:outputText/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Número"/>
-                            </f:facet>
-                            <h:outputText/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Apagar"/>
-                            </f:facet>
-                            <p:commandButton update="listaTelefones" value="Apagar"/>
-
-                        </p:column>
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Email:"/>
-                </p:column>
-                <p:column rowspan="2">
-                    <p:dataTable id="listaEmails" var="email" rows="5"
-                                 paginator="true" paginatorPosition="bottom">
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Email"/>
-                            </f:facet>
-                            <h:outputText/>
-                        </p:column>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Apagar"/>
-                            </f:facet>
-                            <p:commandButton update="listaEmails" value="Apagar"/>
-
-                        </p:column>
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:inputText id="txtEmail"/>
-                    <p:commandButton value="Adicionar" update="listaEmails, txtEmail"/>
-                </p:column>
 
             </p:row>
             <p:row>
                 <p:column>
-                    <p:commandButton value="Salvar"  update="formPrincipal:pnlCentral"/>
+                    <p:panelGrid style="width: 100%" styleClass="">
+                        <p:row>
+                            <p:column style="width: 50%">
+
+                                <h:outputText value="Tipo de Usuário" styleClass="labelTxt"/>
+                                <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
+                                            moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickList"
+                                            removeAllLabel="Remover Todas" value="#{usuarioMB.dualListModel}"
+                                            var="teste" itemLabel="#{teste}" itemValue="#{teste}">
+
+                                </p:pickList>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="Registro Funcional" styleClass="labelTxt"/>
+                                <p:inputText style="width: 48%"/>
+                                <h:outputText value="Registro Aluno" styleClass="labelTxt"/>
+                                <p:inputText style="width: 48%"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+                <p:column>
+                    <p:panelGrid style="width: 100%" styleClass="">
+                        <p:row>
+                            <p:column style="width: 30%" styleClass="">
+                                <h:outputText value="Email:" styleClass="labelTxt"/>
+                                <p:inputText id="txtEmail"  style="width: 60%"/>
+                                <p:commandButton value="Adicionar" update="txtEmail"/>
+                            </p:column>
+                            <p:column rowspan="2">
+                                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Email Cadastrado">
+
+                                   
+                                </p:dataTable>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar" update="formPrincipal:pnlCentral"/>
                     <p:commandButton value="Cancelar" update="formPrincipal:pnlCentral"/>
                 </p:column>
             </p:row>
-
         </p:panelGrid>
+
+        <p:separator/>
+
+        <p:tabView style="width: 50%">
+            <p:tab title="Alunos Cadastrados">
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Aluno Cadastrado">
+                   
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Professores Cadastrados">
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Professor Cadastrado">
+                    
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Coordenadores Cadastrados">
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Coordenador Cadastrado">
+                    
+                </p:dataTable>
+            </p:tab>
+        </p:tabView>
     </ui:composition>
 </html>

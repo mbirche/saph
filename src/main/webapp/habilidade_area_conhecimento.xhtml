@@ -10,6 +10,7 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+    
     <ui:composition id="uiHabilidadeAreaConhecimento">
 
         <h:outputText value="Áreas de Conhecimento" styleClass="tituloSecao"/>
@@ -60,9 +61,7 @@ and open the template in the editor.
             <p:row>
                 <p:column>
                     <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
-                    <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
-                                moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir"
-                                removeAllLabel="Remover Todas" value="#{habilidadeAreaMB.dualListModel}"
+                    <p:pickList value="#{habilidadeAreaMB.dualListModel}" styleClass="pickList"
                                 var="teste" itemLabel="#{teste}" itemValue="#{teste}">
                         
                     </p:pickList>
@@ -84,6 +83,6 @@ and open the template in the editor.
                 </p:column>
             </p:row>
         </p:panelGrid>
-        <p:remoteCommand name="pickListAjax"/>
+
     </ui:composition>
 </html>
