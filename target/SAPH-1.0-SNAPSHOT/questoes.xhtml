@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition id="uiQuestoes">
+
+        <h:outputText value="Questões" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%;">
+            <p:row>
+                <p:column style="width: 50%">                   
+                    <h:outputText value="Questão" styleClass="labelTxt"/>
+                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
+                </p:column>
+                <p:column>
+                    <p:outputLabel value="Alternativas" styleClass="labelTxt"/>
+                    <p:messages  id="msgCobertura" for="msgCobertura" autoUpdate="true" severity="info"/>
+                    <p:messages id="msgDominio" for="msgDominio" autoUpdate="true" escape="false"/>
+
+                    <p:dataTable id="tblAlternativas" emptyMessage="Nenhuma alternativa para esta questão">
+
+                        <p:ajax event="rowDblselect"/>
+                        <p:ajax event="rowDblselect" update=":formPrincipal:pnlCentral"/>
+
+                        <p:column style="width: 50%">
+                            <f:facet name="header">
+                                <h:outputText value="Texto da alternativa"/>
+                            </f:facet>
+
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Habilidades avaliadas nesta alternativa"/>
+                            </f:facet>
+                            <p:dataTable>
+                                <p:column style="width: 34%">
+                                    <f:facet name="header">
+                                        <h:outputText value="Nome"/>
+                                    </f:facet>
+
+                                </p:column>
+                                <p:column style="width: 33%">
+                                    <f:facet name="header">
+                                        <h:outputText value="Descrição"/>
+                                    </f:facet>
+
+                                </p:column>
+                                <p:column style="width: 33%">
+                                    <f:facet name="header">
+                                        <h:outputText value="Domínio"/>
+                                    </f:facet>
+
+                                </p:column>
+                            </p:dataTable>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Remover"/>
+                            </f:facet>
+                            <p:commandButton value="Apagar"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton value="Nova Alternativa" style="display: block; margin-left: 0px; margin-top: 10px;"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar questão"/>
+
+                    <p:commandButton value="Cancelar"/>
+
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+
+        <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
+                         id="confirmaRemocaoAlternativa" 
+                         message="Deseja mesmo remover esta alternativa?"
+                         widgetVar="confirmaRemocaoAlternativa">
+            <p:commandButton value="Remover" onclick="confirmaRemocaoAlternativa.hide()"
+                             update=":formPrincipal:pnlCentral"/>
+            <p:commandButton value="Cancelar" onclick="confirmaRemocaoAlternativa.hide()"/>
+        </p:confirmDialog>   
+    </ui:composition>
+</html>
