@@ -106,3 +106,28 @@ button{
 .ui-picklist > * > tr > *:nth-child(3) {
    width: 45%;
 }
+
+/*css para o Dialog*/
+
+/*Container element of dialog*/
+.ui-dialog{
+    background-color: #99ccff;
+}
+ /*Title bar*/
+ .ui-dialog-titlebar{
+     background-color: #006699 !important;
+     background: none;
+     color: white;
+ }
+ /*Header text*/
+ .ui-dialog-title-dialog{
+     
+ }
+ /*Close icon*/
+ .ui-dialog-titlebar-close{
+     
+ }
+ /*body*/
+ .ui-dialog-content{
+     font-size: 10px !important;
+ }
