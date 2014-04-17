@@ -80,29 +80,29 @@ button{
     resize: none !important;
 }
 .ui-picklist.pickPequeno button{
-    margin: 3px;
     height: 15px;
     width: 17px;
 }
-.ui-picklist td{
-    padding: 3px;
-}
-.pickList button{
-    margin: 3px !important;
-}
-.pickPequeno button{
-    margin: 3px !important;
-}
+
 .ui-picklist.pickList .ui-picklist-list{
     height: 130px;
 }
 .ui-picklist.pickPequeno .ui-picklist-list{
     height: 80px;
-    width: 120px;
 }
-.ui-picklist tbody{
-    width: 100px;
+.ui-picklist button{
+    margin: auto;
+    margin-top: 0.3em;
 }
-.ui-picklist ui-button{
-    margin: 3px !important;
+.ui-picklist-source, .ui-picklist-target{
+    width: 100% !important;
+}
+.ui-picklist{
+   width: 100%;
+}
+.ui-picklist > * > tr > *:nth-child(1) {
+   width: 45%;
+}
+.ui-picklist > * > tr > *:nth-child(3) {
+   width: 45%;
 }
