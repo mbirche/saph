@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition id="uiManterAvaliacoes">
+
+        <h:outputText value="Gerenciar Avaliações" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%;" styleClass="">
+            <p:row>
+                <p:column style="width: 40%">
+                    <h:outputText value="Nome da Avaliação" styleClass="labelTxt"/>
+                    <p:inputText style="width: 100%"/>
+                </p:column>
+                <p:column rowspan="3">
+                    <h:outputText value="Escolha as Questões" styleClass="labelTxt" style="padding-left: 15px"/>
+                    <p:pickList value="#{avaliacaoMB.dualListModel}" styleClass="pickList"
+                                var="teste" itemLabel="#{teste}" itemValue="#{teste}">
+                        
+                    </p:pickList>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar Avaliação"/>
+                    <p:commandButton value="Cancelar"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Avaliações Cadastradas" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Cadastrada">
+                        
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        
+        <p:separator/>
+        
+        <h:outputText value="Gerenciar Avaliações" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%;" styleClass="">
+            <p:row>
+                <p:column style="width: 40%">
+                    <p:outputLabel value="Escolha a Avaliação" styleClass="labelTxt"/>
+                    <p:selectOneMenu style="width: 100%"/>
+                </p:column>
+                <p:column rowspan="3">
+                    <h:outputText value="Avaliações Aplicadas" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Aplicada">
+                        
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Escolha a Atribuição" styleClass="labelTxt"/>
+                    <p:selectOneMenu style="width: 100%"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar Avaliação"/>
+                    <p:commandButton value="Cancelar"/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+    </ui:composition>
+</html>

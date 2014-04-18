@@ -18,6 +18,7 @@ import org.hibernate.annotations.CascadeType;
 @javax.persistence.Entity
 public class Test extends Entity {
 
+    private String name;
     @Cascade(CascadeType.ALL)
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Question> questions;
@@ -34,5 +35,13 @@ public class Test extends Entity {
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
