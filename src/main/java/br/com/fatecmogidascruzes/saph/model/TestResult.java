@@ -19,6 +19,7 @@ import org.hibernate.annotations.CascadeType;
 @javax.persistence.Entity
 public class TestResult extends Entity {
 
+    private Boolean answered;
     @Cascade(CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Answer> answers;
@@ -59,5 +60,13 @@ public class TestResult extends Entity {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Boolean isAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(Boolean answered) {
+        this.answered = answered;
     }
 }
