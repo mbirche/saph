@@ -42,6 +42,7 @@ import br.com.fatecmogidascruzes.saph.model.Teacher;
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,14 +66,35 @@ public class Teste {
 //        teste9();
 //        teste10();
 //        teste11();
-          teste12();
+//          teste12();
 //        teste13();
 //        teste14();
 //        teste15();
+        teste16();
         
         System.exit(0);
     }
+    private static void teste16(){
+        TestAnalysis test = new TestAnalysis();
+        List<TestProbability> listProb = new ArrayList<TestProbability>();
+        TestProbability t1 = new TestProbability();
+        t1.setHitProbability(0.2);
+        TestProbability t2 = new TestProbability();
+        t2.setHitProbability(0.4);
+        TestProbability t3 = new TestProbability();
+        t3.setHitProbability(0.6);
+        TestProbability t4 = new TestProbability();
+        t4.setHitProbability(0.8);
+        
+        listProb.add(t1);
+        listProb.add(t2);
+        listProb.add(t3);
+        listProb.add(t4);
     
+        Double prob = test.getProbability(2, listProb);
+        
+        System.out.println("Prob = " + prob);
+    }
     private static void teste15(){
         TeacherFacade teacherFacade = (TeacherFacade) FacadeFactory.getInstance().getFacade(Teacher.class);
         TestApplicationFacade taFacade = (TestApplicationFacade) FacadeFactory.getInstance().getFacade(TestApplication.class);
