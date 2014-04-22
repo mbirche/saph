@@ -6,6 +6,20 @@
 
 package br.com.fatecmogidascruzes.saph.controller;
 
+import br.com.fatecmogidascruzes.saph.facade.AbilityFacade;
+import br.com.fatecmogidascruzes.saph.facade.KnowledgeAreaFacade;
+import br.com.fatecmogidascruzes.saph.facade.QuestionFacade;
+import br.com.fatecmogidascruzes.saph.facade.TestFacade;
+import br.com.fatecmogidascruzes.saph.facade.TestResultFacade;
+import br.com.fatecmogidascruzes.saph.facade.ClassAssignmentFacade;
+import br.com.fatecmogidascruzes.saph.facade.StudentFacade;
+import br.com.fatecmogidascruzes.saph.facade.CoordinatorFacade;
+import br.com.fatecmogidascruzes.saph.facade.TestApplicationFacade;
+import br.com.fatecmogidascruzes.saph.facade.TeacherFacade;
+import br.com.fatecmogidascruzes.saph.facade.AlternativeFacade;
+import br.com.fatecmogidascruzes.saph.facade.CourseFacade;
+import br.com.fatecmogidascruzes.saph.facade.EvaluatedItemFacade;
+import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
 import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;

@@ -5,21 +5,23 @@
  */
 package br.com.fatecmogidascruzes.saph.teste;
 
-import br.com.fatecmogidascruzes.saph.controller.AbilityFacade;
-import br.com.fatecmogidascruzes.saph.controller.AbstractFacade;
-import br.com.fatecmogidascruzes.saph.controller.AlternativeFacade;
-import br.com.fatecmogidascruzes.saph.controller.ClassAssignmentFacade;
-import br.com.fatecmogidascruzes.saph.controller.CoordinatorFacade;
-import br.com.fatecmogidascruzes.saph.controller.CourseFacade;
+import br.com.fatecmogidascruzes.saph.service.TestProbability;
+import br.com.fatecmogidascruzes.saph.service.TestAnalysis;
+import br.com.fatecmogidascruzes.saph.facade.AbilityFacade;
+import br.com.fatecmogidascruzes.saph.facade.AbstractFacade;
+import br.com.fatecmogidascruzes.saph.facade.AlternativeFacade;
+import br.com.fatecmogidascruzes.saph.facade.ClassAssignmentFacade;
+import br.com.fatecmogidascruzes.saph.facade.CoordinatorFacade;
+import br.com.fatecmogidascruzes.saph.facade.CourseFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
-import br.com.fatecmogidascruzes.saph.controller.KnowledgeAreaFacade;
-import br.com.fatecmogidascruzes.saph.controller.QuestionFacade;
-import br.com.fatecmogidascruzes.saph.controller.StudentClassFacade;
-import br.com.fatecmogidascruzes.saph.controller.StudentFacade;
-import br.com.fatecmogidascruzes.saph.controller.TeacherFacade;
-import br.com.fatecmogidascruzes.saph.controller.TestApplicationFacade;
-import br.com.fatecmogidascruzes.saph.controller.TestFacade;
-import br.com.fatecmogidascruzes.saph.controller.TestResultFacade;
+import br.com.fatecmogidascruzes.saph.facade.KnowledgeAreaFacade;
+import br.com.fatecmogidascruzes.saph.facade.QuestionFacade;
+import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
+import br.com.fatecmogidascruzes.saph.facade.StudentFacade;
+import br.com.fatecmogidascruzes.saph.facade.TeacherFacade;
+import br.com.fatecmogidascruzes.saph.facade.TestApplicationFacade;
+import br.com.fatecmogidascruzes.saph.facade.TestFacade;
+import br.com.fatecmogidascruzes.saph.facade.TestResultFacade;
 import br.com.fatecmogidascruzes.saph.dao.AbstractDAO;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
