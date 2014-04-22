@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition id="uiAnaliseAvaliacao">
+        
+        <h:outputText value="Análise das Avaliações" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%;" styleClass="">
+            <p:row>
+                <p:column style="width: 50%">
+                    <h:outputText value="Selecione a Avaliação" styleClass="labelTxt"/>
+                    <p:selectOneMenu style="width: 100%"/>
+                    <p:commandButton value="Analisar" style="display: block; margin-left: 0px; margin-top: 10px"/>
+                </p:column>
+                <p:column rowspan="2">
+                    <h:outputText value="Detalhes da Avaliação" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Selecionada">
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        
+        <p:separator/>
+        
+        
+        <p:panelGrid style="width: 100%;" styleClass="">
+            <p:row>
+                <p:column style="width: 50%">
+                    <h:outputText value="Resultado da Avaliação" styleClass="labelTxt"/>
+                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Selecionada">
+                        
+                        <p:column style="width: 30%">
+                            <f:facet name="header">
+                                <h:outputText value="Nome do Aluno"/>
+                            </f:facet>
+
+                        </p:column>
+                        <p:column style="width: 20%">
+                            <f:facet name="header">
+                                <h:outputText value="Turma"/>
+                            </f:facet>
+
+                        </p:column>
+                        <p:column style="width: 10%">
+                            <f:facet name="header">
+                                <h:outputText value="Nota Geral"/>
+                            </f:facet>
+
+                        </p:column>
+                        <p:column style="">
+                            <f:facet name="header">
+                                <h:outputText value="Detalhes"/>
+                            </f:facet>
+
+                        </p:column>
+                      
+                    </p:dataTable>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        
+    </ui:composition>
+</html>
