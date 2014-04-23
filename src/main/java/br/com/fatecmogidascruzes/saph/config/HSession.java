@@ -49,7 +49,12 @@ public class HSession {
 
     private HSession() {
 
-        configuration = new Configuration().configure(); // configures settings from hibernate.cfg.xml
+        try {
+            configuration = new Configuration();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        configuration.configure(); // configures settings from hibernate.cfg.xml
 
         configuration.addAnnotatedClass(Entity.class);
         configuration.addAnnotatedClass(User.class);
@@ -75,8 +80,6 @@ public class HSession {
         configuration.addAnnotatedClass(TestApplication.class);
         configuration.addAnnotatedClass(Phone.class);
         configuration.addAnnotatedClass(PhoneType.class);
-        
-        
 
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
 
@@ -98,7 +101,7 @@ public class HSession {
         } else if (!session.isOpen()) {
             session = sessionFactory.openSession();
             return session;
-        }else{
+        } else {
             return session;
         }
     }

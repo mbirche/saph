@@ -17,17 +17,18 @@ and open the template in the editor.
             <p:row>
                 <p:column  style="width: 40%;">
                     <h:outputText value="Nome" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%;"/>
+                    <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.knowledgeArea.name}"/>
                 </p:column>
                 <p:column rowspan="2">
                     <h:outputText value="Descrição" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
+                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                     value="#{habilidadeAreaMB.knowledgeArea.description}"/>
                 </p:column>
             </p:row>
 
             <p:row>
                 <p:column colspan="2">
-                    <p:commandButton value="Salvar Área de Conhecimento"/>
+                    <p:commandButton value="Salvar Área de Conhecimento" action="#{habilidadeAreaMB.saveKArea()}"/>
                     <p:commandButton value="Cancelar" /> 
                 </p:column>
             </p:row>
@@ -50,11 +51,12 @@ and open the template in the editor.
             <p:row>
                 <p:column style="width: 40%;">
                     <p:outputLabel value="Nome" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%;"/>
+                    <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.ability.name}"/>
                 </p:column>
                 <p:column rowspan="2">
                     <p:outputLabel value="Descrição" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
+                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                     value="#{habilidadeAreaMB.ability.description}"/>
                 </p:column>
             </p:row>
             <p:row>

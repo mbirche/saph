@@ -59,7 +59,7 @@ public class Teste {
 
 //        teste1();
 //        teste2();
-//        teste3();
+        teste3();
 //        teste4();
         //teste5();
 //        teste6();
@@ -72,7 +72,7 @@ public class Teste {
 //        teste13();
 //        teste14();
 //        teste15();
-        teste16();
+//        teste16();
         
         System.exit(0);
     }

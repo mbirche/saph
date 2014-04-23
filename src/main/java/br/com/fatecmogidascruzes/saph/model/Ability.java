@@ -20,6 +20,7 @@ public class Ability extends Entity {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<KnowledgeArea> knowledgeAreas;
     private String name;
+    private String description;
 
     public Boolean addKnowledgeArea(KnowledgeArea kArea) {
         return knowledgeAreas.add(kArea);
@@ -43,5 +44,13 @@ public class Ability extends Entity {
 
     public void setKnowledgeAreas(Set<KnowledgeArea> knowledgeAreas) {
         this.knowledgeAreas = knowledgeAreas;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
