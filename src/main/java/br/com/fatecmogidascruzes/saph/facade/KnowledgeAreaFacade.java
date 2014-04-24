@@ -18,5 +18,5 @@ public class KnowledgeAreaFacade extends AbstractFacade{
         }else{
             return facade;
         }
-    }   
+    } 
 }

@@ -10,7 +10,7 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
+
     <ui:composition id="uiHabilidadeAreaConhecimento">
         <h:outputText value="Áreas de Conhecimento" styleClass="tituloSecao"/>
         <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
@@ -28,7 +28,7 @@ and open the template in the editor.
 
             <p:row>
                 <p:column colspan="2">
-                    <p:commandButton value="Salvar Área de Conhecimento" action="#{habilidadeAreaMB.saveKArea()}"/>
+                    <p:commandButton value="Salvar Área de Conhecimento" action="#{habilidadeAreaMB.saveKArea()}" update="formPrincipal:pnlCentral"/>
                     <p:commandButton value="Cancelar" /> 
                 </p:column>
             </p:row>
@@ -36,7 +36,20 @@ and open the template in the editor.
                 <p:column>
                     <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Área de Conhecimento Cadastrada">
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Área de Conhecimento Cadastrada"
+                                 value="#{habilidadeAreaMB.knowledgeAreas}" var="ka" rowKey="#{ka.id}">
+                        <p:column style="width: 30%">
+                            <f:facet name="header">
+                                <h:outputText value="Nome da Área de Conhecimento"/>
+                            </f:facet>
+                            #{ka.name}
+                        </p:column>
+                        <p:column style="width: 20%">
+                            <f:facet name="header">
+                                <h:outputText value="Descrição"/>
+                            </f:facet>
+                            #{ka.description}
+                        </p:column>
 
                     </p:dataTable>
                 </p:column>
@@ -63,8 +76,16 @@ and open the template in the editor.
                 <p:column>
                     <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
                     <p:pickList value="#{habilidadeAreaMB.dualListModel}" styleClass="pickList" style="width: 100%"
-                                var="teste" itemLabel="#{teste}" itemValue="#{teste}">
-                        
+                                var="ka" itemLabel="#{ka.name}" itemValue="#{ka}" converter="knowledgeAreaConverter">
+                        <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransfer}"/>
+                        <p:column style="width: 30%">
+                            
+                            #{ka.name}
+                        </p:column>
+                        <p:column>
+                            
+                            #{ka.description}
+                        </p:column>
                     </p:pickList>
                 </p:column>
             </p:row>
@@ -79,7 +100,7 @@ and open the template in the editor.
                     <p:outputLabel value="Habilidades Cadastradas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada">
-                        
+
                     </p:dataTable>
                 </p:column>
             </p:row>

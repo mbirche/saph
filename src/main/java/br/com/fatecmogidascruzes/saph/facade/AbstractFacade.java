@@ -6,9 +6,10 @@
 
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
+import br.com.fatecmogidascruzes.saph.controller.ServiceFactory;
 import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
 import br.com.fatecmogidascruzes.saph.model.Entity;
+import br.com.fatecmogidascruzes.saph.service.AbstractService;
 import java.util.List;
 
 /**
@@ -17,35 +18,35 @@ import java.util.List;
  */
 public class AbstractFacade implements IAbstractFacade{
 
-    private DAOFactory daoFactory;
+    private ServiceFactory serviceFactory;
     
     public AbstractFacade(){
-        daoFactory = DAOFactory.getInstance();
+        serviceFactory = ServiceFactory.getInstance();
     }
     
     @Override
     public Entity save(Entity entity) {
-        return daoFactory.getDAO(entity.getClass()).save(entity); 
+        return serviceFactory.getService(entity.getClass()).save(entity); 
     }
 
     @Override
     public Entity update(Entity entity) {
-        return daoFactory.getDAO(entity.getClass()).update(entity);
+        return serviceFactory.getService(entity.getClass()).update(entity);
     }
 
     @Override
     public Entity get(Long id, Class<? extends Entity> cl) {
-        return daoFactory.getDAO(cl).get(id, cl);  
+        return serviceFactory.getService(cl).get(id, cl);  
     }
 
     @Override
     public void delete(Entity entity) {
-        daoFactory.getDAO(entity.getClass()).delete(entity);
+        serviceFactory.getService(entity.getClass()).delete(entity);
     }
 
     @Override
     public List<Entity> getAll(Class<? extends Entity> entity) {
-        return daoFactory.getDAO(entity).getAll(entity);
+        return serviceFactory.getService(entity).getAll(entity);
     }
     
 }

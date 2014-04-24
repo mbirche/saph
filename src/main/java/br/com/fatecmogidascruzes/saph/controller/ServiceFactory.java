@@ -23,7 +23,7 @@ public class ServiceFactory {
     private Map<Class, IAbstractService> map;
     private static ServiceFactory factory;
     
-    public IAbstractService getFacade(Class cl){
+    public IAbstractService getService(Class cl){
         return map.get(cl);
     }
     public static ServiceFactory getInstance(){

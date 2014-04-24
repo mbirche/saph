@@ -4,10 +4,10 @@
  */
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.dao.AbilityDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.IAbilityFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
+import br.com.fatecmogidascruzes.saph.service.AbilityService;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
 public class AbilityFacade extends AbstractFacade implements IAbilityFacade{
 
     private static AbilityFacade facade;
-    private AbilityDAO dao;
+    private AbilityService service;
     public static AbilityFacade getInstance(){
         if(facade == null){
             facade = new AbilityFacade();
@@ -27,12 +27,12 @@ public class AbilityFacade extends AbstractFacade implements IAbilityFacade{
         }
     }
     private AbilityFacade(){
-        dao = new AbilityDAO();
+        service = new AbilityService();
     }
 
     @Override
     public List<Ability> getAbilityByKnowledgeArea(KnowledgeArea kArea) {
-        return dao.getAbilityByKnowledgeArea(kArea);
+        return service.getAbilityByKnowledgeArea(kArea);
     }
 
 }
