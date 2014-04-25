@@ -27,6 +27,7 @@ public class HabilidadeAreaMB {
     private KnowledgeArea knowledgeArea;
     private List knowledgeAreas;
     private List knowledgeAreasAux;
+    private List abilities;
     private Ability ability;
 
     public HabilidadeAreaMB() {
@@ -55,6 +56,7 @@ public class HabilidadeAreaMB {
         knowledgeAreas = (List<KnowledgeArea>)(List)kaFacade.getAll(KnowledgeArea.class);
         knowledgeAreasAux = new ArrayList<KnowledgeArea>(knowledgeAreas);
         knowledgeAreasAux.removeAll(ability.getKnowledgeAreas());
+        abilities = (List<KnowledgeArea>)(List)abFacade.getAll(Ability.class);
         dualListModel = new DualListModel<KnowledgeArea> (knowledgeAreasAux, ability.getKnowledgeAreas());
     }
     private void atualizarKArea(){
@@ -67,7 +69,8 @@ public class HabilidadeAreaMB {
     public void onTransfer(TransferEvent event){
         if(event.isAdd()){
             for(Object o : event.getItems()){
-                ability.getKnowledgeAreas().add((KnowledgeArea)o);
+                KnowledgeArea ka = (KnowledgeArea)o;
+                ability.getKnowledgeAreas().add(ka);
             }
             
         }else{
@@ -106,5 +109,12 @@ public class HabilidadeAreaMB {
 
     public void setKnowledgeAreas(List knowledgeAreas) {
         this.knowledgeAreas = knowledgeAreas;
+    }
+    public List getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List abilities) {
+        this.abilities = abilities;
     }
 }

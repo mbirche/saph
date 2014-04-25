@@ -33,7 +33,7 @@ and open the template in the editor.
                 </p:column>
             </p:row>
             <p:row>
-                <p:column>
+                <p:column colspan="2">
                     <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Área de Conhecimento Cadastrada"
@@ -44,7 +44,7 @@ and open the template in the editor.
                             </f:facet>
                             #{ka.name}
                         </p:column>
-                        <p:column style="width: 20%">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Descrição"/>
                             </f:facet>
@@ -76,7 +76,7 @@ and open the template in the editor.
                 <p:column>
                     <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
                     <p:pickList value="#{habilidadeAreaMB.dualListModel}" styleClass="pickList" style="width: 100%"
-                                var="ka" itemLabel="#{ka.name}" itemValue="#{ka}" converter="knowledgeAreaConverter">
+                                var="ka" itemValue="#{ka}" itemLabel="#{ka}" converter="pickListConverter">
                         <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransfer}"/>
                         <p:column style="width: 30%">
                             
@@ -91,15 +91,35 @@ and open the template in the editor.
             </p:row>
             <p:row>
                 <p:column>
-                    <p:commandButton value="Salvar Habilidade"/>                                   
+                    <p:commandButton value="Salvar Habilidade" action="#{habilidadeAreaMB.saveHabilidade()}" update="formPrincipal:pnlCentral"/>                                   
                     <p:commandButton value="Cancelar"/>                 
                 </p:column>
             </p:row>
             <p:row>
-                <p:column>
+                <p:column colspan="2">
                     <p:outputLabel value="Habilidades Cadastradas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada">
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada"
+                                 value="#{habilidadeAreaMB.abilities}" var="ab" rowKey="#{ab.id}">
+                        
+                        <p:column style="width: 30%">
+                            <f:facet name="header">
+                                <h:outputText value="Nome da Habilidade"/>
+                            </f:facet>
+                            #{ab.name}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descrição"/>
+                            </f:facet>
+                            #{ab.description}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Qtde Areas"/>
+                            </f:facet>
+                            #{ab.knowledgeAreas.size()}
+                        </p:column>
 
                     </p:dataTable>
                 </p:column>

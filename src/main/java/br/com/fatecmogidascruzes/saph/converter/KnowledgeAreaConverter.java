@@ -17,7 +17,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author marcelo
  */
-@FacesConverter(forClass = KnowledgeArea.class, value = "knowledgeAreaConverter")
+@FacesConverter(forClass = KnowledgeArea.class)
 public class KnowledgeAreaConverter implements Converter{
 
     KnowledgeAreaService service = new KnowledgeAreaService();
@@ -31,7 +31,7 @@ public class KnowledgeAreaConverter implements Converter{
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         KnowledgeArea ka = (KnowledgeArea) value;
         
-        return ka.getName();
+        return ka.getId().toString();
     }
     
 }
