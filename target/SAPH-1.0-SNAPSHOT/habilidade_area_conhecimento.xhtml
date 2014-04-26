@@ -50,6 +50,14 @@ and open the template in the editor.
                             </f:facet>
                             #{ka.description}
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Deletar"/>
+                            </f:facet>
+                            <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteKArea()}" update=":formPrincipal:pnlCentral">
+                                <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.deletingKA}"/>
+                            </p:commandButton>
+                        </p:column>
 
                     </p:dataTable>
                 </p:column>
@@ -119,6 +127,14 @@ and open the template in the editor.
                                 <h:outputText value="Qtde Areas"/>
                             </f:facet>
                             #{ab.knowledgeAreas.size()}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Deletar"/>
+                            </f:facet>
+                            <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteAbility()}" update=":formPrincipal:pnlCentral">
+                                <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.deletingAbility}"/>
+                            </p:commandButton>
                         </p:column>
 
                     </p:dataTable>

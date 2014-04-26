@@ -7,7 +7,7 @@ package br.com.fatecmogidascruzes.saph.model;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -20,7 +20,7 @@ import org.hibernate.annotations.CascadeType;
 public class Question extends Entity {
 
     @Cascade(CascadeType.ALL)
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Alternative> alternatives;
     
     @Cascade(CascadeType.ALL)

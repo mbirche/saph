@@ -6,10 +6,16 @@
 
 package br.com.fatecmogidascruzes.saph.interfaces;
 
+import br.com.fatecmogidascruzes.saph.model.Ability;
+import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
+import java.util.List;
+
 /**
  *
  * @author marcelo
  */
 public interface IEvaluatedItemFacade extends IAbstractFacade{
+    
+    public List<EvaluatedItem> getEvaluatedItemsByAbility(Ability ability);
     
 }

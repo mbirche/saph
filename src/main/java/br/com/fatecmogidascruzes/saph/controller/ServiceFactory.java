@@ -8,8 +8,10 @@ package br.com.fatecmogidascruzes.saph.controller;
 
 import br.com.fatecmogidascruzes.saph.interfaces.IAbstractService;
 import br.com.fatecmogidascruzes.saph.model.Ability;
+import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.service.AbilityService;
+import br.com.fatecmogidascruzes.saph.service.EvaluatedItemService;
 import br.com.fatecmogidascruzes.saph.service.KnowledgeAreaService;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class ServiceFactory {
         
         map.put(KnowledgeArea.class, KnowledgeAreaService.getInstance());
         map.put(Ability.class, AbilityService.getInstance());
-//        map.put(EvaluatedItem.class, EvaluatedItemFacade.getInstance());
+        map.put(EvaluatedItem.class, EvaluatedItemService.getInstance());
 //        map.put(Alternative.class, AlternativeFacade.getInstance());
 //        map.put(Question.class, QuestionFacade.getInstance());
 //        map.put(Test.class, TestFacade.getInstance());
