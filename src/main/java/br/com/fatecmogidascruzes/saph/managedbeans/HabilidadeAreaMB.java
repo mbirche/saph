@@ -86,6 +86,14 @@ public class HabilidadeAreaMB {
         atualizarListas();
     }
 
+    public void updateKArea(){
+        kaFacade.update(updatingKA);
+        atualizarKArea();
+        atualizarListas();
+    }
+    public void abilityDetail(){
+        
+    }
     public void deleteKArea() {
         kaFacade.delete(deletingKA);
         atualizarKArea();

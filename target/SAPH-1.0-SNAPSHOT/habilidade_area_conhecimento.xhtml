@@ -50,9 +50,17 @@ and open the template in the editor.
                             </f:facet>
                             #{ka.description}
                         </p:column>
-                        <p:column>
+                        <p:column style="width: 10%; text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="Deletar"/>
+                                <h:outputText value="Detalhes"/>
+                            </f:facet>
+                            <p:commandButton value="Detalhe" oncomplete="PF('edtKA').show();">
+                                <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.updatingKA}"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column style="width: 10%; text-align: center">
+                            <f:facet name="header">
+                                <h:outputText value="Remoção"/>
                             </f:facet>
                             <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteKArea()}" update=":formPrincipal:pnlCentral">
                                 <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.deletingKA}"/>
@@ -68,7 +76,7 @@ and open the template in the editor.
 
         <h:outputText value="Habilidades" styleClass="tituloSecao"/>
 
-        <p:panelGrid style="width: 100%;" styleClass="">
+        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
             <p:row>
                 <p:column style="width: 40%;">
                     <p:outputLabel value="Nome" styleClass="labelTxt"/>
@@ -86,13 +94,11 @@ and open the template in the editor.
                     <p:pickList value="#{habilidadeAreaMB.dualListModel}" styleClass="pickList" style="width: 100%"
                                 var="ka" itemValue="#{ka}" itemLabel="#{ka}" converter="pickListConverter">
                         <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransfer}"/>
-                        <p:column style="width: 30%">
-                            
-                            #{ka.name}
-                        </p:column>
+
+                        <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                        <f:facet name="targetCaption">Escolhidas</f:facet> 
                         <p:column>
-                            
-                            #{ka.description}
+                            #{ka.name}
                         </p:column>
                     </p:pickList>
                 </p:column>
@@ -109,7 +115,7 @@ and open the template in the editor.
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada"
                                  value="#{habilidadeAreaMB.abilities}" var="ab" rowKey="#{ab.id}">
-                        
+
                         <p:column style="width: 30%">
                             <f:facet name="header">
                                 <h:outputText value="Nome da Habilidade"/>
@@ -122,15 +128,17 @@ and open the template in the editor.
                             </f:facet>
                             #{ab.description}
                         </p:column>
-                        <p:column>
+                        <p:column style="width: 10%; text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="Qtde Areas"/>
+                                <h:outputText value="Detalhes"/>
                             </f:facet>
-                            #{ab.knowledgeAreas.size()}
+                            <p:commandButton value="Detalhe" onclick="PF('editKArea').show();" update=":formPrincipal:pnlCentral">
+                                <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.updatingAbility}"/>
+                            </p:commandButton>
                         </p:column>
-                        <p:column>
+                        <p:column style="width: 10%; text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="Deletar"/>
+                                <h:outputText value="Remoção"/>
                             </f:facet>
                             <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteAbility()}" update=":formPrincipal:pnlCentral">
                                 <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.deletingAbility}"/>
@@ -142,5 +150,31 @@ and open the template in the editor.
             </p:row>
         </p:panelGrid>
 
+        <p:dialog id="editKArea" header="Edição da Área de Conhecimento" widgetVar="edtKA" modal="true"
+                  appendToBody="true">
+            <h:form>
+                <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+                    <p:row>
+                        <p:column  style="width: 40%;">
+                            <h:outputText value="Nome" styleClass="labelTxt"/>
+                            <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.updatingKA.name}"/>
+                        </p:column>
+                        <p:column rowspan="2">
+                            <h:outputText value="Descrição" styleClass="labelTxt"/>
+                            <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                             value="#{habilidadeAreaMB.updatingKA.description}"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:commandButton value="Atualizar Área de Conhecimento" action="#{habilidadeAreaMB.updateKArea()}" 
+                                             update=":formPrincipal:pnlCentral" oncomplete="PF('edtKA').hide();"/>
+                            <p:commandButton value="Cancelar" oncomplete="PF('edtKA').hide();"/> 
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>  
+            </h:form>
+        </p:dialog>
     </ui:composition>
 </html>
