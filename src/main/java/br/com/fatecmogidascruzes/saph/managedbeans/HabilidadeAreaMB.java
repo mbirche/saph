@@ -72,7 +72,6 @@ public class HabilidadeAreaMB {
     }
 
     public void updateAbility() {
-
     }
 
     public void deleteKArea() {
@@ -100,9 +99,11 @@ public class HabilidadeAreaMB {
         knowledgeAreasAux.removeAll(ability.getKnowledgeAreas());
         abilities = (List<KnowledgeArea>) (List) abFacade.getAll(Ability.class);
         dualListModel = new DualListModel<KnowledgeArea>(knowledgeAreasAux, ability.getKnowledgeAreas());
-        knowledgeAreasAuxEdit = new ArrayList<KnowledgeArea>(knowledgeAreas);
-        knowledgeAreasAuxEdit.removeAll(updatingAbility.getKnowledgeAreas());
-        dualListModelEdit = new DualListModel<KnowledgeArea>(knowledgeAreasAuxEdit, updatingAbility.getKnowledgeAreas());
+        if (updatingAbility != null) {
+            knowledgeAreasAuxEdit = new ArrayList<KnowledgeArea>(knowledgeAreas);
+            knowledgeAreasAuxEdit.removeAll(updatingAbility.getKnowledgeAreas());
+            dualListModelEdit = new DualListModel<KnowledgeArea>(knowledgeAreasAuxEdit, updatingAbility.getKnowledgeAreas());
+        }
 
     }
 
@@ -127,6 +128,7 @@ public class HabilidadeAreaMB {
             }
         }
     }
+
     public void onTransferEdit(TransferEvent event) {
         if (event.isAdd()) {
             for (Object o : event.getItems()) {
