@@ -9,6 +9,7 @@ import br.com.fatecmogidascruzes.saph.interfaces.IDAO;
 import br.com.fatecmogidascruzes.saph.model.Entity;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -26,11 +27,15 @@ public class AbstractDAO implements IDAO {
     public Entity save(Entity entity) {
         session = HSession.getSession();
         tx = session.beginTransaction();
-
-        session.saveOrUpdate(entity);
-
-        tx.commit();
-        session.close();
+        try {
+            session.saveOrUpdate(entity);
+            tx.commit();
+            session.flush();
+        } catch (HibernateException e) {
+            tx.rollback();
+        } finally {
+            session.close();
+        }
         return entity;
     }
 
@@ -38,9 +43,15 @@ public class AbstractDAO implements IDAO {
     public Entity update(Entity entity) {
         session = HSession.getSession();
         tx = session.beginTransaction();
-        session.update(entity);
-        tx.commit();
-        session.close();
+        try {
+            session.update(entity);
+            tx.commit();
+            session.flush();
+        } catch (HibernateException e) {
+            tx.rollback();
+        } finally {
+            session.close();
+        }
         return entity;
     }
 
@@ -48,9 +59,15 @@ public class AbstractDAO implements IDAO {
     public void delete(Entity entity) {
         session = HSession.getSession();
         tx = session.beginTransaction();
-        session.delete(entity);
-        tx.commit();
-        session.close();
+        try {
+            session.delete(entity);
+            tx.commit();
+            session.flush();
+        } catch (HibernateException e) {
+            tx.rollback();
+        } finally {
+            session.close();
+        }
     }
 
     @Override

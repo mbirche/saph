@@ -7,6 +7,7 @@
 package br.com.fatecmogidascruzes.saph.dao;
 
 import br.com.fatecmogidascruzes.saph.config.HSession;
+import br.com.fatecmogidascruzes.saph.interfaces.IDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.IEvaluatedItemFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;

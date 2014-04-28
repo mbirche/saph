@@ -6,6 +6,12 @@
 
 package br.com.fatecmogidascruzes.saph.dao;
 
+import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
+import br.com.fatecmogidascruzes.saph.model.Ability;
+import br.com.fatecmogidascruzes.saph.model.Entity;
+import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
+import java.util.List;
+
 /**
  *
  * @author marcelo
@@ -21,4 +27,22 @@ public class KnowledgeAreaDAO extends AbstractDAO{
             return dao;
         }
     }   
+    
+    @Override
+    public void delete(Entity entity){
+        KnowledgeArea deletingKArea = (KnowledgeArea) entity;
+        
+        AbilityDAO abDAO = (AbilityDAO)DAOFactory.getInstance().getDAO(Ability.class);
+        
+        List<Ability> abilities = abDAO.getAbilityByKnowledgeArea(deletingKArea);
+        
+        for(Ability ab : abilities){
+            if(ab.getKnowledgeAreas().contains(deletingKArea)){
+                ab.getKnowledgeAreas().remove(deletingKArea);
+                abDAO.update(ab);
+            }
+        }
+        
+        super.delete(deletingKArea);
+    }
 }

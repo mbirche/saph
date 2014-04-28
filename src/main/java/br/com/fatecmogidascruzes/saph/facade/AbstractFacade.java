@@ -9,7 +9,6 @@ package br.com.fatecmogidascruzes.saph.facade;
 import br.com.fatecmogidascruzes.saph.controller.ServiceFactory;
 import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
 import br.com.fatecmogidascruzes.saph.model.Entity;
-import br.com.fatecmogidascruzes.saph.service.AbstractService;
 import java.util.List;
 
 /**

@@ -54,7 +54,7 @@ and open the template in the editor.
                             <f:facet name="header">
                                 <h:outputText value="Detalhes"/>
                             </f:facet>
-                            <p:commandButton value="Detalhe" oncomplete="PF('edtKA').show();">
+                            <p:commandButton value="Detalhe" oncomplete="PF('edtKA').show();" update=":formPrincipal:pnlDialogKArea">
                                 <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.updatingKA}"/>
                             </p:commandButton>
                         </p:column>
@@ -130,9 +130,15 @@ and open the template in the editor.
                         </p:column>
                         <p:column style="width: 10%; text-align: center">
                             <f:facet name="header">
+                                <h:outputText value="Qtde Áreas"/>
+                            </f:facet>
+                            #{ab.knowledgeAreas.size()}
+                        </p:column>
+                        <p:column style="width: 10%; text-align: center">
+                            <f:facet name="header">
                                 <h:outputText value="Detalhes"/>
                             </f:facet>
-                            <p:commandButton value="Detalhe" onclick="PF('editKArea').show();" update=":formPrincipal:pnlCentral">
+                            <p:commandButton value="Detalhe" oncomplete="PF('edtAbility').show();" update=":formPrincipal:pnlDialogAbility">
                                 <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.updatingAbility}"/>
                             </p:commandButton>
                         </p:column>
@@ -150,9 +156,9 @@ and open the template in the editor.
             </p:row>
         </p:panelGrid>
 
-        <p:dialog id="editKArea" header="Edição da Área de Conhecimento" widgetVar="edtKA" modal="true"
-                  appendToBody="true">
-            <h:form>
+        <p:dialog id="editKArea" header="Edição da Área de Conhecimento" widgetVar="edtKA" modal="false"
+                  dynamic="true" width="800">
+            <h:panelGroup id ="pnlDialogKArea">
                 <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
                     <p:row>
                         <p:column  style="width: 40%;">
@@ -168,13 +174,51 @@ and open the template in the editor.
 
                     <p:row>
                         <p:column colspan="2">
-                            <p:commandButton value="Atualizar Área de Conhecimento" action="#{habilidadeAreaMB.updateKArea()}" 
-                                             update=":formPrincipal:pnlCentral" oncomplete="PF('edtKA').hide();"/>
+                            <p:commandButton value="Atualizar Área de Conhecimento" actionListener="#{habilidadeAreaMB.updateKArea()}" update="formPrincipal:pnlCentral"/>
                             <p:commandButton value="Cancelar" oncomplete="PF('edtKA').hide();"/> 
                         </p:column>
                     </p:row>
                 </p:panelGrid>  
-            </h:form>
+            </h:panelGroup>
+        </p:dialog>
+        <p:dialog id="editAbility" header="Edição da Área de Conhecimento" widgetVar="edtAbility" modal="false"
+                  dynamic="true" width="800">
+            <h:panelGroup id ="pnlDialogAbility">
+                <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+                    <p:row>
+                        <p:column style="width: 40%;">
+                            <p:outputLabel value="Nome" styleClass="labelTxt"/>
+                            <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.updatingAbility.name}"/>
+                        </p:column>
+                        <p:column rowspan="2">
+                            <p:outputLabel value="Descrição" styleClass="labelTxt"/>
+                            <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                             value="#{habilidadeAreaMB.updatingAbility.description}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
+                            <p:pickList value="#{habilidadeAreaMB.dualListModelEdit}" styleClass="pickList" style="width: 100%"
+                                        var="ka" itemValue="#{ka}" itemLabel="#{ka}" converter="pickListConverter">
+                                <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransferEdit}"/>
+
+                                <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                                <f:facet name="targetCaption">Escolhidas</f:facet> 
+                                <p:column>
+                                    #{ka.name}
+                                </p:column>
+                            </p:pickList>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:commandButton value="Salvar Habilidade" actionListener="#{habilidadeAreaMB.updateAbility()}" update="formPrincipal:pnlCentral"/>                                   
+                            <p:commandButton value="Cancelar"/>                 
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>  
+            </h:panelGroup>
         </p:dialog>
     </ui:composition>
 </html>
