@@ -80,6 +80,12 @@
 
 
                 </p:layout>
+
+                <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+                <p:dialog modal="true" widgetVar="statusDialog" header="Carregando..." style="font-size: 12px"  
+                          draggable="false" closable="false">  
+                    <p:graphicImage value="/images/ajaxloadingbar.gif" />  
+                </p:dialog>  
             </h:form>
         </h:body>
     </f:view>
