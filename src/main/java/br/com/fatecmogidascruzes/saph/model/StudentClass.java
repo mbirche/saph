@@ -29,27 +29,27 @@ public class StudentClass extends Entity {
             schema="saph", 
             joinColumns=@JoinColumn(name="id_studentclass"), 
             inverseJoinColumns=@JoinColumn(name="id_student"))
-    private Set<Student> students;
+    private Set<User> students;
     
     
    @ManyToMany(fetch = FetchType.EAGER)
     private Set<ClassAssignment> classAssignments;
 
     public StudentClass(){
-        students = new HashSet<Student>();
+        students = new HashSet<User>();
         classAssignments = new HashSet<ClassAssignment>();
     }
-    public Boolean addStudent(Student st){
+    public Boolean addStudent(User st){
         return students.add(st);
     }
     public Boolean addClassAssignment(ClassAssignment assignment){
         return classAssignments.add(assignment);
     }
-    public Set<Student> getStudents() {
+    public Set<User> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(Set<User> students) {
         this.students = students;
     }
 

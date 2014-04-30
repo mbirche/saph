@@ -1,8 +1,8 @@
 package br.com.fatecmogidascruzes.saph.interfaces;
 
-import br.com.fatecmogidascruzes.saph.model.Coordinator;
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.List;
 
 /**
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ICourseFacade extends IAbstractFacade{
     
-    public List<Course> getCoursesByCoordinator(Coordinator coordinator);
+    public List<Course> getCoursesByCoordinator(User coordinator);
     
     public List<Course> getCoursesByDiscipline(Discipline discipline);
 }

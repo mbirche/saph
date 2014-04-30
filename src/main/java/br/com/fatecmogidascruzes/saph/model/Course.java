@@ -25,7 +25,7 @@ public class Course extends Entity {
 
     @Cascade(CascadeType.ALL)
     @OneToOne
-    private Coordinator coordinator;
+    private User coordinator;
 
     @Cascade(CascadeType.ALL)
     @OneToMany(fetch = FetchType.EAGER)
@@ -51,11 +51,11 @@ public class Course extends Entity {
         this.name = name;
     }
 
-    public Coordinator getCoordinator() {
+    public User getCoordinator() {
         return coordinator;
     }
 
-    public void setCoordinator(Coordinator coordinator) {
+    public void setCoordinator(User coordinator) {
         this.coordinator = coordinator;
     }
 

@@ -1,8 +1,8 @@
 package br.com.fatecmogidascruzes.saph.interfaces;
 
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
-import br.com.fatecmogidascruzes.saph.model.Teacher;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.List;
 
 /**
@@ -12,8 +12,8 @@ import java.util.List;
  */
 public interface ITeacherFacade {
     
-    public List<ClassAssignment> getClassAssignmentByTeacher(Teacher teacher);
+    public List<ClassAssignment> getClassAssignmentByTeacher(User teacher);
     
-    public List<TestApplication> getTestApplicationsByTeacher(Teacher teacher);
+    public List<TestApplication> getTestApplicationsByTeacher(User teacher);
     
 }

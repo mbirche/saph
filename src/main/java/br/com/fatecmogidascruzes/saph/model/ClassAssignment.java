@@ -23,7 +23,7 @@ public class ClassAssignment extends Entity {
 
     @Cascade(CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Teacher> teachers;
+    private Set<User> teachers;
     
     @Cascade(CascadeType.ALL)
     @OneToOne
@@ -41,19 +41,19 @@ public class ClassAssignment extends Entity {
     public Boolean addStudentClass(StudentClass stClass){
         return studentClasses.add(stClass);
     }
-    public Boolean addTeacher(Teacher teacher){
+    public Boolean addTeacher(User teacher){
         return teachers.add(teacher);
     }
     
     public ClassAssignment(){
-        teachers = new HashSet<Teacher>();
+        teachers = new HashSet<User>();
         studentClasses = new HashSet<StudentClass>();
     }
-    public Set<Teacher> getTeachers() {
+    public Set<User> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
+    public void setTeachers(Set<User> teachers) {
         this.teachers = teachers;
     }
 

@@ -4,6 +4,9 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -31,24 +34,39 @@ public class User extends Entity {
 
     private String name;
     private String surname;
-    private String email;
+    
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+        name="email",
+        joinColumns=@JoinColumn(name="id_user")
+    )
+    @Column(name="email")
+    private List<String> emails;
+    
+    private String ra;
+    private String rf;
     
     @Cascade(CascadeType.ALL)
     @OneToMany(fetch = FetchType.EAGER)
-    private Set<Phone> phones;
+    private List<Phone> phones;
     
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns =
     @JoinColumn(name = "id_user"))
     @Column(name = "roles")
     @Enumerated
-    private Set<Role> roles;
+    private List<Role> roles;
 
-    public Set<Role> getRoles() {
+    public User(){
+        phones = new ArrayList<Phone>();
+        roles = new ArrayList<Role>();
+        emails = new ArrayList<String>();
+    }
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
@@ -68,19 +86,64 @@ public class User extends Entity {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public List<String> getEmails() {
+        return emails;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmails(List<String> emails) {
+        this.emails = emails;
     }
 
-    public Set<Phone> getPhones() {
+    public List<Phone> getPhones() {
         return phones;
     }
 
-    public void setPhones(Set<Phone> phones) {
+    public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
+
+    public String getRa() {
+        return ra;
+    }
+
+    public void setRa(String ra) {
+        this.ra = ra;
+    }
+
+    public String getRf() {
+        return rf;
+    }
+
+    public void setRf(String rf) {
+        this.rf = rf;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 23 * hash + (this.emails != null ? this.emails.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if (this.emails != other.emails && (this.emails == null || !this.emails.equals(other.emails))) {
+            return false;
+        }
+        return true;
+    }
+
+ 
+    
 }

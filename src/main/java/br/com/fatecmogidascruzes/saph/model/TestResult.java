@@ -30,7 +30,7 @@ public class TestResult extends Entity {
     
     @Cascade(CascadeType.ALL)
     @OneToOne
-    private Student student;
+    private User student;
 
     public Boolean addAnswer(Answer ans){
         return answers.add(ans);
@@ -54,11 +54,11 @@ public class TestResult extends Entity {
         this.testApplication = testApplication;
     }
 
-    public Student getStudent() {
+    public User getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(User student) {
         this.student = student;
     }
 

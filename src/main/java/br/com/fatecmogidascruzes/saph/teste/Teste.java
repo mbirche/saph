@@ -11,24 +11,22 @@ import br.com.fatecmogidascruzes.saph.facade.AbilityFacade;
 import br.com.fatecmogidascruzes.saph.facade.AbstractFacade;
 import br.com.fatecmogidascruzes.saph.facade.AlternativeFacade;
 import br.com.fatecmogidascruzes.saph.facade.ClassAssignmentFacade;
-import br.com.fatecmogidascruzes.saph.facade.CoordinatorFacade;
 import br.com.fatecmogidascruzes.saph.facade.CourseFacade;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.facade.KnowledgeAreaFacade;
 import br.com.fatecmogidascruzes.saph.facade.QuestionFacade;
 import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
-import br.com.fatecmogidascruzes.saph.facade.StudentFacade;
-import br.com.fatecmogidascruzes.saph.facade.TeacherFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestApplicationFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestResultFacade;
 import br.com.fatecmogidascruzes.saph.dao.AbstractDAO;
+import br.com.fatecmogidascruzes.saph.facade.UserFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.AlternativeText;
 import br.com.fatecmogidascruzes.saph.model.Answer;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
-import br.com.fatecmogidascruzes.saph.model.Coordinator;
+
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
 import br.com.fatecmogidascruzes.saph.model.Entity;
@@ -38,12 +36,13 @@ import br.com.fatecmogidascruzes.saph.model.Performance;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import br.com.fatecmogidascruzes.saph.model.QuestionText;
 import br.com.fatecmogidascruzes.saph.model.Role;
-import br.com.fatecmogidascruzes.saph.model.Student;
+
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
-import br.com.fatecmogidascruzes.saph.model.Teacher;
+
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -57,9 +56,9 @@ public class Teste {
 
     public static void main(String[] args) {
 
-//        teste1();
+        teste1();
 //        teste2();
-        teste3();
+//        teste3();
 //        teste4();
         //teste5();
 //        teste6();
@@ -98,14 +97,14 @@ public class Teste {
         System.out.println("Prob = " + prob);
     }
     private static void teste15(){
-        TeacherFacade teacherFacade = (TeacherFacade) FacadeFactory.getInstance().getFacade(Teacher.class);
+        UserFacade teacherFacade = (UserFacade) FacadeFactory.getInstance().getFacade(User.class);
         TestApplicationFacade taFacade = (TestApplicationFacade) FacadeFactory.getInstance().getFacade(TestApplication.class);
         
-        Teacher t1 = new Teacher();
+        User t1 = new User();
         t1.setName("Leandro");
-        Teacher t2 = new Teacher();
+        User t2 = new User();
         t2.setName("Rodrigo");
-        Teacher t3 = new Teacher();
+        User t3 = new User();
         t3.setName("Luciano");
         
         ClassAssignment ca1 = new ClassAssignment();
@@ -151,7 +150,7 @@ public class Teste {
     private static void teste14(){
         
         CourseFacade courseFacade = (CourseFacade) FacadeFactory.getInstance().getFacade(Course.class);
-        CoordinatorFacade coordinatorFacade = (CoordinatorFacade) FacadeFactory.getInstance().getFacade(Coordinator.class);
+        UserFacade coordinatorFacade = (UserFacade) FacadeFactory.getInstance().getFacade(User.class);
         
         Course c1 = new Course();        
         
@@ -159,11 +158,11 @@ public class Teste {
         
         Course c3 = new Course();
         
-        Coordinator cd1 = new Coordinator();
+        User cd1 = new User();
         cd1.setName("Leandro");
-        Coordinator cd2 = new Coordinator();
+        User cd2 = new User();
         cd2.setName("Rodrigo");
-        Coordinator cd3 = new Coordinator();
+        User cd3 = new User();
         cd3.setName("Luciano");
         
         c1.setCoordinator(cd1);
@@ -187,7 +186,7 @@ public class Teste {
         Course c1 = new Course();
         c1.setName("ADS");
         
-        Coordinator cd = new Coordinator();
+        User cd = new User();
         cd.setName("Luciano");
         
         Discipline d1 = new Discipline();
@@ -200,7 +199,7 @@ public class Teste {
         Course c2 = new Course();
         c2.setName("Agro");
         
-        Coordinator cd1 = new Coordinator();
+        User cd1 = new User();
         cd1.setName("Mark");
         
         Discipline d2 = new Discipline();
@@ -221,7 +220,7 @@ public class Teste {
         
     }
     private static void teste12(){
-        StudentFacade studentFacade = (StudentFacade) FacadeFactory.getInstance().getFacade(Student.class);
+        UserFacade studentFacade = (UserFacade) FacadeFactory.getInstance().getFacade(User.class);
         StudentClassFacade classFacade = (StudentClassFacade) FacadeFactory.getInstance().getFacade(StudentClass.class);
         ClassAssignmentFacade caFacade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
         
@@ -230,9 +229,9 @@ public class Teste {
         StudentClass sc3 = new StudentClass();
         StudentClass sc4 = new StudentClass();
         
-        Student st1 = new Student();
+        User st1 = new User();
         st1.setName("Alis");
-        Student st2 = new Student();
+        User st2 = new User();
         st2.setName("Vinicius");
         
         sc1.addStudent(st1);
@@ -277,9 +276,9 @@ public class Teste {
         
         ClassAssignment ca = new ClassAssignment();
         
-        Teacher t1 = new Teacher();
+        User t1 = new User();
         t1.setName("Marcelo");
-        Teacher t2 = new Teacher();
+        User t2 = new User();
         t2.setName("Tabata");
         
         Course c1 = new Course();
@@ -295,9 +294,9 @@ public class Teste {
         StudentClass sc1 = new StudentClass();
         StudentClass sc2 = new StudentClass();
         
-        Student st1 = new Student();
+        User st1 = new User();
         st1.setName("Alis");
-        Student st2 = new Student();
+        User st2 = new User();
         st2.setName("Vinicius");
         
         sc1.addStudent(st1);
@@ -344,9 +343,9 @@ public class Teste {
         TestResult tr2 = new TestResult();
         TestResult tr3 = new TestResult();
         
-        Student st1 = new Student();
+        User st1 = new User();
         st1.setName("Marcelo");
-        Student st2 = new Student();
+        User st2 = new User();
         st2.setName("Tabata");
         
         tr1.setStudent(st1);
@@ -394,7 +393,7 @@ public class Teste {
         
         facade.save(ta);
          
-        Student st = new Student();
+        User st = new User();
         st.setName("Marcelo");
         
         Set<Answer> answers = new HashSet<Answer>();
@@ -726,7 +725,7 @@ public class Teste {
         ans2.setQuestion(question);
         ans2.setAlternative(alt2);
 
-        Student st = new Student();
+        User st = new User();
         st.setName("Marcelo");
 
         TestResult tResult = new TestResult();
@@ -743,21 +742,21 @@ public class Teste {
 
         AbstractDAO dao = new AbstractDAO();
 
-        Student st1 = new Student();
+        User st1 = new User();
 
         st1.setName("Marcelo");
         st1.setSurname("Birche Ferri");
-        st1.setRn("092321-4");
+        st1.setRa("092321-4");
 
-        Student st2 = new Student();
+        User st2 = new User();
 
         st2.setName("Tabata");
         st2.setSurname("Cristina Henrique Ferri");
-        st2.setRn("12302");
+        st2.setRa("12302");
 
-        Set<Role> roles = new HashSet<Role>();
-        roles.add(Role.STUDENT);
-        roles.add(Role.TEACHER);
+        List<Role> roles = new ArrayList<Role>();
+        roles.add(Role.Aluno);
+        roles.add(Role.Professor);
 
         st1.setRoles(roles);
         st2.setRoles(roles);
@@ -767,10 +766,10 @@ public class Teste {
         stClass.addStudent(st1);
         stClass.addStudent(st2);
 
-        Coordinator coord = new Coordinator();
+        User coord = new User();
         coord.setName("Leandro Luque");
 
-        Teacher teacher = new Teacher();
+        User teacher = new User();
         teacher.setName("Rodrigo Rocha");
 
         Discipline disc = new Discipline();
@@ -785,7 +784,6 @@ public class Teste {
         ClassAssignment clAs = new ClassAssignment();
 
         clAs.addStudentClass(stClass);
-        teacher.addClassAssignment(clAs);
         clAs.addTeacher(teacher);
 
         clAs.setDiscipline(disc);

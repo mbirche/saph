@@ -1,6 +1,6 @@
 package br.com.fatecmogidascruzes.saph.managedbeans;
 
-import br.com.fatecmogidascruzes.saph.model.Student;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -16,22 +16,22 @@ import org.primefaces.model.DualListModel;
 @SessionScoped
 public class TurmaMB {
 
-    private DualListModel dualListModel;
-    private List<Student> source;
-    private List<Student> target;
+    private DualListModel<User> dualListModel;
+    private List<User> source;
+    private List<User> target;
 
     public TurmaMB() {
-        Student s1 = new Student();
+        User s1 = new User();
         s1.setName("Marcelo");
-        Student s2 = new Student();
+        User s2 = new User();
         s2.setName("Tabata");
         
-        source = new ArrayList<Student>();
+        source = new ArrayList<User>();
         source.add(s1);
-        target = new ArrayList<Student>();
+        target = new ArrayList<User>();
         target.add(s2);
         
-        dualListModel = new DualListModel(source, target);
+        dualListModel = new DualListModel<User>(source, target);
     }
 
     public DualListModel getDualListModel() {
@@ -42,19 +42,19 @@ public class TurmaMB {
         this.dualListModel = dualListModel;
     }
 
-    public List<Student> getSource() {
+    public List<User> getSource() {
         return source;
     }
 
-    public void setSource(List<Student> source) {
+    public void setSource(List<User> source) {
         this.source = source;
     }
 
-    public List<Student> getTarget() {
+    public List<User> getTarget() {
         return target;
     }
 
-    public void setTarget(List<Student> target) {
+    public void setTarget(List<User> target) {
         this.target = target;
     }
     

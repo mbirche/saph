@@ -6,7 +6,9 @@
 
 package br.com.fatecmogidascruzes.saph.converter;
 
-import br.com.fatecmogidascruzes.saph.model.Student;
+
+import br.com.fatecmogidascruzes.saph.dao.UserDAO;
+import br.com.fatecmogidascruzes.saph.model.User;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,21 +20,22 @@ import javax.faces.convert.FacesConverter;
  *
  * @author marcelo
  */
-@FacesConverter(forClass = Student.class)
-public class StudentConverter implements Converter{
+@FacesConverter(forClass = User.class, value = "userConverter")
+public class UserConverter implements Converter{
 
+    UserDAO dao = new UserDAO();
+    
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        Student st = new Student();
-        st.setName(value);
+        User st = (User) dao.get(Long.valueOf(value), User.class);
         return st;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        Student st = (Student) value;
+        User st = (User) value;
         
-        return st.getName();
+        return st.getId().toString();
     }
     
 }

@@ -10,9 +10,11 @@ import br.com.fatecmogidascruzes.saph.interfaces.IAbstractService;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
+import br.com.fatecmogidascruzes.saph.model.User;
 import br.com.fatecmogidascruzes.saph.service.AbilityService;
 import br.com.fatecmogidascruzes.saph.service.EvaluatedItemService;
 import br.com.fatecmogidascruzes.saph.service.KnowledgeAreaService;
+import br.com.fatecmogidascruzes.saph.service.UserService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,11 +48,9 @@ public class ServiceFactory {
 //        map.put(Test.class, TestFacade.getInstance());
 //        map.put(TestApplication.class, TestApplicationFacade.getInstance());
 //        map.put(TestResult.class, TestResultFacade.getInstance());
-//        map.put(Student.class, StudentFacade.getInstance());
 //        map.put(ClassAssignment.class, ClassAssignmentFacade.getInstance());
 //        map.put(StudentClass.class, StudentClassFacade.getInstance());
 //        map.put(Course.class, CourseFacade.getInstance());
-//        map.put(Coordinator.class, CoordinatorFacade.getInstance());
-//        map.put(Teacher.class, TeacherFacade.getInstance());
+        map.put(User.class, UserService.getInstance());
     }
 }

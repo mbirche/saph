@@ -2,9 +2,10 @@ package br.com.fatecmogidascruzes.saph.dao;
 
 import br.com.fatecmogidascruzes.saph.config.HSession;
 import br.com.fatecmogidascruzes.saph.interfaces.ICourseFacade;
-import br.com.fatecmogidascruzes.saph.model.Coordinator;
+
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.List;
 import org.hibernate.Query;
 
@@ -27,7 +28,7 @@ public class CourseDAO extends AbstractDAO implements ICourseFacade{
     }
 
     @Override
-    public List<Course> getCoursesByCoordinator(Coordinator coordinator) {
+    public List<Course> getCoursesByCoordinator(User coordinator) {
         
         session = HSession.getSession();
         String hql = "from Course course WHERE " + coordinator.getId() + " = course.coordinator.id";

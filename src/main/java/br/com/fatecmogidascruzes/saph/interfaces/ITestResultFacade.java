@@ -1,7 +1,7 @@
 package br.com.fatecmogidascruzes.saph.interfaces;
 
-import br.com.fatecmogidascruzes.saph.model.Student;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.List;
 
 /**
@@ -10,5 +10,5 @@ import java.util.List;
  * @author Birche
  */
 public interface ITestResultFacade extends IAbstractFacade{
-    public List<TestResult> getTestResultsByStudent(Student student);
+    public List<TestResult> getTestResultsByStudent(User student);
 }

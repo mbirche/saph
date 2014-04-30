@@ -2,8 +2,9 @@ package br.com.fatecmogidascruzes.saph.facade;
 
 import br.com.fatecmogidascruzes.saph.dao.TestResultDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultFacade;
-import br.com.fatecmogidascruzes.saph.model.Student;
+
 import br.com.fatecmogidascruzes.saph.model.TestResult;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class TestResultFacade extends AbstractFacade implements ITestResultFacad
     }
 
     @Override
-    public List<TestResult> getTestResultsByStudent(Student student) {
+    public List<TestResult> getTestResultsByStudent(User student) {
         return dao.getTestResultsByStudent(student);
     }
 }

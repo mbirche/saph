@@ -12,29 +12,28 @@ import br.com.fatecmogidascruzes.saph.facade.QuestionFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestResultFacade;
 import br.com.fatecmogidascruzes.saph.facade.ClassAssignmentFacade;
-import br.com.fatecmogidascruzes.saph.facade.StudentFacade;
-import br.com.fatecmogidascruzes.saph.facade.CoordinatorFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestApplicationFacade;
-import br.com.fatecmogidascruzes.saph.facade.TeacherFacade;
 import br.com.fatecmogidascruzes.saph.facade.AlternativeFacade;
 import br.com.fatecmogidascruzes.saph.facade.CourseFacade;
 import br.com.fatecmogidascruzes.saph.facade.EvaluatedItemFacade;
 import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
+import br.com.fatecmogidascruzes.saph.facade.UserFacade;
 import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
-import br.com.fatecmogidascruzes.saph.model.Coordinator;
+
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
-import br.com.fatecmogidascruzes.saph.model.Student;
+
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
-import br.com.fatecmogidascruzes.saph.model.Teacher;
+
 import br.com.fatecmogidascruzes.saph.model.Test;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
+import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,12 +67,10 @@ public class FacadeFactory {
         map.put(Test.class, TestFacade.getInstance());
         map.put(TestApplication.class, TestApplicationFacade.getInstance());
         map.put(TestResult.class, TestResultFacade.getInstance());
-        map.put(Student.class, StudentFacade.getInstance());
         map.put(ClassAssignment.class, ClassAssignmentFacade.getInstance());
         map.put(StudentClass.class, StudentClassFacade.getInstance());
         map.put(Course.class, CourseFacade.getInstance());
-        map.put(Coordinator.class, CoordinatorFacade.getInstance());
-        map.put(Teacher.class, TeacherFacade.getInstance());
+        map.put(User.class, UserFacade.getInstance());
     }
     
 }

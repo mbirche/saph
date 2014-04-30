@@ -14,7 +14,12 @@
                     <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
                                 moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickList"
                                 removeAllLabel="Remover Todas" value="#{turmaMB.dualListModel}"
-                                var="teste" itemLabel="#{teste}" itemValue="#{teste}">
+                                var="aluno" itemLabel="#{aluno}" itemValue="#{aluno}">
+                        <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                        <f:facet name="targetCaption">Escolhidos</f:facet> 
+                        <p:column>
+                            #{aluno.name}
+                        </p:column>
                     </p:pickList>
                 </p:column>
                 <p:column>
