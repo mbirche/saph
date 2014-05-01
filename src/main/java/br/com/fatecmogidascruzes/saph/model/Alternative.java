@@ -22,7 +22,7 @@ import org.hibernate.annotations.CascadeType;
 public class Alternative extends Entity {
 
     @Cascade(CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<EvaluatedItem> evaluatedItems;
     
     @Cascade(CascadeType.ALL)

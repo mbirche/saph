@@ -31,6 +31,12 @@ public class UsuarioMB {
     private DualListModel dualListModel;
     private List<Role> source;
     private List<Role> target;
+    
+    private List<User> allUsers;
+    private List<User> allStudents;
+    private List<User> allCoordinators;
+    private List<User> allTeachers;
+    
     private Boolean showRA;
     private Boolean showRF;
     
@@ -46,10 +52,11 @@ public class UsuarioMB {
     public UsuarioMB() {
         
         userFacade = (UserFacade) FacadeFactory.getInstance().getFacade(User.class);
-        
+       
         user = new User();
         resetPickList();
-             
+        
+        fillRolesLists();
         showRA = false;
         showRF = false;
 
@@ -59,8 +66,28 @@ public class UsuarioMB {
         phoneAux = new Phone();
         phoneAux.setPhoneType(PhoneType.CELLPHONE);
         emailAux = "";
+        
     }
 
+    private void fillRolesLists(){
+        allUsers = (List<User>)(List)userFacade.getAll(User.class);
+        allStudents = new ArrayList<User>();
+        allCoordinators = new ArrayList<User>();
+        allTeachers = new ArrayList<User>();
+        
+        for(User usr : allUsers){
+            List<Role> roles = usr.getRoles();
+            if(roles.contains(Role.Aluno)){
+                allStudents.add(usr);
+            }
+            if(roles.contains(Role.Coordenador)){
+                allCoordinators.add(usr);
+            }
+            if(roles.contains(Role.Professor)){
+                allTeachers.add(usr);
+            }
+        }
+    }
     private void resetPickList(){
         source = new ArrayList<Role>();
         source.add(Role.Coordenador);
@@ -75,6 +102,7 @@ public class UsuarioMB {
         resetPickList();
         limpaTelefone();
         emailAux = "";
+        fillRolesLists();
     }
     public void removeEmail(String email){
         user.getEmails().remove(email);
@@ -227,6 +255,30 @@ public class UsuarioMB {
 
     public void setPhoneTypes(List<PhoneType> phoneTypes) {
         this.phoneTypes = phoneTypes;
+    }
+
+    public List<User> getAllStudents() {
+        return allStudents;
+    }
+
+    public void setAllStudents(List<User> allStudents) {
+        this.allStudents = allStudents;
+    }
+
+    public List<User> getAllCoordinators() {
+        return allCoordinators;
+    }
+
+    public void setAllCoordinators(List<User> allCoordinators) {
+        this.allCoordinators = allCoordinators;
+    }
+
+    public List<User> getAllTeachers() {
+        return allTeachers;
+    }
+
+    public void setAllTeachers(List<User> allTeachers) {
+        this.allTeachers = allTeachers;
     }
     
 }

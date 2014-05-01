@@ -21,7 +21,7 @@ public class TestResult extends Entity {
 
     private Boolean answered;
     @Cascade(CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<Answer> answers;
     
     @Cascade(CascadeType.ALL)

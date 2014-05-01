@@ -28,7 +28,7 @@ public class Course extends Entity {
     private User coordinator;
 
     @Cascade(CascadeType.ALL)
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinTable(name = "course_discipline",
             schema = "saph",
             joinColumns = @JoinColumn(name = "id_course"),

@@ -17,7 +17,7 @@ import org.hibernate.annotations.CascadeType;
 public class Ability extends Entity {
 
     @Cascade(CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<KnowledgeArea> knowledgeAreas;
     private String name;
     private String description;

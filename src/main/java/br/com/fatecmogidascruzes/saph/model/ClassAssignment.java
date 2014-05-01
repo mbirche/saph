@@ -22,7 +22,7 @@ import org.hibernate.annotations.CascadeType;
 public class ClassAssignment extends Entity {
 
     @Cascade(CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<User> teachers;
     
     @Cascade(CascadeType.ALL)

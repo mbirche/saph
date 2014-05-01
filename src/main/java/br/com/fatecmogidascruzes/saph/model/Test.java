@@ -20,7 +20,7 @@ public class Test extends Entity {
 
     private String name;
     @Cascade(CascadeType.ALL)
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private Set<Question> questions;
 
     public Boolean addQuestion(Question que){

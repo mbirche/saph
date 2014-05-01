@@ -35,7 +35,7 @@ public class User extends Entity {
     private String name;
     private String surname;
     
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @CollectionTable(
         name="email",
         joinColumns=@JoinColumn(name="id_user")
@@ -47,10 +47,10 @@ public class User extends Entity {
     private String rf;
     
     @Cascade(CascadeType.ALL)
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private List<Phone> phones;
     
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @CollectionTable(name = "roles", joinColumns =
     @JoinColumn(name = "id_user"))
     @Column(name = "roles")

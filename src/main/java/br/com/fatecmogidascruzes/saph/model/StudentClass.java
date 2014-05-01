@@ -10,10 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -24,7 +22,7 @@ public class StudentClass extends Entity {
 
     
     @Cascade(CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name="studentclass_student",
             schema="saph", 
             joinColumns=@JoinColumn(name="id_studentclass"), 
@@ -32,7 +30,7 @@ public class StudentClass extends Entity {
     private Set<User> students;
     
     
-   @ManyToMany(fetch = FetchType.EAGER)
+   @ManyToMany
     private Set<ClassAssignment> classAssignments;
 
     public StudentClass(){

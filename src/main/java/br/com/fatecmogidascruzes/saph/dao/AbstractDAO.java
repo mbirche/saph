@@ -34,7 +34,7 @@ public class AbstractDAO implements IDAO {
         } catch (HibernateException e) {
             tx.rollback();
         } finally {
-            session.close();
+//            session.close();
         }
         return entity;
     }
@@ -50,7 +50,7 @@ public class AbstractDAO implements IDAO {
         } catch (HibernateException e) {
             tx.rollback();
         } finally {
-            session.close();
+//            session.close();
         }
         return entity;
     }
@@ -66,7 +66,8 @@ public class AbstractDAO implements IDAO {
         } catch (HibernateException e) {
             tx.rollback();
         } finally {
-            session.close();
+            
+//            session.close();
         }
     }
 
@@ -75,7 +76,7 @@ public class AbstractDAO implements IDAO {
 
         session = HSession.getSession();
         Entity entity = (Entity) session.get(cl, id);
-        session.close();
+//        session.close();
 
         return entity;
     }
@@ -86,7 +87,7 @@ public class AbstractDAO implements IDAO {
         Criteria crit = session.createCriteria(cl);
         crit.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         List entities = crit.list();
-        session.close();
+//        session.close();
         return entities;
     }
 }
