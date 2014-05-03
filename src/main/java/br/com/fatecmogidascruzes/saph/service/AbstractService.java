@@ -8,6 +8,7 @@ package br.com.fatecmogidascruzes.saph.service;
 
 import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
 import br.com.fatecmogidascruzes.saph.interfaces.IAbstractFacade;
+import br.com.fatecmogidascruzes.saph.interfaces.IAbstractService;
 import br.com.fatecmogidascruzes.saph.interfaces.IDAO;
 import br.com.fatecmogidascruzes.saph.model.Entity;
 import java.util.List;

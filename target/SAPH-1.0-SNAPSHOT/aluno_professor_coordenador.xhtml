@@ -1,12 +1,281 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition id="uiAlunoProfessorCoordenador"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup id="pnlUserInfo">
+        <h:outputText value="Alunos, Professores e Coordenadores" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+            <p:row>
+                <p:column colspan="2">
+                    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+                        <p:row>
+                            <p:column style="width: 30%;">
+                                <h:outputText value="Nome" styleClass="labelTxt"/>
+                                <p:inputText style="width: 100%" value="#{usuarioMB.user.name}"/>
+                                <h:outputText value="Sobrenome" styleClass="labelTxt"/>
+                                <p:inputText style="width: 100%" value="#{usuarioMB.user.surname}"/>    
+                            </p:column>
+                            <p:column style="width: 20%">
 
-    <ui:composition id="uiAlunoProfessorCoordenador">
-        <h:panelGroup id="pnlUserInfo">
-            <h:outputText value="Alunos, Professores e Coordenadores" styleClass="tituloSecao"/>
+                                <h:outputText value="Tipo de Usuário" styleClass="labelTxt" style="padding-left: 15px;"/>
+                                <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
+                                            moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickPequeno"
+                                            removeAllLabel="Remover Todas" value="#{usuarioMB.dualListModel}" style="width: 100%;"
+                                            var="teste" itemLabel="#{teste}" itemValue="#{teste}" converter="roleConverter">
+                                    <p:ajax event="transfer" listener="#{usuarioMB.onTransfer}" update="raRf"/>
+                                </p:pickList>
+                            </p:column>
+                            <p:column style="width: 20%">
+                                <h:panelGroup id="raRf">
+                                    <h:outputText value="Registro Funcional" styleClass="labelTxt" rendered="#{usuarioMB.isShowRF()}"/>
+                                    <p:inputText style="width: 48%" value="#{usuarioMB.user.rf}" rendered="#{usuarioMB.isShowRF()}"/>
+                                    <h:outputText value="Registro Aluno" styleClass="labelTxt" rendered="#{usuarioMB.isShowRA()}"/>
+                                    <p:inputText style="width: 48%" value="#{usuarioMB.user.ra}" rendered="#{usuarioMB.isShowRA()}"/>
+                                </h:panelGroup>
+                            </p:column>
+                            <p:column/>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+
+            </p:row>
+            <p:row>
+                <p:column style="width: 50%;">               
+                    <h:panelGroup id="edicaoTelefone">
+                        <p:panelGrid id="gridTelefone" style="width: 100%" styleClass="gridSemBorda">
+
+                            <p:row>
+                                <p:column style="width: 30%">
+                                    <h:outputText value="Tipo de telefone" styleClass="labelTxt"/>
+                                    <p:selectOneRadio value="#{usuarioMB.phoneAux.phoneType}">
+                                        <f:selectItems value="#{usuarioMB.phoneTypes}" var="type" itemLabel="#{type.description}" itemValue="#{type}"/>
+                                        <p:ajax update="mskTelefone" listener="#{usuarioMB.clearPhoneNumbers()}"/>
+                                    </p:selectOneRadio>
+                                    <h:outputText value="Telefone" styleClass="labelTxt"/>
+                                    <p:inputMask id="mskDDD" mask="99" size="3" value="#{usuarioMB.phoneAux.code}">
+                                        <p:ajax/>
+                                        <p:watermark value="DDD" for="mskDDD"/>
+                                    </p:inputMask>
+                                    <p:inputMask id="mskTelefone" mask="#{usuarioMB.phoneMask}" value="#{usuarioMB.phoneAux.number}" size="15">
+                                        <p:ajax/>
+                                        <p:watermark value="Telefone" for="mskTelefone"/>
+                                    </p:inputMask>
+                                    <p:commandButton update="phoneList, mskTelefone, mskDDD" value="Adicionar" actionListener="#{usuarioMB.addPhone()}"
+                                                     style="margin-left: 0px; display: block"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="Telefones Cadastrados" styleClass="labelTxt"/>
+                                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Telefone Cadastrado" value="#{usuarioMB.user.phones}"
+                                                 var="tel" id="phoneList" styleClass="linhafina" >
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="DDD"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tel.code}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Número"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tel.number}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Tipo de Telefone"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tel.phoneType.description}"/>
+                                        </p:column>
+                                        <p:column style="width: 20%; text-align: center">
+                                            <f:facet name="header">
+                                                <h:outputText value="Apagar"/>
+                                            </f:facet>
+                                            <p:commandButton update="phoneList" value="Apagar" actionListener="#{usuarioMB.removePhone(tel)}"/>
+
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:column>  
+
+                            </p:row>
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </p:column>
+                <p:column>
+                    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+                        <p:row>
+                            <p:column style="width: 30%" styleClass="">
+                                <h:outputText value="Email:" styleClass="labelTxt"/>
+                                <p:inputText id="txtEmail"  style="width: 100%" value="#{usuarioMB.emailAux}"/>
+                                <p:commandButton value="Adicionar" update="txtEmail, emailList" actionListener="#{usuarioMB.addEmail()}"
+                                                 style="margin-left: 0px"/>
+                            </p:column>
+                            <p:column rowspan="2">
+                                <h:outputText value="Emails Cadastrados" styleClass="labelTxt"/>
+                                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Email Cadastrado" value="#{usuarioMB.user.emails}"
+                                             var="email" id="emailList">
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Email"/>
+                                        </f:facet>
+                                        #{email}
+                                    </p:column>
+                                    <p:column style="width: 20%; text-align: center">
+                                        <f:facet name="header">
+                                            <h:outputText value="Apagar"/>
+                                        </f:facet>
+                                        <p:commandButton update="emailList" value="Apagar" actionListener="#{usuarioMB.removeEmail(email)}"/>
+
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Salvar Usuário" update="pnlRolesLists, pnlUserInfo" actionListener="#{usuarioMB.saveUser()}"/>
+                    <p:commandButton value="Cancelar" update="formPrincipal:pnlCentral"/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+    </h:panelGroup>
+    <p:separator/>
+    <h:panelGroup id="pnlRolesLists">
+        <p:tabView style="width: 100%">
+            <p:tab title="Alunos Cadastrados">
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Aluno Cadastrado" value="#{usuarioMB.allStudents}"
+                             var="student" styleClass="linhafina">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        #{student.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sobrenome"/>
+                        </f:facet>
+                        #{student.surname}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="RA"/>
+                        </f:facet>
+                        #{student.ra}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtUsr').show();" update=":formPrincipal:pnlDialogUser">
+                            <f:setPropertyActionListener value="#{student}" target="#{usuarioMB.updatingUser}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" onclick="confirmaRemocaoAluno.show()">
+                            <f:setPropertyActionListener value="#{student}" target="#{usuarioMB.deletingUser}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Professores Cadastrados">
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Professor Cadastrado" value="#{usuarioMB.allTeachers}"
+                             var="teacher" styleClass="linhafina">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        #{teacher.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sobrenome"/>
+                        </f:facet>
+                        #{teacher.surname}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="RA"/>
+                        </f:facet>
+                        #{teacher.rf}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtUsr').show();" update=":formPrincipal:pnlDialogUser">
+                            <f:setPropertyActionListener value="#{teacher}" target="#{usuarioMB.updatingUser}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" onclick="confirmaRemocaoProfessor.show()">
+                            <f:setPropertyActionListener value="#{teacher}" target="#{usuarioMB.deletingUser}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Coordenadores Cadastrados">
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Coordenador Cadastrado" value="#{usuarioMB.allCoordinators}"
+                             var="coordinator" styleClass="linhafina">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        #{coordinator.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sobrenome"/>
+                        </f:facet>
+                        #{coordinator.surname}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="RA"/>
+                        </f:facet>
+                        #{coordinator.rf}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtUsr').show();" update=":formPrincipal:pnlDialogUser">
+                            <f:setPropertyActionListener value="#{coordinator}" target="#{usuarioMB.updatingUser}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" onclick="confirmaRemocaoCoordenador.show()">
+                            <f:setPropertyActionListener value="#{coordinator}" target="#{usuarioMB.deletingUser}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </p:tab>
+        </p:tabView>
+    </h:panelGroup>
+    <p:dialog id="editUser" header="Edição de Usuário" widgetVar="edtUsr" modal="false"
+              dynamic="true" width="1000">
+        <h:panelGroup id ="pnlDialogUser">
             <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
                 <p:row>
                     <p:column colspan="2">
@@ -14,86 +283,89 @@
                             <p:row>
                                 <p:column style="width: 30%;">
                                     <h:outputText value="Nome" styleClass="labelTxt"/>
-                                    <p:inputText style="width: 100%" value="#{usuarioMB.user.name}"/>
+                                    <p:inputText style="width: 100%" value="#{usuarioMB.updatingUser.name}"/>
                                     <h:outputText value="Sobrenome" styleClass="labelTxt"/>
-                                    <p:inputText style="width: 100%" value="#{usuarioMB.user.surname}"/>    
+                                    <p:inputText style="width: 100%" value="#{usuarioMB.updatingUser.surname}"/>    
                                 </p:column>
-                                <p:column style="width: 20%">
+                                <p:column style="width: 30%">
 
                                     <h:outputText value="Tipo de Usuário" styleClass="labelTxt" style="padding-left: 15px;"/>
                                     <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
                                                 moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickPequeno"
-                                                removeAllLabel="Remover Todas" value="#{usuarioMB.dualListModel}" style="width: 100%;"
-                                                var="teste" itemLabel="#{teste}" itemValue="#{teste}" converter="roleConverter">
-                                        <p:ajax event="transfer" listener="#{usuarioMB.onTransfer}" update="raRf"/>
+                                                removeAllLabel="Remover Todas" value="#{usuarioMB.dualListModelEdit}" style="width: 100%;"
+                                                var="role" itemLabel="#{role}" itemValue="#{role}" converter="roleConverter">
+                                        <p:ajax event="transfer" listener="#{usuarioMB.onTransferEdit}" update="raRfEdit"/>
                                     </p:pickList>
                                 </p:column>
                                 <p:column style="width: 20%">
-                                    <h:panelGroup id="raRf">
-                                        <h:outputText value="Registro Funcional" styleClass="labelTxt" rendered="#{usuarioMB.isShowRF()}"/>
-                                        <p:inputText style="width: 48%" value="#{usuarioMB.user.rf}" rendered="#{usuarioMB.isShowRF()}"/>
-                                        <h:outputText value="Registro Aluno" styleClass="labelTxt" rendered="#{usuarioMB.isShowRA()}"/>
-                                        <p:inputText style="width: 48%" value="#{usuarioMB.user.ra}" rendered="#{usuarioMB.isShowRA()}"/>
+                                    <h:panelGroup id="raRfEdit">
+                                        <h:outputText value="Registro Funcional" styleClass="labelTxt" rendered="#{usuarioMB.isShowRFEdit()}"/>
+                                        <p:inputText style="width: 48%" value="#{usuarioMB.updatingUser.rf}" rendered="#{usuarioMB.isShowRFEdit()}"/>
+                                        <h:outputText value="Registro Aluno" styleClass="labelTxt" rendered="#{usuarioMB.isShowRAEdit()}"/>
+                                        <p:inputText style="width: 48%" value="#{usuarioMB.updatingUser.ra}" rendered="#{usuarioMB.isShowRAEdit()}"/>
                                     </h:panelGroup>
                                 </p:column>
                                 <p:column/>
                             </p:row>
                         </p:panelGrid>
                     </p:column>
-
                 </p:row>
                 <p:row>
                     <p:column style="width: 50%;">               
-                        <h:panelGroup id="edicaoTelefone">
-                            <p:panelGrid id="gridTelefone" style="width: 100%" styleClass="gridSemBorda">
-
+                        <h:panelGroup id="edicaoTelefoneEdit">
+                            <p:panelGrid id="gridTelefoneEdit" style="width: 100%" styleClass="gridSemBorda">
                                 <p:row>
                                     <p:column style="width: 30%">
                                         <h:outputText value="Tipo de telefone" styleClass="labelTxt"/>
-                                        <p:selectOneRadio value="#{usuarioMB.phoneAux.phoneType}">
-                                            <f:selectItems value="#{usuarioMB.phoneTypes}" var="type" itemLabel="#{type}" itemValue="#{type}"/>
-                                            <p:ajax update="mskTelefone" listener="#{usuarioMB.clearPhoneNumbers()}"/>
+                                        <p:selectOneRadio value="#{usuarioMB.phoneAuxEdit.phoneType}">
+                                            <f:selectItems value="#{usuarioMB.phoneTypes}" var="type" itemLabel="#{type.description}" itemValue="#{type}"/>
+                                            <p:ajax update="mskTelefoneEdit" listener="#{usuarioMB.clearPhoneNumbersEdit()}"/>
                                         </p:selectOneRadio>
                                         <h:outputText value="Telefone" styleClass="labelTxt"/>
-                                        <p:inputMask id="mskDDD" mask="99" size="3" value="#{usuarioMB.phoneAux.code}">
+                                        <p:inputMask id="mskDDDEdit" mask="99" size="3" value="#{usuarioMB.phoneAuxEdit.code}">
                                             <p:ajax/>
-                                            <p:watermark value="DDD" for="mskDDD"/>
+                                            <p:watermark value="DDD" for="mskDDDEdit"/>
                                         </p:inputMask>
-                                        <p:inputMask id="mskTelefone" mask="#{usuarioMB.phoneMask}" value="#{usuarioMB.phoneAux.number}" size="15">
+                                        <p:inputMask id="mskTelefoneEdit" mask="#{usuarioMB.phoneMaskEdit}" value="#{usuarioMB.phoneAuxEdit.number}" size="15">
                                             <p:ajax/>
-                                            <p:watermark value="Telefone" for="mskTelefone"/>
+                                            <p:watermark value="Telefone" for="mskTelefoneEdit"/>
                                         </p:inputMask>
-                                        <p:commandButton update="phoneList, mskTelefone, mskDDD" value="Adicionar" actionListener="#{usuarioMB.addPhone()}"/>
+                                        <p:commandButton update="phoneListEdit, mskTelefoneEdit, mskDDDEdit" value="Adicionar" actionListener="#{usuarioMB.addPhoneEdit()}"
+                                                         style="margin-left: 0px"/>
                                     </p:column>
                                     <p:column>
                                         <h:outputText value="Telefones Cadastrados" styleClass="labelTxt"/>
                                         <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                                     paginatorAlwaysVisible="false" emptyMessage="Nenhum Telefone Cadastrado" value="#{usuarioMB.user.phones}"
-                                                     var="tel" id="phoneList">
+                                                     paginatorAlwaysVisible="false" emptyMessage="Nenhum Telefone Cadastrado" value="#{usuarioMB.updatingUser.phones}"
+                                                     var="ph" id="phoneListEdit" styleClass="linhafina" >
 
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="DDD"/>
                                                 </f:facet>
-                                                <h:outputText value="#{tel.code}"/>
+                                                <h:outputText value="#{ph.code}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Número"/>
                                                 </f:facet>
-                                                <h:outputText value="#{tel.number}"/>
+                                                <h:outputText value="#{ph.number}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Tipo de Telefone"/>
+                                                </f:facet>
+                                                <h:outputText value="#{ph.phoneType.description}"/>
                                             </p:column>
                                             <p:column style="width: 20%; text-align: center">
                                                 <f:facet name="header">
                                                     <h:outputText value="Apagar"/>
                                                 </f:facet>
-                                                <p:commandButton update="phoneList" value="Apagar" actionListener="#{usuarioMB.removePhone(tel)}"/>
+                                                <p:commandButton update="phoneListEdit" value="Apagar" actionListener="#{usuarioMB.removePhoneEdit(ph)}"/>
 
                                             </p:column>
-
                                         </p:dataTable>
                                     </p:column>  
-
                                 </p:row>
                             </p:panelGrid>
                         </h:panelGroup>
@@ -103,26 +375,27 @@
                             <p:row>
                                 <p:column style="width: 30%" styleClass="">
                                     <h:outputText value="Email:" styleClass="labelTxt"/>
-                                    <p:inputText id="txtEmail"  style="width: 60%" value="#{usuarioMB.emailAux}"/>
-                                    <p:commandButton value="Adicionar" update="txtEmail, emailList" actionListener="#{usuarioMB.addEmail()}"/>
+                                    <p:inputText id="txtEmailEdit"  style="width: 100%" value="#{usuarioMB.emailAuxEdit}"/>
+                                    <p:commandButton value="Adicionar" update="txtEmailEdit, emailListEdit" actionListener="#{usuarioMB.addEmailEdit()}"
+                                                     style="margin-left: 0px"/>
                                 </p:column>
                                 <p:column rowspan="2">
                                     <h:outputText value="Emails Cadastrados" styleClass="labelTxt"/>
                                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Email Cadastrado" value="#{usuarioMB.user.emails}"
-                                                 var="email" id="emailList">
+                                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Email Cadastrado" value="#{usuarioMB.updatingUser.emails}"
+                                                 var="emailE" id="emailListEdit">
 
                                         <p:column>
                                             <f:facet name="header">
                                                 <h:outputText value="Email"/>
                                             </f:facet>
-                                            #{email}
+                                            #{emailE}
                                         </p:column>
                                         <p:column style="width: 20%; text-align: center">
                                             <f:facet name="header">
                                                 <h:outputText value="Apagar"/>
                                             </f:facet>
-                                            <p:commandButton update="emailList" value="Apagar" actionListener="#{usuarioMB.removeEmail(email)}"/>
+                                            <p:commandButton update="emailListEdit" value="Apagar" actionListener="#{usuarioMB.removeEmailEdit(emailE)}"/>
 
                                         </p:column>
 
@@ -134,55 +407,41 @@
                 </p:row>
                 <p:row>
                     <p:column>
-                        <p:commandButton value="Salvar Usuário" update="pnlRolesLists, pnlUserInfo" actionListener="#{usuarioMB.saveUser()}"/>
-                        <p:commandButton value="Cancelar" update="formPrincipal:pnlCentral"/>
+                        <p:commandButton value="Editar" update=":formPrincipal:pnlCentral" actionListener="#{usuarioMB.saveUserEdit()}"/>
+                        <p:commandButton value="Cancelar" update=":formPrincipal:pnlCentral"/>
                     </p:column>
                 </p:row>
             </p:panelGrid>
         </h:panelGroup>
-        <p:separator/>
-        <h:panelGroup id="pnlRolesLists">
-            <p:tabView style="width: 100%">
-                <p:tab title="Alunos Cadastrados">
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Aluno Cadastrado" value="#{usuarioMB.allStudents}"
-                                 var="student">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                            #{student.name}
-                        </p:column>
-
-                    </p:dataTable>
-                </p:tab>
-                <p:tab title="Professores Cadastrados">
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Professor Cadastrado" value="#{usuarioMB.allTeachers}"
-                                 var="teacher">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                            #{teacher.name}
-                        </p:column>
-
-                    </p:dataTable>
-                </p:tab>
-                <p:tab title="Coordenadores Cadastrados">
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 250px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Coordenador Cadastrado" value="#{usuarioMB.allCoordinators}"
-                                 var="coordinator">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                            #{coordinator.name}
-                        </p:column>
-
-                    </p:dataTable>
-                </p:tab>
-            </p:tabView>
-        </h:panelGroup>
-    </ui:composition>
-</html>
+    </p:dialog>
+    <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
+                     id="confirmaRemocaoA" 
+                     message="Deseja mesmo remover o papel de aluno deste usuário? Se este for seu único papel ele será removido"
+                     widgetVar="confirmaRemocaoAluno">
+        <p:commandButton value="Remover" actionListener="#{usuarioMB.deleteRoleStudent()}" 
+                         onclick="confirmaRemocaoAluno.hide()"
+                         update=":formPrincipal:pnlCentral"/>
+        <p:commandButton value="Cancelar"
+                         onclick="confirmaRemocaoAluno.hide()"/>
+    </p:confirmDialog>
+    <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
+                     id="confirmaRemocaoT" 
+                     message="Deseja mesmo remover o papel de professor deste usuário? Se este for seu único papel ele será removido"
+                     widgetVar="confirmaRemocaoProfessor">
+        <p:commandButton value="Remover" actionListener="#{usuarioMB.deleteRoleTeacher()}" 
+                         onclick="confirmaRemocaoProfessor.hide()"
+                         update=":formPrincipal:pnlCentral"/>
+        <p:commandButton value="Cancelar"
+                         onclick="confirmaRemocaoProfessor.hide()"/>
+    </p:confirmDialog>
+    <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
+                     id="confirmaRemocaoC" 
+                     message="Deseja mesmo remover o papel de coordenador deste usuário? Se este for seu único papel ele será removido"
+                     widgetVar="confirmaRemocaoCoordenador">
+        <p:commandButton value="Remover" actionListener="#{usuarioMB.deleteRoleCoordinator()}" 
+                         onclick="confirmaRemocaoCoordenador.hide()"
+                         update=":formPrincipal:pnlCentral"/>
+        <p:commandButton value="Cancelar"
+                         onclick="confirmaRemocaoCoordenador.hide()"/>
+    </p:confirmDialog>
+</ui:composition>

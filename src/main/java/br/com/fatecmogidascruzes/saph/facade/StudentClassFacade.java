@@ -4,8 +4,8 @@
  */
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.dao.StudentClassDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.IStudentClassFacade;
+import br.com.fatecmogidascruzes.saph.service.StudentClassService;
 
 /**
  *
@@ -14,7 +14,7 @@ import br.com.fatecmogidascruzes.saph.interfaces.IStudentClassFacade;
 public class StudentClassFacade extends AbstractFacade implements IStudentClassFacade{
     
     private static StudentClassFacade facade;
-    private StudentClassDAO dao;
+    private StudentClassService service;
     public static StudentClassFacade getInstance(){
         if(facade == null){
             facade = new StudentClassFacade();
@@ -24,7 +24,7 @@ public class StudentClassFacade extends AbstractFacade implements IStudentClassF
         }
     }
     private StudentClassFacade(){
-        dao = new StudentClassDAO();
+        service = new StudentClassService();
     }
     
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.fatecmogidascruzes.saph.controller;
 
 import br.com.fatecmogidascruzes.saph.facade.AbilityFacade;
@@ -42,23 +41,25 @@ import java.util.Map;
  * @author marcelo
  */
 public class FacadeFactory {
-    
+
     private Map<Class, IAbstractFacade> map;
     private static FacadeFactory factory;
-    
-    public IAbstractFacade getFacade(Class cl){
+
+    public IAbstractFacade getFacade(Class cl) {
         return map.get(cl);
     }
-    public static FacadeFactory getInstance(){
-        if(factory == null){
+
+    public static FacadeFactory getInstance() {
+        if (factory == null) {
             return new FacadeFactory();
-        }else{
+        } else {
             return factory;
         }
     }
-    private FacadeFactory(){
+
+    private FacadeFactory() {
         map = new HashMap<Class, IAbstractFacade>();
-        
+
         map.put(KnowledgeArea.class, KnowledgeAreaFacade.getInstance());
         map.put(Ability.class, AbilityFacade.getInstance());
         map.put(EvaluatedItem.class, EvaluatedItemFacade.getInstance());
@@ -71,6 +72,7 @@ public class FacadeFactory {
         map.put(StudentClass.class, StudentClassFacade.getInstance());
         map.put(Course.class, CourseFacade.getInstance());
         map.put(User.class, UserFacade.getInstance());
+        map.put(StudentClass.class, StudentClassFacade.getInstance());
     }
-    
+
 }

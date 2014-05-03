@@ -1,85 +1,135 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <ui:composition id="uiTurma">
-        <h:outputText value="Turmas" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 50%">
-                    <h:outputText value="Nome da Turma" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%"/>
-                    <h:outputText value="Escolha os alunos para a turma" styleClass="labelTxt"/>
-                    <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
-                                moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickList"
-                                removeAllLabel="Remover Todas" value="#{turmaMB.dualListModel}"
-                                var="aluno" itemLabel="#{aluno}" itemValue="#{aluno}">
-                        <f:facet name="sourceCaption">Disponíveis</f:facet>  
-                        <f:facet name="targetCaption">Escolhidos</f:facet> 
-                        <p:column>
-                            #{aluno.name}
+<ui:composition id="uiTurma"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <h:outputText value="Turmas" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+        <p:row>
+            <p:column style="width: 50%">
+                <h:outputText value="Nome da Turma" styleClass="labelTxt"/>
+                <p:inputText style="width: 100%" value="#{turmaMB.stClass.name}"/>
+                <h:outputText value="Escolha os alunos para a turma" styleClass="labelTxt"/>
+                <p:pickList addAllLabel="Adicionar Todas" addLabel="Adicione" moveBottomLabel="Último" 
+                            moveTopLabel="Primeiro" moveDownLabel="Descer" moveUpLabel="Subir" styleClass="pickList"
+                            removeAllLabel="Remover Todas" value="#{turmaMB.dualListModel}" converter="userConverter"
+                            var="aluno" itemValue="#{aluno}">
+                    <p:ajax event="transfer" listener="#{turmaMB.onTransfer}"/>
+                    <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                    <f:facet name="targetCaption">Escolhidos</f:facet> 
+                    <p:column style="width: 80%">
+                        <h:outputText value="Nome: #{aluno.name} #{aluno.surname}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="RA: #{aluno.ra}"/>
+                    </p:column>
+                </p:pickList>
+            </p:column>
+            <p:column>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Turma Cadastrada" value="#{turmaMB.stClasses}"
+                             var="clas" id="classesList">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{clas.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Número de alunos"/>
+                        </f:facet>
+                        <h:outputText value="#{clas.students.size()}"/>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtClass').show();" update=":formPrincipal:pnlDialogClass">
+                            <f:setPropertyActionListener value="#{clas}" target="#{turmaMB.updatingClass}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" onclick="confirmaRemocaoClasse.show()">
+                            <f:setPropertyActionListener value="#{clas}" target="#{turmaMB.deletingClass}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">
+                <p:commandButton value="Salvar Turma" actionListener="#{turmaMB.saveStudentClass()}" update="formPrincipal:pnlCentral"/>
+                <p:commandButton value="Cancelar"/>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
+
+    <p:separator/>
+
+    <h:outputText value="Atribuiçoes" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+        <p:row>
+            <p:column style="width: 50%">
+                <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+                    <p:row>
+                        <p:column style="width: 50%">
+                            <h:outputText value="Escolha um Curso" styleClass="labelTxt"/>
+                            <p:selectOneMenu style="width: 100%"/>
                         </p:column>
-                    </p:pickList>
-                </p:column>
-                <p:column>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Turma Cadastrada">
+                        <p:column>
+                            <h:outputText value="Escolha um(a) ou mais Professores(as)" styleClass="labelTxt"/>
+                            <p:selectManyMenu style="width: 100%; height: 150px"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="width: 50%">
+                            <h:outputText value="Escolha uma Disciplina" styleClass="labelTxt"/>
+                            <p:selectOneMenu style="width: 100%"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Escolha uma ou mais Turmas" styleClass="labelTxt"/>
+                            <p:selectManyMenu style="width: 100%; height: 150px"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid >
+            </p:column>
+            <p:column>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Atribuição Cadastrada">
 
+                </p:dataTable>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">
+                <p:commandButton value="Salvar Atribuição"/>
+                <p:commandButton value="Cancelar"/>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
+    <p:dialog id="editUser" header="Edição de Usuário" widgetVar="edtClass" modal="false"
+              dynamic="true" width="1000">
+        <h:panelGroup id ="pnlDialogClass">
+            
+        </h:panelGroup>
 
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column colspan="2">
-                    <p:commandButton value="Salvar Turma"/>
-                    <p:commandButton value="Cancelar"/>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
-
-        <p:separator/>
-
-        <h:outputText value="Atribuiçoes" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 50%">
-                    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
-                        <p:row>
-                            <p:column style="width: 50%">
-                                <h:outputText value="Escolha um Curso" styleClass="labelTxt"/>
-                                <p:selectOneMenu style="width: 100%"/>
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="Escolha um(a) ou mais Professores(as)" styleClass="labelTxt"/>
-                                <p:selectManyMenu style="width: 100%; height: 150px"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column style="width: 50%">
-                                <h:outputText value="Escolha uma Disciplina" styleClass="labelTxt"/>
-                                <p:selectOneMenu style="width: 100%"/>
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="Escolha uma ou mais Turmas" styleClass="labelTxt"/>
-                                <p:selectManyMenu style="width: 100%; height: 150px"/>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid >
-                </p:column>
-                <p:column>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Atribuição Cadastrada">
-
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column colspan="2">
-                    <p:commandButton value="Salvar Atribuição"/>
-                    <p:commandButton value="Cancelar"/>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
-    </ui:composition>
-</html>
+    </p:dialog>
+    <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
+                     id="confirmaRemocaoClasse" 
+                     message="Deseja mesmo remover esta classe?"
+                     widgetVar="confirmaRemocaoClasse">
+        <p:commandButton value="Remover" actionListener="#{turmaMB.deleteClass()}" 
+                         onclick="confirmaRemocaoClasse.hide()"
+                         update=":formPrincipal:pnlCentral"/>
+        <p:commandButton value="Cancelar"
+                         onclick="confirmaRemocaoClasse.hide()"/>
+    </p:confirmDialog>
+</ui:composition>

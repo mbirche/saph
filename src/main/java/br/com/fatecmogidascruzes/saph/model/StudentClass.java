@@ -6,7 +6,6 @@ package br.com.fatecmogidascruzes.saph.model;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -20,6 +19,7 @@ import org.hibernate.annotations.CascadeType;
 @javax.persistence.Entity
 public class StudentClass extends Entity {
 
+    private String name;
     
     @Cascade(CascadeType.ALL)
     @ManyToMany
@@ -43,6 +43,15 @@ public class StudentClass extends Entity {
     public Boolean addClassAssignment(ClassAssignment assignment){
         return classAssignments.add(assignment);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Set<User> getStudents() {
         return students;
     }

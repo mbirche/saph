@@ -8,14 +8,19 @@ package br.com.fatecmogidascruzes.saph.model;
  */
 public enum PhoneType {
 
-    CELLPHONE(0), FIXED(1);
+    CELLPHONE(0, "Celular"), FIXED(1, "Fixo");
     private Integer code;
+    private String description;
 
-    private PhoneType(Integer code) {
+    private PhoneType(Integer code, String description) {
         this.code = code;
+        this.description = description;
     }
 
-    public Integer geCode() {
+    public Integer getCode() {
         return code;
+    }
+    public String getDescription(){
+        return description;
     }
 }

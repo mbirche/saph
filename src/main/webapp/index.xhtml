@@ -50,7 +50,7 @@
                                 <p:menuitem value="Alunos, Professores e Coordenadores" update="pnlCentral"
                                             actionListener="#{indexMB.setPaginaAtual('aluno_professor_coordenador.xhtml')}"/>
                                 <p:menuitem value="Turmas e Atribuições" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('turma.xhtml')}"/>
+                                            actionListener="#{indexMB.setPaginaAtual('turma.xhtml')}" action="#{turmaMB.refreshStudentClassWindow()}"/>
                                 <p:menuitem value="Cursos e Disciplinas" update="pnlCentral"
                                             actionListener="#{indexMB.setPaginaAtual('curso_disciplina.xhtml')}"/>
                                 <p:menuitem value="Áreas de Conhecimento e Habilidades" update="pnlCentral"
@@ -81,7 +81,7 @@
 
                 </p:layout>
 
-                <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+<!--                <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  -->
                 <p:dialog modal="true" widgetVar="statusDialog" header="Carregando..." style="font-size: 12px"  
                           draggable="false" closable="false">  
                     <p:graphicImage value="/images/ajaxloadingbar.gif" />  
