@@ -6,8 +6,9 @@
 
 package br.com.fatecmogidascruzes.saph.converter;
 
+import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
+import br.com.fatecmogidascruzes.saph.dao.AbilityDAO;
 import br.com.fatecmogidascruzes.saph.model.Ability;
-import br.com.fatecmogidascruzes.saph.service.AbilityService;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,18 +21,18 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(forClass = Ability.class)
 public class AbilityConverter implements Converter{
 
-    AbilityService service = new AbilityService();
+    AbilityDAO dao = (AbilityDAO) DAOFactory.getInstance().getDAO(Ability.class);
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        return service.get(Long.valueOf(value), Ability.class);
+        return dao.get(Long.valueOf(value), Ability.class);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         Ability ab = (Ability) value;
         
-        return ab.getName();
+        return ab.getId().toString();
     }
     
 }

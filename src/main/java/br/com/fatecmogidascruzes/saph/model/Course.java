@@ -22,6 +22,7 @@ import org.hibernate.annotations.CascadeType;
 public class Course extends Entity {
 
     private String name;
+    private String description;
 
     @Cascade(CascadeType.ALL)
     @OneToOne
@@ -49,6 +50,14 @@ public class Course extends Entity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getCoordinator() {

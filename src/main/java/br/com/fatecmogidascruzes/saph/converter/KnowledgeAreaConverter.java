@@ -6,8 +6,9 @@
 
 package br.com.fatecmogidascruzes.saph.converter;
 
+import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
+import br.com.fatecmogidascruzes.saph.dao.KnowledgeAreaDAO;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
-import br.com.fatecmogidascruzes.saph.service.KnowledgeAreaService;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,11 +21,11 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(forClass = KnowledgeArea.class)
 public class KnowledgeAreaConverter implements Converter{
 
-    KnowledgeAreaService service = new KnowledgeAreaService();
+    KnowledgeAreaDAO dao = (KnowledgeAreaDAO) DAOFactory.getInstance().getDAO(KnowledgeArea.class);
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        return service.get(Long.valueOf(value), KnowledgeArea.class);
+        return dao.get(Long.valueOf(value), KnowledgeArea.class);
     }
 
     @Override

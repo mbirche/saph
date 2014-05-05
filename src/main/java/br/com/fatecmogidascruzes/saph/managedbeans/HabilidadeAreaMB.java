@@ -36,14 +36,12 @@ public class HabilidadeAreaMB {
     private DualListModel<KnowledgeArea> dualListModel;
     private DualListModel<KnowledgeArea> dualListModelEdit;
     private KnowledgeArea knowledgeArea;
-    private KnowledgeArea deletingKA;
     private KnowledgeArea updatingKA;
     private List knowledgeAreas;
     private List knowledgeAreasAux;
     private List knowledgeAreasAuxEdit;
     private List abilities;
     private Ability ability;
-    private Ability deletingAbility;
     private Ability updatingAbility;
 
     public HabilidadeAreaMB() {
@@ -59,8 +57,8 @@ public class HabilidadeAreaMB {
 
     }
 
-    public void deleteAbility() {
-        abFacade.delete(deletingAbility);
+    public void deleteAbility(Ability ab) {
+        abFacade.delete(ab);
         atualizarHabilidade();
         atualizarListas();
     }
@@ -76,8 +74,8 @@ public class HabilidadeAreaMB {
         atualizarListas();
     }
 
-    public void deleteKArea() {
-        kaFacade.delete(deletingKA);
+    public void deleteKArea(KnowledgeArea ka) {
+        kaFacade.delete(ka);
         atualizarKArea();
         atualizarListas();
     }
@@ -188,28 +186,12 @@ public class HabilidadeAreaMB {
         this.abilities = abilities;
     }
 
-    public KnowledgeArea getDeletingKA() {
-        return deletingKA;
-    }
-
-    public void setDeletingKA(KnowledgeArea deletingKA) {
-        this.deletingKA = deletingKA;
-    }
-
     public KnowledgeArea getUpdatingKA() {
         return updatingKA;
     }
 
     public void setUpdatingKA(KnowledgeArea updatingKA) {
         this.updatingKA = updatingKA;
-    }
-
-    public Ability getDeletingAbility() {
-        return deletingAbility;
-    }
-
-    public void setDeletingAbility(Ability deletingAbility) {
-        this.deletingAbility = deletingAbility;
     }
 
     public Ability getUpdatingAbility() {

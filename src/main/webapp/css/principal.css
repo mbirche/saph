@@ -145,4 +145,6 @@ button{
 .ui-datatable-data tr{
     height: 20px !important;
 }
-
+.ui-selectonemenu-item{
+    font-size: 10px;
+}

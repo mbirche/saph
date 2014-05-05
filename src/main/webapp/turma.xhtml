@@ -80,24 +80,24 @@
             <p:column style="width: 50%">
                 <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
                     <p:row>
-                        <p:column style="width: 50%">
+<!--                        <p:column style="width: 50%">
                             <h:outputText value="Escolha um Curso" styleClass="labelTxt"/>
                             <p:selectOneMenu style="width: 100%"/>
                         </p:column>
                         <p:column>
                             <h:outputText value="Escolha um(a) ou mais Professores(as)" styleClass="labelTxt"/>
                             <p:selectManyMenu style="width: 100%; height: 150px"/>
-                        </p:column>
+                        </p:column>-->
                     </p:row>
                     <p:row>
-                        <p:column style="width: 50%">
+<!--                        <p:column style="width: 50%">
                             <h:outputText value="Escolha uma Disciplina" styleClass="labelTxt"/>
                             <p:selectOneMenu style="width: 100%"/>
                         </p:column>
                         <p:column>
                             <h:outputText value="Escolha uma ou mais Turmas" styleClass="labelTxt"/>
                             <p:selectManyMenu style="width: 100%; height: 150px"/>
-                        </p:column>
+                        </p:column>-->
                     </p:row>
                 </p:panelGrid >
             </p:column>
@@ -115,7 +115,7 @@
             </p:column>
         </p:row>
     </p:panelGrid>
-    <p:dialog id="editUser" header="Edição de Usuário" widgetVar="edtClass" modal="false"
+    <p:dialog id="editClass" header="Edição de Usuário" widgetVar="edtClass" modal="false"
               dynamic="true" width="1000">
         <h:panelGroup id ="pnlDialogClass">
             
@@ -123,7 +123,7 @@
 
     </p:dialog>
     <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
-                     id="confirmaRemocaoClasse" 
+                     id="confirmaRemClasse" 
                      message="Deseja mesmo remover esta classe?"
                      widgetVar="confirmaRemocaoClasse">
         <p:commandButton value="Remover" actionListener="#{turmaMB.deleteClass()}" 

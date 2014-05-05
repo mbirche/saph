@@ -1,83 +1,126 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    
-    <ui:composition id="uiCursoDisciplina">
 
-        <h:outputText value="Cursos" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 30%;">
-                    <p:outputLabel value="Nome:" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%"/>
-                </p:column>
-                <p:column rowspan="2">
-                    <p:outputLabel value="Descrição:" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
-                </p:column>
-            </p:row>     
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="Escolha o professor coordenador" styleClass="labelTxt"/>
-                    <p:selectOneMenu style="width: 100%"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Salvar Curso"/>
-                    <p:commandButton value="Cancelar"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Cursos Cadastrados" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum Curso Cadastrado">
 
-                    </p:dataTable>
-                </p:column>            
-            </p:row>
-        </p:panelGrid>
-        
-        <p:separator/>
-        
-        <h:outputText value="Disciplinas" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 30%">
-                    <p:outputLabel value="Nome:" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%;"/>
-                </p:column>
-                <p:column rowspan="2">
-                    <p:outputLabel value="Descrição:" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
-                </p:column>
-            </p:row>
-            
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="Escolha o curso" styleClass="labelTxt"/>
-                    <p:selectOneMenu style="width: 100%"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Salvar Disciplina"/>
-                    <p:commandButton value="Cancelar"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Disciplinas Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Disciplina Cadastrada">
+<ui:composition id="uiCursoDisciplina"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
-        
-    </ui:composition>
-</html>
+    <h:outputText value="Cursos" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+        <p:row>
+            <p:column style="width: 30%;">
+                <p:outputLabel value="Nome" styleClass="labelTxt"/>
+                <p:inputText style="width: 100%" value="#{cursoDisciplinaMB.course.name}"/>
+            </p:column>
+            <p:column rowspan="2">
+                <p:outputLabel value="Descrição" styleClass="labelTxt"/>
+                <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable" value="#{cursoDisciplinaMB.course.description}"/>
+            </p:column>
+        </p:row>     
+        <p:row>
+<!--            <p:column>
+                <p:outputLabel value="Escolha o professor coordenador" styleClass="labelTxt"/>
+                <p:selectOneMenu style="width: 100%" value="#{cursoDisciplinaMB.course.coordinator}" converter="userConverter">
+                    <f:selectItems value="#{cursoDisciplinaMB.allCoordinators}" var="coord" itemLabel="#{coord.name}" itemValue="#{coord}"/>
+                </p:selectOneMenu>
+            </p:column>-->
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:commandButton value="Salvar Curso" actionListener="#{cursoDisciplinaMB.saveCourse()}" update="formPrincipal:pnlCentral"/>
+                <p:commandButton value="Cancelar"/>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">
+                <h:outputText value="Cursos Cadastrados" styleClass="labelTxt"/>
+
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum Curso Cadastrado" value="#{cursoDisciplinaMB.courses}"
+                             var="course" id="courseList">
+
+                    <p:column style="width: 30%">
+                        <f:facet name="header">
+                            <h:outputText value="Nome do Curso"/>
+                        </f:facet>
+                        #{course.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        #{course.description}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtCourse').show();" update=":formPrincipal:pnlDialogCourse">
+                            <f:setPropertyActionListener value="#{course}" target="#{cursoDisciplinaMB.updatingCourse}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" action="#{cursoDisciplinaMB.deleteCourse()}" update=":formPrincipal:pnlCentral">
+                            <f:setPropertyActionListener value="#{course}" target="#{cursoDisciplinaMB.deletingCourse}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </p:column>            
+        </p:row>
+    </p:panelGrid>
+
+    <p:separator/>
+
+    <h:outputText value="Disciplinas" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+        <p:row>
+            <p:column style="width: 30%">
+                <p:outputLabel value="Nome" styleClass="labelTxt"/>
+                <p:inputText style="width: 100%;" value="#{cursoDisciplinaMB.discipline.name}"/>
+            </p:column>
+            <p:column rowspan="2">
+                <p:outputLabel value="Descrição" styleClass="labelTxt"/>
+                <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                 value="#{cursoDisciplinaMB.discipline.description}"/>
+            </p:column>
+        </p:row>
+
+        <p:row>
+<!--            <p:column>
+                <p:outputLabel value="Escolha o curso" styleClass="labelTxt"/>
+                <p:selectOneMenu style="width: 100%" value="#{cursoDisciplinaMB.discipline.course}">
+                    <f:selectItems value="#{cursoDisciplinaMB.courses}" var="crs" itemValue="#{crs}" itemLabel="#{crs.name}"/>
+                </p:selectOneMenu>
+            </p:column>-->
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:commandButton value="Salvar Disciplina"/>
+                <p:commandButton value="Cancelar"/>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <h:outputText value="Disciplinas Cadastradas" styleClass="labelTxt"/>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Disciplina Cadastrada">
+
+                </p:dataTable>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
+
+    <p:dialog id="editUser" header="Edição de Curso" widgetVar="edtCourse" modal="false"
+              dynamic="true" width="1000">
+        <h:panelGroup id ="pnlDialogCourse">
+
+        </h:panelGroup>
+    </p:dialog>
+</ui:composition>
+

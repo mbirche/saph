@@ -11,5 +11,5 @@ package br.com.fatecmogidascruzes.saph.interfaces;
  * @author marcelo
  */
 public interface IStudentClassService extends IAbstractService{
-    
+
 }

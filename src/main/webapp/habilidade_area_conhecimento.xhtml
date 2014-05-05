@@ -1,224 +1,211 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition id="uiHabilidadeAreaConhecimento"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <h:outputText value="Áreas de Conhecimento" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+        <p:row>
+            <p:column  style="width: 40%;">
+                <h:outputText value="Nome" styleClass="labelTxt"/>
+                <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.knowledgeArea.name}"/>
+            </p:column>
+            <p:column rowspan="2">
+                <h:outputText value="Descrição" styleClass="labelTxt"/>
+                <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                 value="#{habilidadeAreaMB.knowledgeArea.description}"/>
+            </p:column>
+        </p:row>
 
-    <ui:composition id="uiHabilidadeAreaConhecimento">
-        <h:outputText value="Áreas de Conhecimento" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-            <p:row>
-                <p:column  style="width: 40%;">
-                    <h:outputText value="Nome" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.knowledgeArea.name}"/>
-                </p:column>
-                <p:column rowspan="2">
-                    <h:outputText value="Descrição" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
-                                     value="#{habilidadeAreaMB.knowledgeArea.description}"/>
-                </p:column>
-            </p:row>
+        <p:row>
+            <p:column colspan="2">
+                <p:commandButton value="Salvar Área de Conhecimento" action="#{habilidadeAreaMB.saveKArea()}" update="formPrincipal:pnlCentral"/>
+                <p:commandButton value="Cancelar" /> 
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">
+                <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Área de Conhecimento Cadastrada"
+                             value="#{habilidadeAreaMB.knowledgeAreas}" var="ka">
+                    <p:column style="width: 30%">
+                        <f:facet name="header">
+                            <h:outputText value="Nome da Área de Conhecimento"/>
+                        </f:facet>
+                        #{ka.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        #{ka.description}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtKA').show();" update=":formPrincipal:pnlDialogKArea">
+                            <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.updatingKA}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteKArea(ka)}" update=":formPrincipal:pnlCentral"/>
+                    </p:column>
 
-            <p:row>
-                <p:column colspan="2">
-                    <p:commandButton value="Salvar Área de Conhecimento" action="#{habilidadeAreaMB.saveKArea()}" update="formPrincipal:pnlCentral"/>
-                    <p:commandButton value="Cancelar" /> 
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column colspan="2">
-                    <h:outputText value="Áreas de Conhecimento Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Área de Conhecimento Cadastrada"
-                                 value="#{habilidadeAreaMB.knowledgeAreas}" var="ka" rowKey="#{ka.id}">
-                        <p:column style="width: 30%">
-                            <f:facet name="header">
-                                <h:outputText value="Nome da Área de Conhecimento"/>
-                            </f:facet>
-                            #{ka.name}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Descrição"/>
-                            </f:facet>
-                            #{ka.description}
-                        </p:column>
-                        <p:column style="width: 10%; text-align: center">
-                            <f:facet name="header">
-                                <h:outputText value="Detalhes"/>
-                            </f:facet>
-                            <p:commandButton value="Detalhe" oncomplete="PF('edtKA').show();" update=":formPrincipal:pnlDialogKArea">
-                                <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.updatingKA}"/>
-                            </p:commandButton>
-                        </p:column>
-                        <p:column style="width: 10%; text-align: center">
-                            <f:facet name="header">
-                                <h:outputText value="Remoção"/>
-                            </f:facet>
-                            <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteKArea()}" update=":formPrincipal:pnlCentral">
-                                <f:setPropertyActionListener value="#{ka}" target="#{habilidadeAreaMB.deletingKA}"/>
-                            </p:commandButton>
-                        </p:column>
+                </p:dataTable>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
 
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
+    <p:separator/>
 
-        <p:separator/>
+    <h:outputText value="Habilidades" styleClass="tituloSecao"/>
 
-        <h:outputText value="Habilidades" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+        <p:row>
+            <p:column style="width: 40%;">
+                <p:outputLabel value="Nome" styleClass="labelTxt"/>
+                <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.ability.name}"/>
+            </p:column>
+            <p:column rowspan="2">
+                <p:outputLabel value="Descrição" styleClass="labelTxt"/>
+                <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                 value="#{habilidadeAreaMB.ability.description}"/>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
+                <p:pickList value="#{habilidadeAreaMB.dualListModel}" styleClass="pickList" style="width: 100%"
+                            var="ka" itemValue="#{ka}" itemLabel="#{ka}" converter="pickListConverter">
+                    <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransfer}"/>
 
-        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 40%;">
-                    <p:outputLabel value="Nome" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.ability.name}"/>
-                </p:column>
-                <p:column rowspan="2">
-                    <p:outputLabel value="Descrição" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
-                                     value="#{habilidadeAreaMB.ability.description}"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
-                    <p:pickList value="#{habilidadeAreaMB.dualListModel}" styleClass="pickList" style="width: 100%"
-                                var="ka" itemValue="#{ka}" itemLabel="#{ka}" converter="pickListConverter">
-                        <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransfer}"/>
+                    <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                    <f:facet name="targetCaption">Escolhidas</f:facet> 
+                    <p:column>
+                        #{ka.name}
+                    </p:column>
+                </p:pickList>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:commandButton value="Salvar Habilidade" action="#{habilidadeAreaMB.saveHabilidade()}" update="formPrincipal:pnlCentral"/>                                   
+                <p:commandButton value="Cancelar"/>                 
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">
+                <p:outputLabel value="Habilidades Cadastradas" styleClass="labelTxt"/>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada"
+                             value="#{habilidadeAreaMB.abilities}" var="ab">
 
-                        <f:facet name="sourceCaption">Disponíveis</f:facet>  
-                        <f:facet name="targetCaption">Escolhidas</f:facet> 
-                        <p:column>
-                            #{ka.name}
-                        </p:column>
-                    </p:pickList>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Salvar Habilidade" action="#{habilidadeAreaMB.saveHabilidade()}" update="formPrincipal:pnlCentral"/>                                   
-                    <p:commandButton value="Cancelar"/>                 
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column colspan="2">
-                    <p:outputLabel value="Habilidades Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Habilidade Cadastrada"
-                                 value="#{habilidadeAreaMB.abilities}" var="ab" rowKey="#{ab.id}">
+                    <p:column style="width: 30%">
+                        <f:facet name="header">
+                            <h:outputText value="Nome da Habilidade"/>
+                        </f:facet>
+                #{ab.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                #{ab.description}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Qtde Áreas"/>
+                        </f:facet>
+                #{ab.knowledgeAreas.size()}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtAbility').show();" update=":formPrincipal:pnlDialogAbility">
+                            <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.updatingAbility}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteAbility(ab)}" update=":formPrincipal:pnlCentral"/>
+                    </p:column>
+                </p:dataTable>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
 
-                        <p:column style="width: 30%">
-                            <f:facet name="header">
-                                <h:outputText value="Nome da Habilidade"/>
-                            </f:facet>
-                            #{ab.name}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Descrição"/>
-                            </f:facet>
-                            #{ab.description}
-                        </p:column>
-                        <p:column style="width: 10%; text-align: center">
-                            <f:facet name="header">
-                                <h:outputText value="Qtde Áreas"/>
-                            </f:facet>
-                            #{ab.knowledgeAreas.size()}
-                        </p:column>
-                        <p:column style="width: 10%; text-align: center">
-                            <f:facet name="header">
-                                <h:outputText value="Detalhes"/>
-                            </f:facet>
-                            <p:commandButton value="Detalhe" oncomplete="PF('edtAbility').show();" update=":formPrincipal:pnlDialogAbility">
-                                <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.updatingAbility}"/>
-                            </p:commandButton>
-                        </p:column>
-                        <p:column style="width: 10%; text-align: center">
-                            <f:facet name="header">
-                                <h:outputText value="Remoção"/>
-                            </f:facet>
-                            <p:commandButton value="Apagar" action="#{habilidadeAreaMB.deleteAbility()}" update=":formPrincipal:pnlCentral">
-                                <f:setPropertyActionListener value="#{ab}" target="#{habilidadeAreaMB.deletingAbility}"/>
-                            </p:commandButton>
-                        </p:column>
+    <p:dialog id="editKArea" header="Edição da Área de Conhecimento" widgetVar="edtKA" modal="false"
+              dynamic="true" width="800">
+        <h:panelGroup id ="pnlDialogKArea">
+            <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+                <p:row>
+                    <p:column  style="width: 40%;">
+                        <h:outputText value="Nome" styleClass="labelTxt"/>
+                        <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.updatingKA.name}"/>
+                    </p:column>
+                    <p:column rowspan="2">
+                        <h:outputText value="Descrição" styleClass="labelTxt"/>
+                        <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                         value="#{habilidadeAreaMB.updatingKA.description}"/>
+                    </p:column>
+                </p:row>
 
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:commandButton value="Atualizar Área de Conhecimento" actionListener="#{habilidadeAreaMB.updateKArea()}" update="formPrincipal:pnlCentral"/>
+                        <p:commandButton value="Cancelar" oncomplete="PF('edtKA').hide();"/> 
+                    </p:column>
+                </p:row>
+            </p:panelGrid>  
+        </h:panelGroup>
+    </p:dialog>
+    <p:dialog id="editAbility" header="Edição da Habilidade" widgetVar="edtAbility" modal="false"
+              dynamic="true" width="800">
+        <h:panelGroup id ="pnlDialogAbility">
+            <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+                <p:row>
+                    <p:column style="width: 40%;">
+                        <p:outputLabel value="Nome" styleClass="labelTxt"/>
+                        <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.updatingAbility.name}"/>
+                    </p:column>
+                    <p:column rowspan="2">
+                        <p:outputLabel value="Descrição" styleClass="labelTxt"/>
+                        <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                         value="#{habilidadeAreaMB.updatingAbility.description}"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
+                        <p:pickList value="#{habilidadeAreaMB.dualListModelEdit}" styleClass="pickList" style="width: 100%"
+                                    var="karea" itemValue="#{karea}" converter="pickListConverter">
+                            <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransferEdit}"/>
 
-        <p:dialog id="editKArea" header="Edição da Área de Conhecimento" widgetVar="edtKA" modal="false"
-                  dynamic="true" width="800">
-            <h:panelGroup id ="pnlDialogKArea">
-                <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-                    <p:row>
-                        <p:column  style="width: 40%;">
-                            <h:outputText value="Nome" styleClass="labelTxt"/>
-                            <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.updatingKA.name}"/>
-                        </p:column>
-                        <p:column rowspan="2">
-                            <h:outputText value="Descrição" styleClass="labelTxt"/>
-                            <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
-                                             value="#{habilidadeAreaMB.updatingKA.description}"/>
-                        </p:column>
-                    </p:row>
+                            <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                            <f:facet name="targetCaption">Escolhidas</f:facet> 
+                            <p:column>
+                                #{karea.name}
+                            </p:column>
+                        </p:pickList>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:commandButton value="Atualizar Habilidade" actionListener="#{habilidadeAreaMB.updateAbility()}" update="formPrincipal:pnlCentral"/>                                   
+                        <p:commandButton value="Cancelar"/>                 
+                    </p:column>
+                </p:row>
+            </p:panelGrid>  
+        </h:panelGroup>
+    </p:dialog>
+</ui:composition>
 
-                    <p:row>
-                        <p:column colspan="2">
-                            <p:commandButton value="Atualizar Área de Conhecimento" actionListener="#{habilidadeAreaMB.updateKArea()}" update="formPrincipal:pnlCentral"/>
-                            <p:commandButton value="Cancelar" oncomplete="PF('edtKA').hide();"/> 
-                        </p:column>
-                    </p:row>
-                </p:panelGrid>  
-            </h:panelGroup>
-        </p:dialog>
-        <p:dialog id="editAbility" header="Edição da Habilidade" widgetVar="edtAbility" modal="false"
-                  dynamic="true" width="800">
-            <h:panelGroup id ="pnlDialogAbility">
-                <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-                    <p:row>
-                        <p:column style="width: 40%;">
-                            <p:outputLabel value="Nome" styleClass="labelTxt"/>
-                            <p:inputText style="width: 100%;" value="#{habilidadeAreaMB.updatingAbility.name}"/>
-                        </p:column>
-                        <p:column rowspan="2">
-                            <p:outputLabel value="Descrição" styleClass="labelTxt"/>
-                            <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
-                                             value="#{habilidadeAreaMB.updatingAbility.description}"/>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Selecione as Áreas de Conhecimento" styleClass="labelTxt"/>
-                            <p:pickList value="#{habilidadeAreaMB.dualListModelEdit}" styleClass="pickList" style="width: 100%"
-                                        var="ka" itemValue="#{ka}" itemLabel="#{ka}" converter="pickListConverter">
-                                <p:ajax event="transfer" listener="#{habilidadeAreaMB.onTransferEdit}"/>
-
-                                <f:facet name="sourceCaption">Disponíveis</f:facet>  
-                                <f:facet name="targetCaption">Escolhidas</f:facet> 
-                                <p:column>
-                                    #{ka.name}
-                                </p:column>
-                            </p:pickList>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:commandButton value="Atualizar Habilidade" actionListener="#{habilidadeAreaMB.updateAbility()}" update="formPrincipal:pnlCentral"/>                                   
-                            <p:commandButton value="Cancelar"/>                 
-                        </p:column>
-                    </p:row>
-                </p:panelGrid>  
-            </h:panelGroup>
-        </p:dialog>
-    </ui:composition>
-</html>

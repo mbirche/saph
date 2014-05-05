@@ -7,6 +7,7 @@
 package br.com.fatecmogidascruzes.saph.converter;
 
 
+import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
 import br.com.fatecmogidascruzes.saph.dao.UserDAO;
 import br.com.fatecmogidascruzes.saph.model.User;
 import javax.faces.component.UIComponent;
@@ -23,7 +24,7 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(forClass = User.class, value = "userConverter")
 public class UserConverter implements Converter{
 
-    UserDAO dao = new UserDAO();
+    UserDAO dao = (UserDAO) DAOFactory.getInstance().getDAO(User.class);
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

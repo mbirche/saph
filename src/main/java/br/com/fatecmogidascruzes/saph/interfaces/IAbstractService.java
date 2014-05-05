@@ -13,15 +13,20 @@ import java.util.List;
  *
  * @author marcelo
  */
-public interface IAbstractService {
+public interface IAbstractService extends IAbstractFacade, IDAO{
     
+    @Override
     public Entity save(Entity entity);
 
+    @Override
     public Entity update(Entity entity);
 
+    @Override
     public Entity get(Long id, Class<? extends Entity> cl);
 
+    @Override
     public void delete(Entity entity);
 
+    @Override
     public List<Entity> getAll(Class<? extends Entity> entity);
 }
