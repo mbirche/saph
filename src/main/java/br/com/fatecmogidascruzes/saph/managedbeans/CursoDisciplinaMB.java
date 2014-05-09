@@ -52,6 +52,9 @@ public class CursoDisciplinaMB {
         allCoordinators = getCoordinators();
     }
 
+    public void refreshCourseDisciplineWindow(){
+        refreshCoordinatorList();
+    }
     public void deleteCourse(){
         courseFacade.delete(deletingCourse);
         refreshCourseList();
@@ -59,11 +62,14 @@ public class CursoDisciplinaMB {
     private void refreshCourseList(){
         courses = (List<Course>) (List) courseFacade.getAll(Course.class);
     }
+    private void refreshCoordinatorList(){
+        allCoordinators = getCoordinators();
+    }
     public void saveCourse(){
-        System.out.println("Gravado...");
-//        courseFacade.save(course);
-//        course = new Course();
-//        refreshCourseList();
+        
+        courseFacade.save(course);
+        course = new Course();
+        refreshCourseList();
     }
 
     private List<User> getCoordinators() {
