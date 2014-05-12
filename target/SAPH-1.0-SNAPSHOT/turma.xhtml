@@ -80,24 +80,33 @@
             <p:column style="width: 50%">
                 <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
                     <p:row>
-<!--                        <p:column style="width: 50%">
+                        <p:column style="width: 50%">
                             <h:outputText value="Escolha um Curso" styleClass="labelTxt"/>
-                            <p:selectOneMenu style="width: 100%"/>
+                            <p:selectOneMenu style="width: 100%" value="#{turmaMB.clAssignment.course}" id="slctOneCursoAtribuicao">
+                                <f:selectItems value="#{cursoDisciplinaMB.courses}" var="course" itemLabel="#{course.name}" itemValue="#{course}"/>
+                            </p:selectOneMenu>
                         </p:column>
                         <p:column>
                             <h:outputText value="Escolha um(a) ou mais Professores(as)" styleClass="labelTxt"/>
-                            <p:selectManyMenu style="width: 100%; height: 150px"/>
-                        </p:column>-->
+                            <p:selectManyMenu style="width: 100%; height: 150px" value="#{turmaMB.clAssignment.teachers}" showCheckbox="true" id="slctOneTeacherAtribuicao">
+                                <f:selectItems value="#{usuarioMB.allTeachers}" var="teacher" itemLabel="#{teacher.name}" itemValue="#{teacher}"/>
+                            </p:selectManyMenu>
+                        </p:column>
                     </p:row>
                     <p:row>
-<!--                        <p:column style="width: 50%">
+                        <p:column style="width: 50%">
                             <h:outputText value="Escolha uma Disciplina" styleClass="labelTxt"/>
-                            <p:selectOneMenu style="width: 100%"/>
-                        </p:column>
-                        <p:column>
+                            <p:selectOneMenu style="width: 100%" id="slctOneDisciplinaAtribuicao" value="#{turmaMB.clAssignment.discipline}">
+                                <f:selectItems value="#{cursoDisciplinaMB.disciplines}" var="discipline" itemLabel="#{discipline.name}" itemValue="#{discipline}"/>
+                            </p:selectOneMenu>
+                        </p:column><!--
+-->                        <p:column>
                             <h:outputText value="Escolha uma ou mais Turmas" styleClass="labelTxt"/>
-                            <p:selectManyMenu style="width: 100%; height: 150px"/>
-                        </p:column>-->
+                            <p:selectManyMenu style="width: 100%; height: 150px" id="slctOneTurmaAtribuicao" value="#{turmaMB.clAssignment.studentClasses}"
+                                              showCheckbox="true">
+                                <f:selectItems value="#{turmaMB.stClasses}" var="stClass" itemLabel="#{stClass.name}" itemValue="#{stClass}"/>
+                            </p:selectManyMenu>
+                        </p:column>
                     </p:row>
                 </p:panelGrid >
             </p:column>

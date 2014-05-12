@@ -3,6 +3,7 @@ package br.com.fatecmogidascruzes.saph.managedbeans;
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
 import br.com.fatecmogidascruzes.saph.facade.UserFacade;
+import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
 import br.com.fatecmogidascruzes.saph.model.Role;
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
 import br.com.fatecmogidascruzes.saph.model.User;
@@ -36,6 +37,11 @@ public class TurmaMB {
     private StudentClass updatingClass;
     private StudentClass deletingClass;
     private List<StudentClass> stClasses;
+    
+    
+    private ClassAssignment clAssignment;
+    private ClassAssignment updatingClAssignment;
+    private ClassAssignment deletingClAssignment;
 
     public TurmaMB() {
         
@@ -48,6 +54,10 @@ public class TurmaMB {
         stClass = new StudentClass();
         updatingClass = new StudentClass();
         deletingClass = new StudentClass();
+        
+        clAssignment = new ClassAssignment();
+        updatingClAssignment = new ClassAssignment();
+        deletingClAssignment = new ClassAssignment();
     }
 
     public void onTransfer(TransferEvent event) {
@@ -106,6 +116,31 @@ public class TurmaMB {
             }
         }
     }
+
+    public ClassAssignment getClAssignment() {
+        return clAssignment;
+    }
+
+    public void setClAssignment(ClassAssignment clAssignment) {
+        this.clAssignment = clAssignment;
+    }
+
+    public ClassAssignment getUpdatingClAssignment() {
+        return updatingClAssignment;
+    }
+
+    public void setUpdatingClAssignment(ClassAssignment updatingClAssignment) {
+        this.updatingClAssignment = updatingClAssignment;
+    }
+
+    public ClassAssignment getDeletingClAssignment() {
+        return deletingClAssignment;
+    }
+
+    public void setDeletingClAssignment(ClassAssignment deletingClAssignment) {
+        this.deletingClAssignment = deletingClAssignment;
+    }
+    
     public DualListModel getDualListModel() {
         return dualListModel;
     }

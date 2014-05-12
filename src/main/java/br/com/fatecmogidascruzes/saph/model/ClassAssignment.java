@@ -4,11 +4,9 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
@@ -23,7 +21,7 @@ public class ClassAssignment extends Entity {
 
     @Cascade(CascadeType.ALL)
     @ManyToMany
-    private Set<User> teachers;
+    private List<User> teachers;
     
     @Cascade(CascadeType.ALL)
     @OneToOne
@@ -31,7 +29,7 @@ public class ClassAssignment extends Entity {
     
     @Cascade(CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<StudentClass> studentClasses;
+    private List<StudentClass> studentClasses;
     
     @Cascade(CascadeType.ALL)
     @OneToOne
@@ -46,14 +44,14 @@ public class ClassAssignment extends Entity {
     }
     
     public ClassAssignment(){
-        teachers = new HashSet<User>();
-        studentClasses = new HashSet<StudentClass>();
+        teachers = new ArrayList<User>();
+        studentClasses = new ArrayList<StudentClass>();
     }
-    public Set<User> getTeachers() {
+    public List<User> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(Set<User> teachers) {
+    public void setTeachers(List<User> teachers) {
         this.teachers = teachers;
     }
 
@@ -65,11 +63,11 @@ public class ClassAssignment extends Entity {
         this.discipline = discipline;
     }
 
-    public Set<StudentClass> getStudentClasses() {
+    public List<StudentClass> getStudentClasses() {
         return studentClasses;
     }
 
-    public void setStudentClasses(Set<StudentClass> studentClasses) {
+    public void setStudentClasses(List<StudentClass> studentClasses) {
         this.studentClasses = studentClasses;
     }
 

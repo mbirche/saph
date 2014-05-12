@@ -42,6 +42,7 @@ public class DisciplineService extends AbstractService {
         if (discipline.getCourse() != null) {
             Course course = discipline.getCourse();
             discipline.setCourse(null);
+            super.update(discipline);
             course.getDisciplines().remove(discipline);
             courseDAO.update(course);
         }

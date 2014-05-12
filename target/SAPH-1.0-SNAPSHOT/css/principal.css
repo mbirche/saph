@@ -148,3 +148,9 @@ button{
 .ui-selectonemenu-item{
     font-size: 10px;
 }
+.ui-chkbox-box{
+    margin-right: 10px !important;
+}
+.ui-selectlistbox-item{
+    vertical-align: central !important;
+}
