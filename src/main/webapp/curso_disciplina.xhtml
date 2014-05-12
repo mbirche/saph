@@ -1,5 +1,3 @@
-
-
 <ui:composition id="uiCursoDisciplina"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -8,7 +6,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:outputText value="Cursos" styleClass="tituloSecao"/>
-    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda" id="pnlGridCadastroCurso">
         <p:row>
             <p:column style="width: 30%;">
                 <p:outputLabel value="Nome" styleClass="labelTxt"/>
@@ -78,7 +76,7 @@
     <p:separator/>
 
     <h:outputText value="Disciplinas" styleClass="tituloSecao"/>
-    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+    <p:panelGrid style="width: 100%" styleClass="gridSemBorda" id="pnlGridCadastroDisciplina">
         <p:row>
             <p:column style="width: 30%">
                 <p:outputLabel value="Nome" styleClass="labelTxt"/>
@@ -94,31 +92,69 @@
         <p:row>
             <p:column>
                 <p:outputLabel value="Escolha o curso" styleClass="labelTxt"/>
-                <p:selectOneMenu style="width: 100%" value="#{cursoDisciplinaMB.discipline.course}">
-                    <f:selectItems value="#{cursoDisciplinaMB.courses}" var="crs" itemValue="#{crs}" itemLabel="#{crs.name}"/>
-                </p:selectOneMenu>
+                <h:panelGroup id="pnlSlctOneCursos">
+                    <p:selectOneMenu style="width: 100%" value="#{cursoDisciplinaMB.discipline.course}" id="slctOneCursos">
+                        <f:selectItems value="#{cursoDisciplinaMB.courses}" var="crs" itemValue="#{crs}" itemLabel="#{crs.name}"/>
+                    </p:selectOneMenu>
+                </h:panelGroup>
             </p:column>
         </p:row>
         <p:row>
             <p:column>
-                <p:commandButton value="Salvar Disciplina"/>
+                <p:commandButton value="Salvar Disciplina" actionListener="#{cursoDisciplinaMB.saveDiscipline()}" update="formPrincipal:pnlCentral"/>
                 <p:commandButton value="Cancelar"/>
             </p:column>
         </p:row>
         <p:row>
-            <p:column>
+            <p:column colspan="2">
                 <h:outputText value="Disciplinas Cadastradas" styleClass="labelTxt"/>
                 <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Disciplina Cadastrada">
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Disciplina Cadastrada" id="listDisciplina"
+                             value="#{cursoDisciplinaMB.disciplines}" var="discipline">
+                    
+                    <p:column style="width: 30%">
+                        <f:facet name="header">
+                            <h:outputText value="Nome da Disciplina"/>
+                        </f:facet>
+                        #{discipline.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        #{discipline.description}
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtDiscipline').show();" update=":formPrincipal:pnlDialogCourse">
+                            <f:setPropertyActionListener value="#{discipline}" target="#{cursoDisciplinaMB.updatingDiscipline}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" action="#{cursoDisciplinaMB.deleteDiscipline()}" update=":formPrincipal:pnlCentral">
+                            <f:setPropertyActionListener value="#{discipline}" target="#{cursoDisciplinaMB.deletingDiscipline}"/>
+                        </p:commandButton>
+                    </p:column>
 
                 </p:dataTable>
             </p:column>
         </p:row>
     </p:panelGrid>
 
-    <p:dialog id="editUser" header="Edição de Curso" widgetVar="edtCourse" modal="false"
+    <p:dialog id="editCourse" header="Edição de Curso" widgetVar="edtCourse" modal="false"
               dynamic="true" width="1000">
         <h:panelGroup id ="pnlDialogCourse">
+
+        </h:panelGroup>
+    </p:dialog>
+    <p:dialog id="editDiscipline" header="Edição de Disciplina" widgetVar="edtDiscipline" modal="false"
+              dynamic="true" width="1000">
+        <h:panelGroup id ="pnlDialogDiscipline">
 
         </h:panelGroup>
     </p:dialog>

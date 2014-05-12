@@ -14,6 +14,7 @@ import br.com.fatecmogidascruzes.saph.facade.ClassAssignmentFacade;
 import br.com.fatecmogidascruzes.saph.facade.TestApplicationFacade;
 import br.com.fatecmogidascruzes.saph.facade.AlternativeFacade;
 import br.com.fatecmogidascruzes.saph.facade.CourseFacade;
+import br.com.fatecmogidascruzes.saph.facade.DisciplineFacade;
 import br.com.fatecmogidascruzes.saph.facade.EvaluatedItemFacade;
 import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
 import br.com.fatecmogidascruzes.saph.facade.UserFacade;
@@ -23,6 +24,7 @@ import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
 
 import br.com.fatecmogidascruzes.saph.model.Course;
+import br.com.fatecmogidascruzes.saph.model.Discipline;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
@@ -73,6 +75,7 @@ public class FacadeFactory {
         map.put(Course.class, CourseFacade.getInstance());
         map.put(User.class, UserFacade.getInstance());
         map.put(StudentClass.class, StudentClassFacade.getInstance());
+        map.put(Discipline.class, DisciplineFacade.getInstance());
     }
 
 }

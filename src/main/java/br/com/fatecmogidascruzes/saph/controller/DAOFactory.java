@@ -10,6 +10,7 @@ import br.com.fatecmogidascruzes.saph.dao.AbilityDAO;
 import br.com.fatecmogidascruzes.saph.dao.AlternativeDAO;
 import br.com.fatecmogidascruzes.saph.dao.ClassAssignmentDAO;
 import br.com.fatecmogidascruzes.saph.dao.CourseDAO;
+import br.com.fatecmogidascruzes.saph.dao.DisciplineDAO;
 import br.com.fatecmogidascruzes.saph.dao.EvaluatedItemDAO;
 import br.com.fatecmogidascruzes.saph.dao.KnowledgeAreaDAO;
 import br.com.fatecmogidascruzes.saph.dao.QuestionDAO;
@@ -24,6 +25,7 @@ import br.com.fatecmogidascruzes.saph.model.Alternative;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
 
 import br.com.fatecmogidascruzes.saph.model.Course;
+import br.com.fatecmogidascruzes.saph.model.Discipline;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
 import br.com.fatecmogidascruzes.saph.model.KnowledgeArea;
 import br.com.fatecmogidascruzes.saph.model.Question;
@@ -71,5 +73,6 @@ public class DAOFactory {
         map.put(StudentClass.class, StudentClassDAO.getInstance());
         map.put(Course.class, CourseDAO.getInstance());
         map.put(User.class, UserDAO.getInstance());
+        map.put(Discipline.class, DisciplineDAO.getInstance());
     }
 }

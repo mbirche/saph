@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.fatecmogidascruzes.saph.converter;
 
 import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
@@ -19,20 +18,28 @@ import javax.faces.convert.FacesConverter;
  * @author marcelo
  */
 @FacesConverter(forClass = Course.class)
-public class CourseConverter implements Converter{
-    
+public class CourseConverter implements Converter {
+
     CourseDAO dao = (CourseDAO) DAOFactory.getInstance().getDAO(Course.class);
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        Course course = (Course) dao.get(Long.valueOf(value), Course.class);
+        Course course = null;
+        if (value != null && !value.equals("")) {
+            course = (Course) dao.get(Long.valueOf(value), Course.class);
+        }
         return course;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        Course course = (Course) value;
-        return course.getId().toString();
+
+        if (value != null) {
+            Course course = (Course) value;
+            return course.getId().toString();
+        } else {
+            return null;
+        }
     }
-    
+
 }

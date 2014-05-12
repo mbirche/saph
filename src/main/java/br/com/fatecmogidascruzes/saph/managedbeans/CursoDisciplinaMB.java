@@ -7,6 +7,7 @@ package br.com.fatecmogidascruzes.saph.managedbeans;
 
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
 import br.com.fatecmogidascruzes.saph.facade.CourseFacade;
+import br.com.fatecmogidascruzes.saph.facade.DisciplineFacade;
 import br.com.fatecmogidascruzes.saph.facade.UserFacade;
 import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
@@ -30,14 +31,17 @@ public class CursoDisciplinaMB {
     private Course deletingCourse;
     private List<Course> courses;
 
+
     private Discipline discipline;
     private Discipline updatingDiscipline;
     private Discipline deletingDiscipline;
+    private List<Discipline> disciplines;
 
     private List<User> allCoordinators;
 
     private UserFacade userFacade;
     private CourseFacade courseFacade;
+    private DisciplineFacade disciplineFacade;
 
     public CursoDisciplinaMB() {
         course = new Course();
@@ -48,10 +52,25 @@ public class CursoDisciplinaMB {
 
         userFacade = (UserFacade) FacadeFactory.getInstance().getFacade(User.class);
         courseFacade = (CourseFacade) FacadeFactory.getInstance().getFacade(Course.class);
+        disciplineFacade = (DisciplineFacade) FacadeFactory.getInstance().getFacade(Discipline.class);
         refreshCourseList();
+        refreshDisciplineList();
         allCoordinators = getCoordinators();
     }
 
+    public void deleteDiscipline(){
+        disciplineFacade.delete(deletingDiscipline);
+        refreshDisciplineList();
+    }
+    public void saveDiscipline(){
+        discipline.getCourse().addDiscipline(discipline);
+        disciplineFacade.save(discipline);
+        discipline = new Discipline();
+        refreshDisciplineList();
+    }
+    private void refreshDisciplineList(){
+        disciplines = (List<Discipline>)(List)disciplineFacade.getAll(Discipline.class);
+    }
     public void refreshCourseDisciplineWindow(){
         refreshCoordinatorList();
     }
@@ -82,6 +101,14 @@ public class CursoDisciplinaMB {
             }
         }
         return coordinators;
+    }
+
+    public List<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(List<Discipline> disciplines) {
+        this.disciplines = disciplines;
     }
 
     public Course getCourse() {

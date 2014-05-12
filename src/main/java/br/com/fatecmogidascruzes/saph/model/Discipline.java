@@ -5,6 +5,7 @@
 package br.com.fatecmogidascruzes.saph.model;
 
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -14,6 +15,7 @@ import javax.persistence.OneToOne;
 public class Discipline extends Entity {
 
     @OneToOne
+    @PrimaryKeyJoinColumn
     private Course course;
     private String name;
     private String description;
