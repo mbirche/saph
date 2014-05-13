@@ -4,7 +4,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
-    
+
     <h:outputText value="Turmas" styleClass="tituloSecao"/>
     <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
         <p:row>
@@ -75,10 +75,10 @@
     <p:separator/>
 
     <h:outputText value="Atribuiçoes" styleClass="tituloSecao"/>
-    <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+    <p:panelGrid style="width: 100%" styleClass="gridSemBorda" id="pnlGridCadastroAtribuicao">
         <p:row>
             <p:column style="width: 50%">
-                <p:panelGrid style="width: 100%" styleClass="gridSemBorda">
+                <p:panelGrid style="width: 100%" styleClass="gridSemBorda" id="pnlGridCadastroAtribuicao1">
                     <p:row>
                         <p:column style="width: 50%">
                             <h:outputText value="Escolha um Curso" styleClass="labelTxt"/>
@@ -99,8 +99,8 @@
                             <p:selectOneMenu style="width: 100%" id="slctOneDisciplinaAtribuicao" value="#{turmaMB.clAssignment.discipline}">
                                 <f:selectItems value="#{cursoDisciplinaMB.disciplines}" var="discipline" itemLabel="#{discipline.name}" itemValue="#{discipline}"/>
                             </p:selectOneMenu>
-                        </p:column><!--
--->                        <p:column>
+                        </p:column>
+                        <p:column>
                             <h:outputText value="Escolha uma ou mais Turmas" styleClass="labelTxt"/>
                             <p:selectManyMenu style="width: 100%; height: 150px" id="slctOneTurmaAtribuicao" value="#{turmaMB.clAssignment.studentClasses}"
                                               showCheckbox="true">
@@ -108,11 +108,47 @@
                             </p:selectManyMenu>
                         </p:column>
                     </p:row>
-                </p:panelGrid >
+                </p:panelGrid>
             </p:column>
             <p:column>
                 <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Atribuição Cadastrada">
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Atribuição Cadastrada" id="classAssignmentList"
+                             value="#{turmaMB.clAssignments}" var="clAssignment">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{clAssignment.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Curso"/>
+                        </f:facet>
+                        <h:outputText value="#{clAssignment.course.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Disciplina"/>
+                        </f:facet>
+                        <h:outputText value="#{clAssignment.discipline.name}"/>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtClass').show();" update=":formPrincipal:pnlDialogClass">
+                            <f:setPropertyActionListener value="#{clAssignment}" target="#{turmaMB.updatingClAssignment}"/>
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width: 10%; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Remoção"/>
+                        </f:facet>
+                        <p:commandButton value="Apagar" onclick="">
+                            <f:setPropertyActionListener value="#{clAssignment}" target="#{turmaMB.deletingClAssignment}"/>
+                        </p:commandButton>
+                    </p:column>
 
                 </p:dataTable>
             </p:column>
@@ -127,7 +163,7 @@
     <p:dialog id="editClass" header="Edição de Usuário" widgetVar="edtClass" modal="false"
               dynamic="true" width="1000">
         <h:panelGroup id ="pnlDialogClass">
-            
+
         </h:panelGroup>
 
     </p:dialog>

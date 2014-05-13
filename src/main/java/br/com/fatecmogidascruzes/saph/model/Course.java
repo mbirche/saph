@@ -4,15 +4,14 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
 
 /**
  *
@@ -29,19 +28,15 @@ public class Course extends Entity {
     private User coordinator;
 
     @Cascade(CascadeType.ALL)
-    @OneToMany
-    @JoinTable(name = "course_discipline",
-            schema = "saph",
-            joinColumns = @JoinColumn(name = "id_course"),
-            inverseJoinColumns = @JoinColumn(name = "id_discipline"))
-    private Set<Discipline> disciplines;
+    @OneToMany(mappedBy="course")  
+    private List<Discipline> disciplines;
 
     public Boolean addDiscipline(Discipline disc) {
         return disciplines.add(disc);
     }
 
     public Course() {
-        disciplines = new HashSet<Discipline>();
+        disciplines = new ArrayList<Discipline>();
     }
 
     public String getName() {
@@ -68,11 +63,11 @@ public class Course extends Entity {
         this.coordinator = coordinator;
     }
 
-    public Set<Discipline> getDisciplines() {
+    public List<Discipline> getDisciplines() {
         return disciplines;
     }
 
-    public void setDisciplines(Set<Discipline> disciplines) {
+    public void setDisciplines(List<Discipline> disciplines) {
         this.disciplines = disciplines;
     }
 }

@@ -1,6 +1,7 @@
 package br.com.fatecmogidascruzes.saph.managedbeans;
 
 import br.com.fatecmogidascruzes.saph.controller.FacadeFactory;
+import br.com.fatecmogidascruzes.saph.facade.ClassAssignmentFacade;
 import br.com.fatecmogidascruzes.saph.facade.StudentClassFacade;
 import br.com.fatecmogidascruzes.saph.facade.UserFacade;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
@@ -25,6 +26,7 @@ public class TurmaMB {
 
     private UserFacade userFacade;
     private StudentClassFacade stFacade;
+    private ClassAssignmentFacade clFacade;
     private DualListModel<User> dualListModel;
     private List<User> allUsers;
     private List<User> allStudents;
@@ -42,15 +44,18 @@ public class TurmaMB {
     private ClassAssignment clAssignment;
     private ClassAssignment updatingClAssignment;
     private ClassAssignment deletingClAssignment;
+    private List<ClassAssignment> clAssignments;
 
     public TurmaMB() {
         
         userFacade = (UserFacade) FacadeFactory.getInstance().getFacade(User.class);
         stFacade = (StudentClassFacade) FacadeFactory.getInstance().getFacade(StudentClass.class);
+        clFacade = (ClassAssignmentFacade) FacadeFactory.getInstance().getFacade(ClassAssignment.class);
         
         fillRolesLists();
         resetPickList();
         refreshStudentClassesList();
+        refreshClassAssignmentList();
         stClass = new StudentClass();
         updatingClass = new StudentClass();
         deletingClass = new StudentClass();
@@ -76,6 +81,9 @@ public class TurmaMB {
     public void deleteClass(){
         stFacade.delete(deletingClass);
         refreshStudentClassesList();
+    }
+    private void refreshClassAssignmentList(){
+        clAssignments = (List<ClassAssignment>)(List)clFacade.getAll(ClassAssignment.class);
     }
     private void refreshStudentClassesList(){
         stClasses =(List<StudentClass>)(List) stFacade.getAll(StudentClass.class);
@@ -115,6 +123,14 @@ public class TurmaMB {
                 allTeachers.add(usr);
             }
         }
+    }
+
+    public List<ClassAssignment> getClAssignments() {
+        return clAssignments;
+    }
+
+    public void setClAssignments(List<ClassAssignment> clAssignments) {
+        this.clAssignments = clAssignments;
     }
 
     public ClassAssignment getClAssignment() {
