@@ -88,6 +88,11 @@ public class TurmaMB {
     private void refreshStudentClassesList(){
         stClasses =(List<StudentClass>)(List) stFacade.getAll(StudentClass.class);
     }
+    public void saveClassAssignment(){
+        clFacade.save(clAssignment);
+        refreshClassAssignmentList();
+        clAssignment = new ClassAssignment();
+    }
     public void saveStudentClass(){
         stFacade.save(stClass);
         refreshStudentClassesList();

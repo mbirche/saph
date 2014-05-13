@@ -28,6 +28,7 @@
                 </p:pickList>
             </p:column>
             <p:column>
+                <h:outputText value="Turmas Cadastradas" styleClass="labelTxt"/>
                 <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
                              paginatorAlwaysVisible="false" emptyMessage="Nenhuma Turma Cadastrada" value="#{turmaMB.stClasses}"
                              var="clas" id="classesList">
@@ -80,6 +81,12 @@
             <p:column style="width: 50%">
                 <p:panelGrid style="width: 100%" styleClass="gridSemBorda" id="pnlGridCadastroAtribuicao1">
                     <p:row>
+                        <p:column colspan="2">
+                            <h:outputText value="Nome da Atribuição" styleClass="labelTxt"/>
+                            <p:inputText style="width: 45%" value="#{turmaMB.clAssignment.name}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
                         <p:column style="width: 50%">
                             <h:outputText value="Escolha um Curso" styleClass="labelTxt"/>
                             <p:selectOneMenu style="width: 100%" value="#{turmaMB.clAssignment.course}" id="slctOneCursoAtribuicao">
@@ -88,8 +95,10 @@
                         </p:column>
                         <p:column>
                             <h:outputText value="Escolha um(a) ou mais Professores(as)" styleClass="labelTxt"/>
-                            <p:selectManyMenu style="width: 100%; height: 150px" value="#{turmaMB.clAssignment.teachers}" showCheckbox="true" id="slctOneTeacherAtribuicao">
+                            <p:selectManyMenu style="width: 100%; height: 150px" value="#{turmaMB.clAssignment.teachers}" showCheckbox="true" 
+                                              id="slctOneTeacherAtribuicao" converter="userConverter">
                                 <f:selectItems value="#{usuarioMB.allTeachers}" var="teacher" itemLabel="#{teacher.name}" itemValue="#{teacher}"/>
+                                <p:ajax event="select" update="@this" />
                             </p:selectManyMenu>
                         </p:column>
                     </p:row>
@@ -103,14 +112,16 @@
                         <p:column>
                             <h:outputText value="Escolha uma ou mais Turmas" styleClass="labelTxt"/>
                             <p:selectManyMenu style="width: 100%; height: 150px" id="slctOneTurmaAtribuicao" value="#{turmaMB.clAssignment.studentClasses}"
-                                              showCheckbox="true">
+                                              showCheckbox="true" converter="studentClassConverter">
                                 <f:selectItems value="#{turmaMB.stClasses}" var="stClass" itemLabel="#{stClass.name}" itemValue="#{stClass}"/>
+                                <p:ajax event="change" update="@this" />
                             </p:selectManyMenu>
                         </p:column>
                     </p:row>
                 </p:panelGrid>
             </p:column>
             <p:column>
+                <h:outputText value="Atribuições Cadastradas" styleClass="labelTxt"/>
                 <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
                              paginatorAlwaysVisible="false" emptyMessage="Nenhuma Atribuição Cadastrada" id="classAssignmentList"
                              value="#{turmaMB.clAssignments}" var="clAssignment">
@@ -137,7 +148,7 @@
                         <f:facet name="header">
                             <h:outputText value="Detalhes"/>
                         </f:facet>
-                        <p:commandButton value="Detalhe" oncomplete="PF('edtClass').show();" update=":formPrincipal:pnlDialogClass">
+                        <p:commandButton value="Detalhe" oncomplete="PF('edtClAssignment').show();" update=":formPrincipal:pnlDialogClass">
                             <f:setPropertyActionListener value="#{clAssignment}" target="#{turmaMB.updatingClAssignment}"/>
                         </p:commandButton>
                     </p:column>
@@ -155,7 +166,7 @@
         </p:row>
         <p:row>
             <p:column colspan="2">
-                <p:commandButton value="Salvar Atribuição"/>
+                <p:commandButton value="Salvar Atribuição" actionListener="#{turmaMB.saveClassAssignment()}" update="formPrincipal:pnlCentral"/>
                 <p:commandButton value="Cancelar"/>
             </p:column>
         </p:row>
@@ -163,6 +174,13 @@
     <p:dialog id="editClass" header="Edição de Usuário" widgetVar="edtClass" modal="false"
               dynamic="true" width="1000">
         <h:panelGroup id ="pnlDialogClass">
+
+        </h:panelGroup>
+
+    </p:dialog>
+    <p:dialog id="editClAssignment" header="Edição de Usuário" widgetVar="edtClAssignment" modal="false"
+              dynamic="true" width="1000">
+        <h:panelGroup id ="pnlDialogClAssignment">
 
         </h:panelGroup>
 

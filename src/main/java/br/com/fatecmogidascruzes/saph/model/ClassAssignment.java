@@ -19,6 +19,8 @@ import org.hibernate.annotations.CascadeType;
 @javax.persistence.Entity
 public class ClassAssignment extends Entity {
 
+    private String name;
+    
     @Cascade(CascadeType.ALL)
     @ManyToMany
     private List<User> teachers;
@@ -78,4 +80,13 @@ public class ClassAssignment extends Entity {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

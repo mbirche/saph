@@ -1,9 +1,7 @@
 package br.com.fatecmogidascruzes.saph.converter;
 
 import br.com.fatecmogidascruzes.saph.dao.StudentClassDAO;
-import br.com.fatecmogidascruzes.saph.model.Course;
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
-import br.com.fatecmogidascruzes.saph.model.User;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
