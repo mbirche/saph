@@ -55,9 +55,7 @@ public class QuestaoMB {
         question = new Question();
         
         alternative = new Alternative();
-        
-        ability = new Ability();
-        
+              
         refreshAbilitiesList();
         
         evItem = new EvaluatedItem();
@@ -67,35 +65,31 @@ public class QuestaoMB {
         
     }
 
-    public void moveAbility() {
+    private void moveAbility(EvaluatedItem evItem) {
 
-        evItem = new EvaluatedItem(ability, performance);
-        ability = new Ability();
-        
+
         selectedEvaluatedItems.add(evItem);
-        if (abilities.contains(ability)) {
-            abilities.remove(ability);
+        if (abilities.contains(evItem.getAbility())) {
+            abilities.remove(evItem.getAbility());
         }
         alternative.setEvaluatedItems(selectedEvaluatedItems);
     }
-    public void editSatisfatory() {
-        performanceEdit = Performance.SATISFATORY;
-        selectedEvaluatedItems.get(selectedEvaluatedItems.indexOf(evItem)).setPerformance(performanceEdit);
-    }
-
-    public void editInsatisfatory() {
-        performanceEdit = Performance.INSATISFATORY;
-        selectedEvaluatedItems.get(selectedEvaluatedItems.indexOf(evItem)).setPerformance(performanceEdit);
-    }
-    public void setSatisfatory(){
+    
+    public void setSatisfatory(Ability ability){
         performance = Performance.SATISFATORY;
+        evItem = new EvaluatedItem(ability, performance);
+        
+        moveAbility(evItem);
     }
-    public void setInsatisfatory(){
+    public void setInsatisfatory(Ability ability){
         performance = Performance.INSATISFATORY;
+        evItem = new EvaluatedItem(ability, performance);
+        
+        moveAbility(evItem);
     }
-    public void deleteEvItem(){
-        if (selectedEvaluatedItems.contains(deletingEvItem)) {
-            selectedEvaluatedItems.remove(deletingEvItem);
+    public void deleteEvItem(EvaluatedItem evItem){
+        if (selectedEvaluatedItems.contains(evItem)) {
+            selectedEvaluatedItems.remove(evItem);
         }
         refreshAbilitiesList();
 
@@ -108,6 +102,7 @@ public class QuestaoMB {
     }
     public void addAlternative(){
         question.addAlternative(alternative);
+        alternative = new Alternative();
     }
     public void saveQuestion(){
         qFacade.save(question);
@@ -143,14 +138,6 @@ public class QuestaoMB {
 
     public void setAlternative(Alternative alternative) {
         this.alternative = alternative;
-    }
-
-    public Ability getAbility() {
-        return ability;
-    }
-
-    public void setAbility(Ability ability) {
-        this.ability = ability;
     }
 
     public List<Ability> getAbilities() {

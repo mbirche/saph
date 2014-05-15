@@ -17,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
@@ -34,6 +35,10 @@ public class User extends Entity {
 
     private String name;
     private String surname;
+    
+    @Cascade(CascadeType.ALL)
+    @OneToOne
+    private Credential credential;
     
     @ElementCollection
     @CollectionTable(
@@ -61,6 +66,7 @@ public class User extends Entity {
         phones = new ArrayList<Phone>();
         roles = new ArrayList<Role>();
         emails = new ArrayList<String>();
+        credential = new Credential();
     }
     public List<Role> getRoles() {
         return roles;
@@ -116,6 +122,14 @@ public class User extends Entity {
 
     public void setRf(String rf) {
         this.rf = rf;
+    }
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
 
     @Override

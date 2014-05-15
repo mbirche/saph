@@ -10,6 +10,7 @@ import br.com.fatecmogidascruzes.saph.model.AlternativeText;
 import br.com.fatecmogidascruzes.saph.model.Answer;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
 import br.com.fatecmogidascruzes.saph.model.Course;
+import br.com.fatecmogidascruzes.saph.model.Credential;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
 import br.com.fatecmogidascruzes.saph.model.Entity;
 import br.com.fatecmogidascruzes.saph.model.EvaluatedItem;
@@ -74,6 +75,7 @@ public class HSession {
         configuration.addAnnotatedClass(TestApplication.class);
         configuration.addAnnotatedClass(Phone.class);
         configuration.addAnnotatedClass(PhoneType.class);
+        configuration.addAnnotatedClass(Credential.class);
 
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
 

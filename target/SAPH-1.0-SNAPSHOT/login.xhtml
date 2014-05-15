@@ -1,11 +1,26 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <ui:composition id="uiLogin">
-        Olá Mundo!
-        <h:commandButton value="Teste" action="#{habilidadeAreaMB.saveKArea()}"/>
+<ui:composition id="uiLogin"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup id="pnlUserInfo">
+        <h:outputText value="Acesso ao sistema de Avaliação por Habilidades" styleClass="tituloSecao"/>
+        <p:panelGrid style="width: 100%" styleClass="gridSemBorda" id="pnlGridUsers">
+            <p:row>
+                <p:column>
+                    <h:outputText value="Login" styleClass="labelTxt"/>
+                    <p:inputText style="width: 48%" value="#{loginMB.credential.login}"/>
+                    <h:outputText value="Senha" styleClass="labelTxt"/>
+                    <p:inputText style="width: 48%" value="#{loginMB.credential.password}"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Entrar"/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+    </h:panelGroup>
+</ui:composition>
 
-    </ui:composition>
-</html>

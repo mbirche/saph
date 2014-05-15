@@ -31,6 +31,7 @@ public class Alternative extends Entity {
     }
     public Alternative(){
         evaluatedItems = new ArrayList<EvaluatedItem>();
+        alternativeText = new AlternativeText();
     }
     public List<Long> getEvaluatedItemsIds(){
         List<Long> ids = new ArrayList<Long>();

@@ -10,6 +10,6 @@ package br.com.fatecmogidascruzes.saph.interfaces;
  *
  * @author marcelo
  */
-public interface IUserService extends IAbstractService{
+public interface IUserService extends IUserFacade{
     
 }

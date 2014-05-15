@@ -7,12 +7,12 @@
 package br.com.fatecmogidascruzes.saph.dao;
 
 import br.com.fatecmogidascruzes.saph.config.HSession;
-import br.com.fatecmogidascruzes.saph.interfaces.ICoordinatorFacade;
-import br.com.fatecmogidascruzes.saph.interfaces.IStudentFacade;
-import br.com.fatecmogidascruzes.saph.interfaces.ITeacherFacade;
+import br.com.fatecmogidascruzes.saph.interfaces.IUserFacade;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
 import br.com.fatecmogidascruzes.saph.model.Course;
+import br.com.fatecmogidascruzes.saph.model.Credential;
 import br.com.fatecmogidascruzes.saph.model.Discipline;
+import br.com.fatecmogidascruzes.saph.model.Entity;
 import br.com.fatecmogidascruzes.saph.model.StudentClass;
 import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
@@ -24,7 +24,7 @@ import org.hibernate.Query;
  *
  * @author marcelo
  */
-public class UserDAO extends AbstractDAO implements IStudentFacade, ICoordinatorFacade, ITeacherFacade{
+public class UserDAO extends AbstractDAO implements IUserFacade{
     
     private static UserDAO dao;
 
@@ -113,5 +113,17 @@ public class UserDAO extends AbstractDAO implements IStudentFacade, ICoordinator
         List entities = q.list();
         session.close();
         return entities;
+    }
+
+    @Override
+    public User getUserByCredentials(Credential credential) {
+        
+        session = HSession.getSession();
+        String hql = "from User usr WHERE " + credential.getLogin() + " = usr.credential.login AND" + credential.getPassword()+ " = usr.credential.password";
+        Query q = session.createQuery(hql);
+        
+        User user = (User) q.uniqueResult();
+        
+        return user;
     }
 }
