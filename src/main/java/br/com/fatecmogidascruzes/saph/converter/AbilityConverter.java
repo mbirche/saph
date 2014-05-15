@@ -8,7 +8,6 @@ package br.com.fatecmogidascruzes.saph.converter;
 import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
 import br.com.fatecmogidascruzes.saph.dao.AbilityDAO;
 import br.com.fatecmogidascruzes.saph.model.Ability;
-import br.com.fatecmogidascruzes.saph.model.Course;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;

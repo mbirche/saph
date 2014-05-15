@@ -8,7 +8,6 @@ package br.com.fatecmogidascruzes.saph.converter;
 
 import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
 import br.com.fatecmogidascruzes.saph.dao.EntityDAO;
-import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Entity;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,7 +18,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author marcelo
  */
-@FacesConverter(forClass = Entity.class)
+@FacesConverter(forClass = Entity.class, value = "entityConverter")
 public class EntityConverter implements Converter{
 
     EntityDAO dao = (EntityDAO) DAOFactory.getInstance().getDAO(Entity.class);

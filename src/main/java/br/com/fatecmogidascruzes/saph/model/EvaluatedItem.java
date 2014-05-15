@@ -25,6 +25,13 @@ public class EvaluatedItem extends Entity {
     @Enumerated
     private Performance performance;
 
+    public EvaluatedItem() {
+    }
+
+    public EvaluatedItem(Ability ability, Performance performance){
+        this.ability = ability;
+        this.performance = performance;
+    }
     public Ability getAbility() {
         return ability;
     }

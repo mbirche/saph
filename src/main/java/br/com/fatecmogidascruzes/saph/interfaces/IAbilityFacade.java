@@ -14,6 +14,6 @@ import java.util.List;
  *
  * @author marcelo
  */
-public interface IAbilityFacade {
+public interface IAbilityFacade extends IAbstractFacade{
     public List<Ability> getAbilityByKnowledgeArea(KnowledgeArea kArea);
 }

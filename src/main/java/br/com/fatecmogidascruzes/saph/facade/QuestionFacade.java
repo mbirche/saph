@@ -4,8 +4,9 @@
  */
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.dao.QuestionDAO;
+import br.com.fatecmogidascruzes.saph.controller.ServiceFactory;
 import br.com.fatecmogidascruzes.saph.interfaces.IQuestionFacade;
+import br.com.fatecmogidascruzes.saph.interfaces.IQuestionService;
 import br.com.fatecmogidascruzes.saph.model.Ability;
 import br.com.fatecmogidascruzes.saph.model.Question;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 public class QuestionFacade extends AbstractFacade implements IQuestionFacade {
 
     private static QuestionFacade facade;
-    private QuestionDAO dao;
+    private IQuestionService service;
     public static QuestionFacade getInstance(){
         if(facade == null){
             facade = new QuestionFacade();
@@ -27,11 +28,11 @@ public class QuestionFacade extends AbstractFacade implements IQuestionFacade {
         }
     }
     private QuestionFacade(){
-        dao = new QuestionDAO();
+        service = (IQuestionService)ServiceFactory.getInstance().getService(Question.class);
     }
 
     @Override
     public List<Question> getQuestionsByAbility(Ability ability) {
-        return dao.getQuestionsByAbility(ability);
+        return service.getQuestionsByAbility(ability);
     }
 }

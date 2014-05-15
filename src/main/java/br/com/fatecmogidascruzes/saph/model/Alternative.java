@@ -5,10 +5,7 @@
 package br.com.fatecmogidascruzes.saph.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
@@ -23,7 +20,7 @@ public class Alternative extends Entity {
 
     @Cascade(CascadeType.ALL)
     @ManyToMany
-    private Set<EvaluatedItem> evaluatedItems;
+    private List<EvaluatedItem> evaluatedItems;
     
     @Cascade(CascadeType.ALL)
     @OneToOne
@@ -33,7 +30,7 @@ public class Alternative extends Entity {
         return evaluatedItems.add(evItem);
     }
     public Alternative(){
-        evaluatedItems = new HashSet<EvaluatedItem>();
+        evaluatedItems = new ArrayList<EvaluatedItem>();
     }
     public List<Long> getEvaluatedItemsIds(){
         List<Long> ids = new ArrayList<Long>();
@@ -42,11 +39,11 @@ public class Alternative extends Entity {
         }
         return ids;
     }
-    public Set<EvaluatedItem> getEvaluatedItems() {
+    public List<EvaluatedItem> getEvaluatedItems() {
         return evaluatedItems;
     }
 
-    public void setEvaluatedItems(Set<EvaluatedItem> evaluatedItems) {
+    public void setEvaluatedItems(List<EvaluatedItem> evaluatedItems) {
         this.evaluatedItems = evaluatedItems;
     }
 

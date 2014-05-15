@@ -6,11 +6,12 @@
     <ui:composition id="uiQuestoes">
 
         <h:outputText value="Questões" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;">
+        <p:panelGrid style="width: 100%;" id="pnlGridQuestao">
             <p:row>
                 <p:column style="width: 50%">                   
-                    <h:outputText value="Questão" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
+                    <h:outputText value="Texto da Questão" styleClass="labelTxt"/>
+                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                     value="#{questaoMB.question.questionText.text}"/>
                 </p:column>
                 <p:column>
                     <p:outputLabel value="Alternativas" styleClass="labelTxt"/>
@@ -18,7 +19,8 @@
                     <p:messages id="msgDominio" for="msgDominio" autoUpdate="true" escape="false"/>
 
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma alternativa para esta questão">>
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma alternativa para esta questão" value="#{questaoMB.question.alternatives}"
+                                 var="alternative" id="alternativeList">
 
                         <p:ajax event="rowDblselect"/>
                         <p:ajax event="rowDblselect" update=":formPrincipal:pnlCentral"/>
@@ -27,30 +29,24 @@
                             <f:facet name="header">
                                 <h:outputText value="Texto da alternativa"/>
                             </f:facet>
-
+                            #{alternative.alternativeText.text}
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Habilidades avaliadas nesta alternativa"/>
                             </f:facet>
-                            <p:dataTable>
+                            <p:dataTable value="#{alternative.evaluatedItems}" var="evItems" id="evaluatedItemsList"> 
                                 <p:column style="width: 34%">
                                     <f:facet name="header">
                                         <h:outputText value="Nome"/>
                                     </f:facet>
-
-                                </p:column>
-                                <p:column style="width: 33%">
-                                    <f:facet name="header">
-                                        <h:outputText value="Descrição"/>
-                                    </f:facet>
-
+                                    #{evItems.ability.name}
                                 </p:column>
                                 <p:column style="width: 33%">
                                     <f:facet name="header">
                                         <h:outputText value="Domínio"/>
                                     </f:facet>
-
+                                    #{evItems.performance}
                                 </p:column>
                             </p:dataTable>
                         </p:column>
@@ -67,7 +63,7 @@
             </p:row>
             <p:row>
                 <p:column>
-                    <p:commandButton value="Salvar questão"/>
+                    <p:commandButton value="Salvar questão" actionListener="#{questaoMB.saveQuestion()}" update="formPrincipal:pnlCentral"/>
 
                     <p:commandButton value="Cancelar"/>
 
@@ -77,97 +73,151 @@
                 <p:column>
                     <h:outputText value="Questões Cadastradas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Questão Cadastrada">
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Questão Cadastrada" value="#{questaoMB.questions}"
+                                 var="question" id="questionList">
+                        <p:column style="width: 34%">
+                            <f:facet name="header">
+                                <h:outputText value="Texto"/>
+                            </f:facet>
+                            #{question.questionText.text}
+                        </p:column>
+                        <p:column style="width: 33%">
+                            <f:facet name="header">
+                                <h:outputText value="Quantidade de  Alternativas"/>
+                            </f:facet>
+                            #{question.alternatives.size()}
+                        </p:column>
 
                     </p:dataTable>
                 </p:column>
             </p:row>
         </p:panelGrid>
 
+
+        <p:dialog id="cadAlternativa" header="Cadastro de Alternativa" widgetVar="AltDlg" modal="true"
+                  appendTo="@(body)">  
+            <p:panelGrid>
+                <p:row>
+                    <p:column style="width: 50%">
+                        <h:outputText value="Texto da alternativa: *" styleClass="labelTxt"/>
+                        <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"
+                                         value="#{questaoMB.alternative.alternativeText.text}"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column >
+                        <h:outputText value="Escolha as Habilidades" styleClass="labelTxt"/>
+                        <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                     paginatorAlwaysVisible="false" emptyMessage="Não há habilidades para escolher"
+                                     selection="#{questaoMB.ability}" selectionMode="single" rowKey="#{ability.id}"
+                                     id="abilitiesList" value="#{questaoMB.abilities}" var="ability">
+
+                            <p:ajax event="rowDblselect" onsuccess="PF('classificaDominio').show();"/>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                #{ability.name}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descrição"/>
+                                </f:facet>
+                                #{ability.description}
+                            </p:column>
+                        </p:dataTable>   
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="Ao escolher esta alternativa o aluno será avaliado de acordo com as habilidades abaixo"
+                                       styleClass="labelTxt"/>
+                        <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                     paginatorAlwaysVisible="false" emptyMessage="Escolha a habilidade" id="selectedEvItems"
+                                     value="#{questaoMB.selectedEvaluatedItems}" var="evItem" selection="#{questaoMB.evItem}"
+                                     selectionMode="single" rowKey="#{evItem.id}">                               
+                            <p:ajax event="rowDblselect" onsuccess="PF('alteraDominio').show();">
+                                <f:setPropertyActionListener value="#{evItem}" target="#{questaoMB.evItem}"/>
+                            </p:ajax>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                #{evItem.ability.name}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descrição"/>
+                                </f:facet>
+                                #{evItem.ability.description}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Domínio"/>
+                                </f:facet>
+                                #{evItem.performance}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Remoção"/>
+                                </f:facet>
+                                <p:commandButton value="Apagar" onclick="PF('confirmaDelecao').show();">
+                                    <f:setPropertyActionListener value="#{evItem}" target="#{questaoMB.deletingEvItem}"/>
+                                </p:commandButton>                       
+                            </p:column>
+                        </p:dataTable>  
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:commandButton value="Salvar alternativa"
+                                         onsuccess="PF('AltDlg').show();"/>
+                        <p:commandButton value="Cancelar"/> 
+
+                    </p:column>
+                </p:row>
+            </p:panelGrid>  
+        </p:dialog>  
+        <p:confirmDialog appendTo="@(body)" header="Defina o domínio"
+                         id="classDominio" 
+                         message="De acordo com a questão, a escolha desta alternativa demonstra domínio satisfatório ou insatisfatório desta habilidade?"
+                         widgetVar="classificaDominio">
+            <p:commandButton value="Satisfatório" actionListener="#{questaoMB.setSatisfatory()}" 
+                             onclick="PF('classificaDominio').hide();" action="#{questaoMB.moveAbility()}"
+                             update=":formPrincipal:pnlCentral"/>
+            <p:commandButton value="Insatisfatório" actionListener="#{questaoMB.setInsatisfatory()}" 
+                             onclick="PF('classificaDominio').hide();" action="#{questaoMB.moveAbility()}"
+                             update=":formPrincipal:pnlCentral"/>
+        </p:confirmDialog>
+        <p:confirmDialog appendTo="@(body)" header="Redefina o domínio"
+                         id="altDominio" 
+                         message="De acordo com a questão, a escolha desta alternativa demonstra domínio satisfatório ou insatisfatório desta habilidade?"
+                         widgetVar="alteraDominio">
+            <p:commandButton value="Satisfatório" actionListener="#{questaoMB.editSatisfatory()}" 
+                             onclick="PF('alteraDominio').hide();"
+                             update=":formPrincipal:pnlCentral"/>
+            <p:commandButton value="Insatisfatório" actionListener="#{questaoMB.editInsatisfatory()}" 
+                             onclick="PF('alteraDominio').hide();"
+                             update=":formPrincipal:pnlCentral"/>
+        </p:confirmDialog>
         <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
-                         id="confirmaRemocaoAlternativa" 
+                         id="confDelecao" 
+                         message="Deseja mesmo remover este item avaliado?"
+                         widgetVar="confirmaDelecao">
+            <p:commandButton value="Remover" actionListener="#{questaoMB.deleteEvItem()}" 
+                             onclick="PF('confirmaDelecao').hide();"
+                             update=":formPrincipal:pnlCentral"/>
+            <p:commandButton value="Cancelar"
+                             onclick="PF('confirmaDelecao').hide();"/>
+        </p:confirmDialog>
+        <p:confirmDialog appendTo="@(body)" header="Confirmação da remoção"
+                         id="confRemAlternativa" 
                          message="Deseja mesmo remover esta alternativa?"
                          widgetVar="confirmaRemocaoAlternativa">
-            <p:commandButton value="Remover" onclick="confirmaRemocaoAlternativa.hide()"
+            <p:commandButton value="Remover" actionListener="#{questaoMB.removerAlternativa()}" 
+                             onclick="PF('confirmaRemocaoAlternativa').hide();"
                              update=":formPrincipal:pnlCentral"/>
-            <p:commandButton value="Cancelar" onclick="confirmaRemocaoAlternativa.hide()"/>
+            <p:commandButton value="Cancelar"
+                             onclick="PF('confirmaRemocaoAlternativa').hide();"/>
         </p:confirmDialog>
-        
-        <p:dialog id="cadAlternativa" header="Cadastro de Alternativa" widgetVar="AltDlg" modal="true"
-                  appendToBody="true">  
-            <p:panelGrid>
-            <p:row>
-                <p:column style="width: 50%">
-                    <h:outputText value="Texto da alternativa: *" styleClass="labelTxt"/>
-                    <p:inputTextarea style="width: 100%;" autoResize="false" rows="5" styleClass="unresizable"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column >
-                    <h:outputText value="Habilidades Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Não há habilidades para escolher">
-                                                 
-                        <p:ajax event="rowDblselect" onsuccess="classificaDominio.show()"/>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                    
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Descrição"/>
-                            </f:facet>
-                           
-                        </p:column>
-                    </p:dataTable>   
-                </p:column>
-                <p:column>
-                    <p:outputLabel value="Ao escolher esta alternativa o aluno será avaliado de acordo com as habilidades abaixo"
-                                   styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Escolha a habilidade">                               
-                        <p:ajax event="rowDblselect" onsuccess="alteraDominio.show()">                           
-                        </p:ajax>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                            
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Descrição"/>
-                            </f:facet>
-                            
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Domínio"/>
-                            </f:facet>
-                            
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Remoção"/>
-                            </f:facet>
-                            <p:commandButton value="Apagar" onclick="confirmaDelecao.show()">
-                                
-                            </p:commandButton>                       
-                        </p:column>
-                    </p:dataTable>  
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Salvar alternativa"/>
-                                     
-                    <p:commandButton value="Cancelar"/> 
-                                     
-                </p:column>
-            </p:row>
-        </p:panelGrid>  
-        </p:dialog>  
     </ui:composition>
 </html>

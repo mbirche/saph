@@ -6,6 +6,7 @@
 
 package br.com.fatecmogidascruzes.saph.service;
 
+import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
 import br.com.fatecmogidascruzes.saph.dao.ClassAssignmentDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.IClassAssignmentService;
 import br.com.fatecmogidascruzes.saph.model.ClassAssignment;
@@ -32,7 +33,7 @@ public class ClassAssignmentService extends AbstractService implements IClassAss
         }
     }   
     public ClassAssignmentService(){
-        dao = new ClassAssignmentDAO();
+        dao = (ClassAssignmentDAO) DAOFactory.getInstance().getDAO(ClassAssignment.class);
     }
     @Override
     public List<ClassAssignment> getClassAssignmentsByTeacher(User teacher) {
