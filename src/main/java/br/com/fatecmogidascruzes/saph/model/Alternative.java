@@ -55,4 +55,27 @@ public class Alternative extends Entity {
     public void setAlternativeText(AlternativeText alternativeText) {
         this.alternativeText = alternativeText;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (this.alternativeText != null ? this.alternativeText.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Alternative other = (Alternative) obj;
+        if (this.alternativeText != other.alternativeText && (this.alternativeText == null || !this.alternativeText.equals(other.alternativeText))) {
+            return false;
+        }
+        return true;
+    }
+    
 }

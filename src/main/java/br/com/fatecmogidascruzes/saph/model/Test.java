@@ -4,9 +4,8 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.FetchType;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -21,19 +20,19 @@ public class Test extends Entity {
     private String name;
     @Cascade(CascadeType.ALL)
     @OneToMany
-    private Set<Question> questions;
+    private List<Question> questions;
 
     public Boolean addQuestion(Question que){
         return questions.add(que);
     }
     public Test(){
-        questions = new HashSet<Question>();
+        questions = new ArrayList<Question>();
     }
-    public Set<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 

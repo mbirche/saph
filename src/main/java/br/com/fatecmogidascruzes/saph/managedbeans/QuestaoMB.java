@@ -36,7 +36,8 @@ public class QuestaoMB {
     private EvaluatedItem evItem;
     private EvaluatedItem deletingEvItem;
     
-    private Performance performance;
+    private Performance performanceSatisfatory;
+    private Performance performanceInsatisfatory;
     private Performance performanceEdit;
     
     
@@ -70,14 +71,14 @@ public class QuestaoMB {
     }
     
     public void setSatisfatory(Ability ability){
-        performance = Performance.SATISFATORY;
-        evItem = new EvaluatedItem(ability, performance);
+        performanceSatisfatory = Performance.SATISFATORY;
+        evItem = new EvaluatedItem(ability, performanceSatisfatory);
         
         moveAbility(evItem);
     }
     public void setInsatisfatory(Ability ability){
-        performance = Performance.INSATISFATORY;
-        evItem = new EvaluatedItem(ability, performance);
+        performanceInsatisfatory = Performance.INSATISFATORY;
+        evItem = new EvaluatedItem(ability, performanceInsatisfatory);
         
         moveAbility(evItem);
     }
@@ -97,6 +98,14 @@ public class QuestaoMB {
     public void addAlternative(){
         question.addAlternative(alternative);
         alternative = new Alternative();
+        evItem = new EvaluatedItem();
+        selectedEvaluatedItems = new ArrayList<EvaluatedItem>();
+        refreshAbilitiesList();
+    }
+    public void removeAlternative(Alternative alternative){
+        if(question.getAlternatives().contains(alternative)){
+            question.getAlternatives().remove(alternative);
+        }
     }
     public void saveQuestion(){
         qFacade.save(question);

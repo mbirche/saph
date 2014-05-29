@@ -6,7 +6,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:outputText value="Questões" styleClass="tituloSecao"/>
-    <p:panelGrid style="width: 100%;" id="pnlGridQuestao">
+    <p:panelGrid style="width: 100%;" id="pnlGridQuestao" styleClass="gridSemBorda">
         <p:row>
             <p:column style="width: 50%">                   
                 <h:outputText value="Texto da Questão" styleClass="labelTxt"/>
@@ -44,7 +44,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Domínio"/>
                                 </f:facet>
-                                #{evItems.performance}
+                                #{evItems.performance.description}
                             </p:column>
                         </p:dataTable>
                     </p:column>
@@ -52,7 +52,7 @@
                         <f:facet name="header">
                             <h:outputText value="Remover"/>
                         </f:facet>
-                        <p:commandButton value="Apagar"/>
+                        <p:commandButton value="Apagar" actionListener="#{questaoMB.removeAlternative(alternative)}" update=":formPrincipal:pnlCentral"/>
                     </p:column>
                 </p:dataTable>
                 <p:commandButton value="Nova Alternativa" style="display: block; margin-left: 0px; margin-top: 10px;"
@@ -92,7 +92,8 @@
     </p:panelGrid>
 
 
-    <p:dialog id="cadAlternativa" header="Cadastro de Alternativa" widgetVar="AltDlg" modal="false" dynamic="true">
+    <p:dialog id="cadAlternativa" header="Cadastro de Alternativa" widgetVar="AltDlg" modal="false" dynamic="true"
+              width="70%">
         <h:panelGroup id="pnlCadastroAlternativa">
             <p:panelGrid>
                 <p:row>

@@ -7,7 +7,7 @@
     <ui:composition id="uiManterAvaliacoes">
 
         <h:outputText value="Gerenciar Avaliações" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;" styleClass="">
+        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
             <p:row>
                 <p:column style="width: 40%">
                     <h:outputText value="Nome da Avaliação" styleClass="labelTxt"/>
@@ -15,9 +15,16 @@
                 </p:column>
                 <p:column rowspan="3">
                     <h:outputText value="Escolha as Questões" styleClass="labelTxt" style="padding-left: 15px"/>
-                    <p:pickList value="#{avaliacaoMB.dualListModel}" styleClass="pickList"
-                                var="teste" itemLabel="#{teste}" itemValue="#{teste}">
+                    <p:pickList value="#{avaliacaoMB.dualListModel}" styleClass="pickList" converter="pickListConverter"
+                                var="question" itemLabel="#{question}" itemValue="#{question}">
                         
+                       
+                        <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                        <f:facet name="targetCaption">Escolhidas</f:facet> 
+                        <p:column>
+                            #{question.questionText.text}
+                        </p:column>
+
                     </p:pickList>
                 </p:column>
             </p:row>
@@ -32,16 +39,16 @@
                     <h:outputText value="Avaliações Cadastradas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Cadastrada">
-                        
+
                     </p:dataTable>
                 </p:column>
             </p:row>
         </p:panelGrid>
-        
+
         <p:separator/>
-        
+
         <h:outputText value="Gerenciar Aplicações" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;" styleClass="">
+        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
             <p:row>
                 <p:column style="width: 40%">
                     <p:outputLabel value="Escolha a Avaliação" styleClass="labelTxt"/>
@@ -51,7 +58,7 @@
                     <h:outputText value="Avaliações Aplicadas" styleClass="labelTxt"/>
                     <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
                                  paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Aplicada">
-                        
+
                     </p:dataTable>
                 </p:column>
             </p:row>

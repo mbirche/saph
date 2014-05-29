@@ -61,7 +61,7 @@
                                     <p:menuitem value="Questões" update="pnlCentral"
                                                 actionListener="#{indexMB.setPaginaAtual('questoes.xhtml')}"/>
                                     <p:menuitem value="Avaliações" update="pnlCentral"
-                                                actionListener="#{indexMB.setPaginaAtual('manter_avaliacoes.xhtml')}"/>
+                                                actionListener="#{indexMB.setPaginaAtual('manter_avaliacoes.xhtml')}" action="#{avaliacaoMB.refreshTestManagementWindow()}"/>
                                     <p:menuitem value="Analisar Avaliações"/>
                                 </p:submenu>
                                 <p:submenu label="Geral" rendered="#{loginMB.isLogged()}">                               
