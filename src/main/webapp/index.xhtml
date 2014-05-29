@@ -39,34 +39,36 @@
 
                     <p:layoutUnit position="west" size="185" header="Menu" styleClass="cssPainel"
                                   style="background-color: #006699 !important;">
-                        <p:commandButton value="Log Out" actionListener="#{indexMB.setPaginaAtual('login.xhtml')}"
-                                         update="pnlCentral"/>
-                        <p:menu id="menuEsquerdo" style="width: 159px;">
-                            <p:submenu label="Aluno">
-                                <p:menuitem value="Responder Avaliações"/>
-                                <p:menuitem value="Avaliações Analisadas"/>
-                            </p:submenu>
-                            <p:submenu label="Coordenador">
-                                <p:menuitem value="Alunos, Professores e Coordenadores" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('aluno_professor_coordenador.xhtml')}"/>
-                                <p:menuitem value="Turmas e Atribuições" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('turma.xhtml')}" action="#{turmaMB.refreshStudentClassWindow()}"/>
-                                <p:menuitem value="Cursos e Disciplinas" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('curso_disciplina.xhtml')}" action="#{cursoDisciplinaMB.refreshCourseDisciplineWindow()}"/>
-                                <p:menuitem value="Áreas de Conhecimento e Habilidades" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('habilidade_area_conhecimento.xhtml')}"/>
-                            </p:submenu>
-                            <p:submenu label="Professor">
-                                <p:menuitem value="Questões" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('questoes.xhtml')}"/>
-                                <p:menuitem value="Avaliações" update="pnlCentral"
-                                            actionListener="#{indexMB.setPaginaAtual('manter_avaliacoes.xhtml')}"/>
-                                <p:menuitem value="Analisar Avaliações"/>
-                            </p:submenu>
-                            <p:submenu label="Geral">                               
-                                <p:menuitem value="Atualizar Dados Pessoais"/>                             
-                            </p:submenu>
-                        </p:menu>
+                        <h:panelGroup id="pnlEsquerdo">
+                            <p:commandButton value="#{loginMB.btnText}" actionListener="#{indexMB.setPaginaAtual('login.xhtml')}"
+                                             update="pnlCentral, pnlEsquerdo" action="#{loginMB.logOut()}" rendered="#{loginMB.isLogged()}"/>
+                            <p:menu id="menuEsquerdo" style="width: 159px;">
+                                <p:submenu label="Aluno" rendered="#{loginMB.isStudent()}">
+                                    <p:menuitem value="Responder Avaliações"/>
+                                    <p:menuitem value="Avaliações Analisadas"/>
+                                </p:submenu>
+                                <p:submenu label="Coordenador" rendered="#{loginMB.isCoordinator()}">
+                                    <p:menuitem value="Alunos, Professores e Coordenadores" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('aluno_professor_coordenador.xhtml')}"/>
+                                    <p:menuitem value="Turmas e Atribuições" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('turma.xhtml')}" action="#{turmaMB.refreshStudentClassWindow()}"/>
+                                    <p:menuitem value="Cursos e Disciplinas" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('curso_disciplina.xhtml')}" action="#{cursoDisciplinaMB.refreshCourseDisciplineWindow()}"/>
+                                    <p:menuitem value="Áreas de Conhecimento e Habilidades" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('habilidade_area_conhecimento.xhtml')}"/>
+                                </p:submenu>
+                                <p:submenu label="Professor" rendered="#{loginMB.isTeacher()}">
+                                    <p:menuitem value="Questões" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('questoes.xhtml')}"/>
+                                    <p:menuitem value="Avaliações" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('manter_avaliacoes.xhtml')}"/>
+                                    <p:menuitem value="Analisar Avaliações"/>
+                                </p:submenu>
+                                <p:submenu label="Geral" rendered="#{loginMB.isLogged()}">                               
+                                    <p:menuitem value="Atualizar Dados Pessoais"/>                             
+                                </p:submenu>
+                            </p:menu>
+                        </h:panelGroup>
                     </p:layoutUnit>
 
 
@@ -81,7 +83,7 @@
 
                 </p:layout>
 
-<!--                <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  -->
+                <!--                <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  -->
                 <p:dialog modal="true" widgetVar="statusDialog" header="Carregando..." style="font-size: 12px"  
                           draggable="false" closable="false">  
                     <p:graphicImage value="/images/ajaxloadingbar.gif" />  

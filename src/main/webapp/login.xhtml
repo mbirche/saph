@@ -9,6 +9,7 @@
         <p:panelGrid style="width: 100%" styleClass="gridSemBorda" id="pnlGridUsers">
             <p:row>
                 <p:column>
+                    <p:messages id="msgLogin" autoUpdate="true" severity="info"/>
                     <h:outputText value="Login" styleClass="labelTxt"/>
                     <p:inputText style="width: 48%" value="#{loginMB.credential.login}"/>
                     <h:outputText value="Senha" styleClass="labelTxt"/>
@@ -17,7 +18,8 @@
             </p:row>
             <p:row>
                 <p:column>
-                    <p:commandButton value="Entrar"/>
+                    <p:commandButton value="Entrar" actionListener="#{indexMB.setPaginaAtual(loginMB.login())}"
+                                     update="formPrincipal:pnlCentral, formPrincipal:pnlEsquerdo"/>
                 </p:column>
             </p:row>
         </p:panelGrid>

@@ -119,9 +119,10 @@ public class UserDAO extends AbstractDAO implements IUserFacade{
     public User getUserByCredentials(Credential credential) {
         
         session = HSession.getSession();
-        String hql = "from User usr WHERE " + credential.getLogin() + " = usr.credential.login AND" + credential.getPassword()+ " = usr.credential.password";
+        String hql = "from User usr WHERE :login = usr.credential.login AND :password = usr.credential.password";
         Query q = session.createQuery(hql);
-        
+        q.setString("login", credential.getLogin());
+        q.setString("password", credential.getPassword());
         User user = (User) q.uniqueResult();
         
         return user;

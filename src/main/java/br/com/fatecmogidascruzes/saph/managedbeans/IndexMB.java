@@ -17,11 +17,8 @@ public class IndexMB implements Serializable{
 
     private String paginaAtual;
 
-    public IndexMB() {
-        
+    public IndexMB() {        
         paginaAtual = "login.xhtml";
-//        paginaAtual = "habilidade_area_conhecimento.xhtml";
-        //paginaAtual = "cursos.xhtml";
     }
 
     public String getPaginaAtual() {
@@ -31,7 +28,9 @@ public class IndexMB implements Serializable{
         System.out.println("Fazendo nada!");
     }
     public String setPaginaAtual(String paginaAtual) {
-        this.paginaAtual = paginaAtual;
+        if(!paginaAtual.equals("null")){
+            this.paginaAtual = paginaAtual;
+        }
         return paginaAtual;
     }
 }

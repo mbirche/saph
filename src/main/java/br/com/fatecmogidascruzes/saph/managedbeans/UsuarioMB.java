@@ -159,6 +159,8 @@ public class UsuarioMB {
         resetPickList();
         limpaTelefone();
         emailAux = "";
+        showRA = false;
+        showRF = false;
         fillRolesLists();
     }
     public void saveUserEdit(){
