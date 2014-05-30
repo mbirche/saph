@@ -34,7 +34,6 @@ public class TestResultDAO extends AbstractDAO implements ITestResultFacade{
         Query q = session.createQuery(hql);
         
         List entities = q.list();
-        session.close();
         return entities;
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class QuestionService extends AbstractService implements IQuestionService{
 
-     private static QuestionService service;
+    private static QuestionService service;
     private QuestionDAO dao;
     public static QuestionService getInstance(){
         if(service == null){

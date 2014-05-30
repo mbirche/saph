@@ -38,4 +38,5 @@ public class TestApplication extends Entity {
     public void setTest(Test test) {
         this.test = test;
     }
+    
 }

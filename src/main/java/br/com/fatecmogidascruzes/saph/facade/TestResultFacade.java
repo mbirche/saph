@@ -1,10 +1,10 @@
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.dao.TestResultDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultFacade;
 
 import br.com.fatecmogidascruzes.saph.model.TestResult;
 import br.com.fatecmogidascruzes.saph.model.User;
+import br.com.fatecmogidascruzes.saph.service.TestResultService;
 import java.util.List;
 
 /**
@@ -15,7 +15,7 @@ import java.util.List;
 public class TestResultFacade extends AbstractFacade implements ITestResultFacade{
 
     private static TestResultFacade facade;
-    private TestResultDAO dao;
+    private TestResultService service;
     public static TestResultFacade getInstance(){
         if(facade == null){
             facade = new TestResultFacade();
@@ -25,11 +25,11 @@ public class TestResultFacade extends AbstractFacade implements ITestResultFacad
         }
     }
     private TestResultFacade(){
-        dao = new TestResultDAO();
+        service = new TestResultService();
     }
 
     @Override
     public List<TestResult> getTestResultsByStudent(User student) {
-        return dao.getTestResultsByStudent(student);
+        return service.getTestResultsByStudent(student);
     }
 }

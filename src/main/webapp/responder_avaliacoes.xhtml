@@ -6,33 +6,57 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:outputText value="Responder Avaliações" styleClass="tituloSecao"/>
-    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda" id="pnlGridResponderAvaliacoes">
-        <p:row>
-            <p:column>
-                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Cadastrada"
-                             var="loggedApp" value="#{avaliacaoMB.loggedApplications}" id="testApplicationsList">
 
-                    <p:column style="width: 34%">
-                        <f:facet name="header">
-                            <h:outputText value="Avaliação"/>
-                        </f:facet>
-                        #{loggedApp.test.name}
+        <h:panelGroup id="pnlRespostaAvaliacao">
+            <p:panelGrid id="pnlGridResponderProva" styleClass="gridSemBorda">
+                <p:row>
+                    <p:column style="width: 50%">
+                        <h:outputText value="Questões" styleClass="labelTxt"/>
+                        <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                     paginatorAlwaysVisible="false" emptyMessage="Não há questões para responder"
+                                     id="questionsListToAnswer" value="#{responderAvaliacaoMB.questionsToAnswer}" var="question">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Texto da Questão"/>
+                                </f:facet>
+                                #{question.questionText.text}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Alternativas"/>
+                                </f:facet>
+                                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
+                                             paginatorAlwaysVisible="false" emptyMessage="Não há alternativas para escolher"
+                                             id="answerListToChoose" value="#{question.alternatives}" var="alternative">
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Texto da Alternativa"/>
+                                        </f:facet>
+                                        #{alternative.alternativeText.text}
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Alternativas"/>
+                                        </f:facet>
+                                        <p:commandButton value="Escolher" action="#{responderAvaliacaoMB.chooseAlternative(question, alternative)}"
+                                                         update=":formPrincipal:pnlRespostaAvaliacao"/>
+                                        
+                                    </p:column>
+                                </p:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </p:column>
-                    <p:column style="width: 33%">
-                        <f:facet name="header">
-                            <h:outputText value="Atribuição"/>
-                        </f:facet>
-                        #{loggedApp.classAssignment.name}
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:commandButton value="Finalizar Avaliação" action="#{responderAvaliacaoMB.finishTest()}" 
+                                         actionListener="#{indexMB.setPaginaAtual('avaliacoes.xhtml')}"
+                                         update="formPrincipal:pnlCentral"/>
                     </p:column>
-                    <p:column style="width: 33%">
-                        <f:facet name="header">
-                            <h:outputText value="Responder"/>
-                        </f:facet>
-                        <p:commandButton value="Responder" disabled="false"/>
-                    </p:column>
-                </p:dataTable>
-            </p:column>
-        </p:row>
-    </p:panelGrid>
+                </p:row>
+            </p:panelGrid>  
+        </h:panelGroup>
+
 </ui:composition>
