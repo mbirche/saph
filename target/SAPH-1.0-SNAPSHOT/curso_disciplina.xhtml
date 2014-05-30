@@ -20,7 +20,7 @@
         <p:row>
             <p:column>
                 <p:outputLabel value="Escolha o professor coordenador" styleClass="labelTxt"/>
-                <p:selectOneMenu style="width: 100%" value="#{cursoDisciplinaMB.course.coordinator}" converter="userConverter">
+                <p:selectOneMenu style="width: 100%" value="#{cursoDisciplinaMB.course.coordinator}">
                     <f:selectItems value="#{cursoDisciplinaMB.allCoordinators}" var="coord" itemLabel="#{coord.name}" itemValue="#{coord}"/>
                 </p:selectOneMenu>
             </p:column>

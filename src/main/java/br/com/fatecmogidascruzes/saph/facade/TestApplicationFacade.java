@@ -1,7 +1,7 @@
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.dao.TestApplicationDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestApplicationFacade;
+import br.com.fatecmogidascruzes.saph.service.TestApplicationService;
 
 /**
  * All fonts were produced for author's graduation project
@@ -11,7 +11,7 @@ import br.com.fatecmogidascruzes.saph.interfaces.ITestApplicationFacade;
 public class TestApplicationFacade extends AbstractFacade implements ITestApplicationFacade{
 
     private static TestApplicationFacade facade;
-    private TestApplicationDAO dao;
+    private TestApplicationService service;
     public static TestApplicationFacade getInstance(){
         if(facade == null){
             facade = new TestApplicationFacade();
@@ -21,6 +21,6 @@ public class TestApplicationFacade extends AbstractFacade implements ITestApplic
         }
     }
     private TestApplicationFacade(){
-        dao = new TestApplicationDAO();
+        service = new TestApplicationService();
     }
 }

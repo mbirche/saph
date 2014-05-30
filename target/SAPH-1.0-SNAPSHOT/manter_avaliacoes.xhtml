@@ -1,79 +1,108 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition id="uiManterAvaliacoes"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition id="uiManterAvaliacoes">
+    <h:outputText value="Gerenciar Avaliações" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda" id="pnlGridAvaliacoes">
+        <p:row>
+            <p:column style="width: 40%">
+                <h:outputText value="Nome da Avaliação" styleClass="labelTxt"/>
+                <p:inputText style="width: 100%" value="#{avaliacaoMB.test.name}"/>
+            </p:column>
+            <p:column rowspan="3">
+                <h:outputText value="Escolha as Questões" styleClass="labelTxt" style="padding-left: 15px"/>
+                <p:pickList value="#{avaliacaoMB.dualListModel}" styleClass="pickList" converter="pickListConverter"
+                            var="question" itemLabel="#{question}" itemValue="#{question}">
 
-        <h:outputText value="Gerenciar Avaliações" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 40%">
-                    <h:outputText value="Nome da Avaliação" styleClass="labelTxt"/>
-                    <p:inputText style="width: 100%"/>
-                </p:column>
-                <p:column rowspan="3">
-                    <h:outputText value="Escolha as Questões" styleClass="labelTxt" style="padding-left: 15px"/>
-                    <p:pickList value="#{avaliacaoMB.dualListModel}" styleClass="pickList" converter="pickListConverter"
-                                var="question" itemLabel="#{question}" itemValue="#{question}">
-                        
-                       
-                        <f:facet name="sourceCaption">Disponíveis</f:facet>  
-                        <f:facet name="targetCaption">Escolhidas</f:facet> 
-                        <p:column>
-                            #{question.questionText.text}
-                        </p:column>
+                    <p:ajax event="transfer" listener="#{avaliacaoMB.onTransfer}"/>
+                    <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                    <f:facet name="targetCaption">Escolhidas</f:facet> 
+                    <p:column>
+                        #{question.questionText.text}
+                    </p:column>
 
-                    </p:pickList>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Salvar Avaliação"/>
-                    <p:commandButton value="Cancelar"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Avaliações Cadastradas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Cadastrada">
+                </p:pickList>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:commandButton value="Salvar Avaliação" actionListener="#{avaliacaoMB.saveTest()}" update="formPrincipal:pnlCentral"/>
+                <p:commandButton value="Cancelar"/>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <h:outputText value="Avaliações Cadastradas" styleClass="labelTxt"/>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Cadastrada"
+                             var="test" value="#{avaliacaoMB.allTests}" id="testsList">
 
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
+                    <p:column style="width: 34%">
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        #{test.name}
+                    </p:column>
+                    <p:column style="width: 33%">
+                        <f:facet name="header">
+                            <h:outputText value="Quantidade de  Questões"/>
+                        </f:facet>
+                        #{test.questions.size()}
+                    </p:column>
+                </p:dataTable>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
 
-        <p:separator/>
+    <p:separator/>
 
-        <h:outputText value="Gerenciar Aplicações" styleClass="tituloSecao"/>
-        <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
-            <p:row>
-                <p:column style="width: 40%">
-                    <p:outputLabel value="Escolha a Avaliação" styleClass="labelTxt"/>
-                    <p:selectOneMenu style="width: 100%"/>
-                </p:column>
-                <p:column rowspan="3">
-                    <h:outputText value="Avaliações Aplicadas" styleClass="labelTxt"/>
-                    <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
-                                 paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Aplicada">
+    <h:outputText value="Gerenciar Aplicações" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 100%;" styleClass="gridSemBorda">
+        <p:row>
+            <p:column style="width: 40%">
+                <p:outputLabel value="Escolha a Avaliação" styleClass="labelTxt"/>
+                <p:selectOneMenu style="width: 100%" value="#{avaliacaoMB.testApplication.test}" id="slctOneTest">
+                    <f:selectItems value="#{avaliacaoMB.allTests}" var="test" itemLabel="#{test.name}" itemValue="#{test}"/>
+                </p:selectOneMenu>
+            </p:column>
+            <p:column rowspan="3">
+                <h:outputText value="Avaliações Aplicadas" styleClass="labelTxt"/>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 90px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhuma Avaliação Aplicada" id="applicationsList"
+                             var="testApp" value="#{avaliacaoMB.allApplications}">
 
-                    </p:dataTable>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="Escolha a Atribuição" styleClass="labelTxt"/>
-                    <p:selectOneMenu style="width: 100%"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Salvar Aplicação"/>
-                    <p:commandButton value="Cancelar"/>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
-    </ui:composition>
-</html>
+                    <p:column style="width: 34%">
+                        <f:facet name="header">
+                            <h:outputText value="Avaliação"/>
+                        </f:facet>
+                        #{testApp.test.name}
+                    </p:column>
+                    <p:column style="width: 33%">
+                        <f:facet name="header">
+                            <h:outputText value="Atribuição"/>
+                        </f:facet>
+                        #{testApp.classAssignment.name}
+                    </p:column>
+                </p:dataTable>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:outputLabel value="Escolha a Atribuição" styleClass="labelTxt"/>
+                <p:selectOneMenu style="width: 100%" value="#{avaliacaoMB.testApplication.classAssignment}" id="slctOneClassAssignment">
+                    <f:selectItems value="#{turmaMB.clAssignments}" var="clAssignment" itemLabel="#{clAssignment.name}" itemValue="#{clAssignment}"/>
+                </p:selectOneMenu>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:commandButton value="Salvar Aplicação" actionListener="#{avaliacaoMB.saveApplication()}" update="formPrincipal:pnlCentral"/>
+                <p:commandButton value="Cancelar"/>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
+</ui:composition>
+

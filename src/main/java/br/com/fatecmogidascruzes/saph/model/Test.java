@@ -6,7 +6,7 @@ package br.com.fatecmogidascruzes.saph.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -19,7 +19,7 @@ public class Test extends Entity {
 
     private String name;
     @Cascade(CascadeType.ALL)
-    @OneToMany
+    @ManyToMany
     private List<Question> questions;
 
     public Boolean addQuestion(Question que){

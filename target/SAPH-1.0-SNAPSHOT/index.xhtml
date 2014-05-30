@@ -44,7 +44,9 @@
                                              update="pnlCentral, pnlEsquerdo" action="#{loginMB.logOut()}" rendered="#{loginMB.isLogged()}"/>
                             <p:menu id="menuEsquerdo" style="width: 159px;">
                                 <p:submenu label="Aluno" rendered="#{loginMB.isStudent()}">
-                                    <p:menuitem value="Responder Avaliações"/>
+                                    <p:menuitem value="Responder Avaliações" update="pnlCentral"
+                                                actionListener="#{indexMB.setPaginaAtual('responder_avaliacoes.xhtml')}"
+                                                action="#{avaliacaoMB.fillApplicationsList()}"/>
                                     <p:menuitem value="Avaliações Analisadas"/>
                                 </p:submenu>
                                 <p:submenu label="Coordenador" rendered="#{loginMB.isCoordinator()}">

@@ -4,8 +4,8 @@
  */
 package br.com.fatecmogidascruzes.saph.facade;
 
-import br.com.fatecmogidascruzes.saph.dao.TestDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestFacade;
+import br.com.fatecmogidascruzes.saph.service.TestService;
 
 /**
  *
@@ -13,7 +13,7 @@ import br.com.fatecmogidascruzes.saph.interfaces.ITestFacade;
  */
 public class TestFacade extends AbstractFacade implements ITestFacade{
     private static TestFacade facade;
-    private TestDAO dao;
+    private TestService service;
     public static TestFacade getInstance(){
         if(facade == null){
             facade = new TestFacade();
@@ -23,6 +23,6 @@ public class TestFacade extends AbstractFacade implements ITestFacade{
         }
     }
     private TestFacade(){
-        dao = new TestDAO();
+        service = new TestService();
     }
 }
