@@ -12,8 +12,8 @@
                 <p:row>
                     <p:column style="width: 50%">
                         <h:outputText value="Questões" styleClass="labelTxt"/>
-                        <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="5" tableStyle="height: 140px"
-                                     paginatorAlwaysVisible="false" emptyMessage="Não há questões para responder"
+                        <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="1" tableStyle="height: 140px"
+                                     paginatorAlwaysVisible="false" emptyMessage="Você já respondeu todas as questões desta avaliação"
                                      id="questionsListToAnswer" value="#{responderAvaliacaoMB.questionsToAnswer}" var="question">
 
                             <p:column>

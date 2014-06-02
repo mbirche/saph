@@ -81,9 +81,9 @@ public class ResponderAvaliacaoMB {
     
     public void finishTest(){
         testResult.setAnswered(true);
+        testResult.setStudent(LoginMB.getLoggedUser());
         testResultFacade.save(testResult);
         testResult = new TestResult();
-        testResult.setStudent(LoginMB.getLoggedUser());
         fillApplicationsList();
     }
     public void chooseAlternative(Question question, Alternative alternative){
