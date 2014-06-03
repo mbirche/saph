@@ -396,7 +396,7 @@ public class Teste {
         User st = new User();
         st.setName("Marcelo");
         
-        Set<Answer> answers = new HashSet<Answer>();
+        List<Answer> answers = new ArrayList<Answer>();
         
         Answer ans;
         Alternative alt;

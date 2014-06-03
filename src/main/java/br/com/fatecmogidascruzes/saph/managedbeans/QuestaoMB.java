@@ -113,7 +113,7 @@ public class QuestaoMB {
         question = new Question();
     }
 
-    private void refreshAbilitiesList(){
+    public void refreshAbilitiesList(){
         abilities = (List<Ability>)(List) abFacade.getAll(Ability.class);
     }
     private void refreshQuestionList(){

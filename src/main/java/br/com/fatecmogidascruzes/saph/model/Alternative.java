@@ -26,6 +26,14 @@ public class Alternative extends Entity {
     @OneToOne
     private AlternativeText alternativeText;
 
+    public Boolean hasAbility(Ability ability){
+        for(EvaluatedItem ev : evaluatedItems){
+            if(ev.getAbility().equals(ability)){
+                return true;
+            }
+        }
+        return false;
+    }
     public Boolean addEvaluatedItem(EvaluatedItem evItem){
         return evaluatedItems.add(evItem);
     }

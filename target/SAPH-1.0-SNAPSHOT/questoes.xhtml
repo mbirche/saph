@@ -56,7 +56,7 @@
                     </p:column>
                 </p:dataTable>
                 <p:commandButton value="Nova Alternativa" style="display: block; margin-left: 0px; margin-top: 10px;"
-                                 onclick="PF('AltDlg').show();"/>
+                                 oncomplete="PF('AltDlg').show();" action="#{questaoMB.refreshAbilitiesList()}"/>
             </p:column>
         </p:row>
         <p:row>
@@ -95,7 +95,7 @@
     <p:dialog id="cadAlternativa" header="Cadastro de Alternativa" widgetVar="AltDlg" modal="false" dynamic="true"
               width="70%">
         <h:panelGroup id="pnlCadastroAlternativa">
-            <p:panelGrid>
+            <p:panelGrid styleClass="gridSemBorda">
                 <p:row>
                     <p:column style="width: 50%">
                         <h:outputText value="Texto da alternativa: *" styleClass="labelTxt"/>

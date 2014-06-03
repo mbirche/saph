@@ -4,9 +4,8 @@
  */
 package br.com.fatecmogidascruzes.saph.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.FetchType;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
@@ -22,7 +21,7 @@ public class TestResult extends Entity {
     private Boolean answered;
     @Cascade(CascadeType.ALL)
     @ManyToMany
-    private Set<Answer> answers;
+    private List<Answer> answers;
     
     @Cascade(CascadeType.ALL)
     @OneToOne
@@ -36,13 +35,13 @@ public class TestResult extends Entity {
         return answers.add(ans);
     }
     public TestResult(){
-        answers = new HashSet<Answer>();
+        answers = new ArrayList<Answer>();
     }
-    public Set<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Set<Answer> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
