@@ -9,6 +9,7 @@ package br.com.fatecmogidascruzes.saph.service;
 import br.com.fatecmogidascruzes.saph.controller.DAOFactory;
 import br.com.fatecmogidascruzes.saph.dao.TestResultDAO;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultService;
+import br.com.fatecmogidascruzes.saph.model.TestApplication;
 import br.com.fatecmogidascruzes.saph.model.TestResult;
 import br.com.fatecmogidascruzes.saph.model.User;
 import java.util.List;
@@ -36,6 +37,11 @@ public class TestResultService extends AbstractService implements ITestResultSer
     @Override
     public List<TestResult> getTestResultsByStudent(User student) {
         return dao.getTestResultsByStudent(student);
+    }
+
+    @Override
+    public List<TestResult> getTestResultsByTestApplication(TestApplication testApp) {
+        return dao.getTestResultsByTestApplication(testApp);
     }
     
 }

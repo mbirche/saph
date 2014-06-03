@@ -1,0 +1,42 @@
+<ui:composition id="uiManterAvaliacoes"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:outputText value="Analisar Avaliações" styleClass="tituloSecao"/>
+    <p:panelGrid style="width: 50%;" styleClass="gridSemBorda" id="pnlGridAnalisarAvaliacoes">
+        <p:row>
+            <p:column>
+                <p:outputLabel value="Escolha a Avaliação" styleClass="labelTxt"/>
+                <p:selectOneMenu style="width: 100%" value="#{analisarAvaliacaoMB.selectedTestApp}" id="slctOneTestApp">
+                    <f:selectItems value="#{analisarAvaliacaoMB.allTestApplications}" var="testApp" itemLabel="#{testApp.test.name}" itemValue="#{testApp}"/>
+                    <p:ajax event="change" listener="#{analisarAvaliacaoMB.fillTestResultsByTestApplication()}" update="testResultsList"/>
+                </p:selectOneMenu>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 140px"
+                             paginatorAlwaysVisible="false" emptyMessage="Nenhum aluno respondeu esta avaliação"
+                             id="testResultsList" value="#{analisarAvaliacaoMB.testResults}" var="testResult">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome do aluno"/>
+                        </f:facet>
+                        #{testResult.student.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Analisar"/>
+                        </f:facet>
+                        <p:commandButton value="Analisar"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
+</ui:composition>

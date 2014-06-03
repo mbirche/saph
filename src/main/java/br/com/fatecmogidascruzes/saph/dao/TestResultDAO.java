@@ -2,6 +2,7 @@ package br.com.fatecmogidascruzes.saph.dao;
 
 import br.com.fatecmogidascruzes.saph.config.HSession;
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultFacade;
+import br.com.fatecmogidascruzes.saph.model.TestApplication;
 
 import br.com.fatecmogidascruzes.saph.model.TestResult;
 import br.com.fatecmogidascruzes.saph.model.User;
@@ -32,6 +33,17 @@ public class TestResultDAO extends AbstractDAO implements ITestResultFacade{
         session = HSession.getSession();
         String hql = "from TestResult tr WHERE " + student.getId() + " = tr.student.id";
         Query q = session.createQuery(hql);
+        
+        List entities = q.list();
+        return entities;
+    }
+
+    @Override
+    public List<TestResult> getTestResultsByTestApplication(TestApplication testApp) {
+        session = HSession.getSession();
+        String hql = "from TestResult tr WHERE :testAppId = tr.testApplication.id";
+        Query q = session.createQuery(hql);
+        q.setString("testAppId", testApp.getId().toString());
         
         List entities = q.list();
         return entities;

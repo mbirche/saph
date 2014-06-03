@@ -1,6 +1,7 @@
 package br.com.fatecmogidascruzes.saph.facade;
 
 import br.com.fatecmogidascruzes.saph.interfaces.ITestResultFacade;
+import br.com.fatecmogidascruzes.saph.model.TestApplication;
 
 import br.com.fatecmogidascruzes.saph.model.TestResult;
 import br.com.fatecmogidascruzes.saph.model.User;
@@ -31,5 +32,10 @@ public class TestResultFacade extends AbstractFacade implements ITestResultFacad
     @Override
     public List<TestResult> getTestResultsByStudent(User student) {
         return service.getTestResultsByStudent(student);
+    }
+
+    @Override
+    public List<TestResult> getTestResultsByTestApplication(TestApplication testApp) {
+        return service.getTestResultsByTestApplication(testApp);
     }
 }
