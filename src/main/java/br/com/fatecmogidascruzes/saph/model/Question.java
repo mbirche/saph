@@ -26,6 +26,26 @@ public class Question extends Entity {
     @OneToOne
     private QuestionText questionText;
 
+    public Integer numberOfHits(Ability ability){
+        Integer nHits = 0;
+        
+        for(Alternative alt : alternatives){
+            for(EvaluatedItem ev : alt.getEvaluatedItems()){
+                if(ev.getAbility().equals(ability) && ev.getPerformance().equals(Performance.SATISFATORY)){
+                    nHits++;
+                }
+            }
+        }
+        return nHits;
+    }
+    public Boolean hasAbility(Ability ability){
+        for(Alternative alt : alternatives){
+            if(alt.hasAbility(ability)){
+                return true;
+            }
+        }
+        return false;
+    }
     public Boolean addAlternative(Alternative alt){
         return alternatives.add(alt);
     }

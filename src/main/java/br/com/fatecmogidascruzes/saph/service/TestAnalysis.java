@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public class TestAnalysis {
 
-
     private Map<Integer, List<Boolean>> mapProb;
     private boolean[][] combinacoes;
 
@@ -26,32 +25,34 @@ public class TestAnalysis {
     }
 
     public Double getProbability(Integer nHit, List<TestProbability> rdmProb) {
-        
+
+        mapProb = new HashMap<Integer, List<Boolean>>();
         Double returnProb = 0.0;
 
-        gerarMatrizCombinacional(rdmProb.size(),nHit);
+        gerarMatrizCombinacional(rdmProb.size(), nHit);
 
-        for(int i = 0; i < mapProb.size(); i++){
+        for (int i = 0; i < mapProb.keySet().size(); i++) {
             returnProb += obterProbParcial(rdmProb, mapProb.get(i));
         }
         return returnProb;
     }
 
-    private Double obterProbParcial(List<TestProbability> rdmProb, List<Boolean> combinacao){
+    private Double obterProbParcial(List<TestProbability> rdmProb, List<Boolean> combinacao) {
         Double retorno = 1.0;
-        
-        for(int i = 0; i < rdmProb.size(); i++){
-            if(combinacao.get(i)){
+
+        for (int i = 0; i < rdmProb.size(); i++) {
+            if (combinacao.get(i)) {
                 retorno *= rdmProb.get(i).getHitProbability();
-            }else{
+            } else {
                 retorno *= rdmProb.get(i).getMissProbability();
             }
         }
         return retorno;
     }
+
     private void gerarMatrizCombinacional(Integer nQuestions, Integer nHits) {
         combinacoes = gerarCombinacoes(nQuestions, nHits);
-        
+
         for (int i = 0; i < combinacoes.length; i++) {
             for (int j = 0; j < combinacoes[i].length; j++) {
                 System.out.print(combinacoes[i][j] ? "1" : "0");
@@ -74,50 +75,61 @@ public class TestAnalysis {
         boolean[][] retorno = new boolean[quantidadeCombinacoes][N];
         int linhaAtual = 0;
 
+        if (p == 0) {
+            mapProb.put(0, new ArrayList<Boolean>());
+            
+            for(int i = 0; i < N; i++){
+                retorno[0][i] = false;
+                mapProb.get(0).add(false);
+            }
+            return retorno;
+        } else {
+
         // Preenche a matriz.
-        // Gera todas as possíveis posições dos 1s.
-        int[] posicao = new int[p];
-        for (int i = 0; i < p; i++) {
-            posicao[i] = i;
-        }
+            // Gera todas as possíveis posições dos 1s.
+            int[] posicao = new int[p];
+            for (int i = 0; i < p; i++) {
+                posicao[i] = i;
+            }
         // O algoritmo seguinte gera números conforme os seguintes - para um
-        // exemplo de combinação(5, 3).
-        // 1 2 3
-        // 1 2 4
-        // 1 2 5
-        // 1 3 4
-        // 1 3 5
-        // 1 4 5
-        // 2 3 4
-        // 2 3 5
-        // 2 4 5
-        // 3 4 5
-        adicionaCombinacao(retorno, linhaAtual++, posicao);
-        // Enquanto não gerar a última posição.
-        while (posicao[0] != (N - p)) {
-            int i = p - 1;
-            while (i >= 0) {
-                if (posicao[i] < (N - p + i)) {
-                    posicao[i]++;
-                    // Atualiza as posições à direita da atual.
-                    for (int j = i + 1; j < p; j++) {
-                        posicao[j] = posicao[j - 1] + 1;
+            // exemplo de combinação(5, 3).
+            // 1 2 3
+            // 1 2 4
+            // 1 2 5
+            // 1 3 4
+            // 1 3 5
+            // 1 4 5
+            // 2 3 4
+            // 2 3 5
+            // 2 4 5
+            // 3 4 5
+            adicionaCombinacao(retorno, linhaAtual++, posicao);
+            // Enquanto não gerar a última posição.
+            while (posicao[0] != (N - p)) {
+                int i = p - 1;
+                while (i >= 0) {
+                    if (posicao[i] < (N - p + i)) {
+                        posicao[i]++;
+                        // Atualiza as posições à direita da atual.
+                        for (int j = i + 1; j < p; j++) {
+                            posicao[j] = posicao[j - 1] + 1;
+                        }
+                        break;
+                    } else {
+                        i--;
                     }
-                    break;
-                } else {
-                    i--;
+                }
+                adicionaCombinacao(retorno, linhaAtual++, posicao);
+            }
+
+            for (int k = 0; k < quantidadeCombinacoes; k++) {
+                mapProb.put(k, new ArrayList<Boolean>());
+                for (int l = 0; l < N; l++) {
+                    mapProb.get(k).add(retorno[k][l]);
                 }
             }
-            adicionaCombinacao(retorno, linhaAtual++, posicao);
+            return retorno;
         }
-
-        for(int k = 0; k < quantidadeCombinacoes; k++){
-            mapProb.put(k, new ArrayList<Boolean>());
-            for(int l = 0; l < N; l++){
-                mapProb.get(k).add(retorno[k][l]);
-            }
-        }
-        return retorno;
     }
 
     /**
@@ -143,6 +155,9 @@ public class TestAnalysis {
      * @return O fatorial do número i.
      */
     public static int fatorial(int i) {
+        if (i == 0) {
+            return 1;
+        }
         int fatorial = 1;
         for (int j = 2; j <= i; j++) {
             fatorial *= j;
