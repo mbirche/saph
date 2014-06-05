@@ -32,11 +32,59 @@
                         <f:facet name="header">
                             <h:outputText value="Analisar"/>
                         </f:facet>
-                        <p:commandButton value="Analisar" action="#{analisarAvaliacaoMB.analisarProva(testResult)}"/>
+                        <p:commandButton value="Analisar" action="#{analisarAvaliacaoMB.analisarProva(testResult)}"
+                                         oncomplete="PF('resultDlg').show();"/>
                     </p:column>
 
                 </p:dataTable>
             </p:column>
         </p:row>
     </p:panelGrid>
+    
+    <p:dialog id="showResult" header="Resultado da Avaliação" widgetVar="resultDlg" modal="false" dynamic="true"
+              width="50%">
+        <h:panelGroup id="pnlshowResult">
+            <p:panelGrid styleClass="gridSemBorda">
+                <p:row>
+                    <p:column >
+                        <h:outputText value="Desempenho na Avaliação por Habilidade" styleClass="labelTxt"/>
+                        <p:dataTable style="width: 100%;" paginator="true" paginatorPosition="bottom" rows="10" tableStyle="height: 140px"
+                                     paginatorAlwaysVisible="false" emptyMessage="Não há resultados para esta avaliação"
+                                     id="showResultList" value="#{analisarAvaliacaoMB.resultDetails}" var="result">
+
+                            <p:column style="width: 50%">
+                                <f:facet name="header">
+                                    <h:outputText value="Nome da habilidade"/>
+                                </f:facet>
+                                #{result.ability.name}
+                            </p:column>
+                            <p:column style="width: 20%">
+                                <f:facet name="header">
+                                    <h:outputText value="Número de acertos"/>
+                                </f:facet>
+                                #{result.numberOfHits}
+                            </p:column>
+                            <p:column style="width: 20%">
+                                <f:facet name="header">
+                                    <h:outputText value="Número de ocorrências"/>
+                                </f:facet>
+                                #{result.numberOfUses}
+                            </p:column>
+                            <p:column style="width: 10%">
+                                <f:facet name="header">
+                                    <h:outputText value="Probabilidade de obter este resultado aleatoriamente"/>
+                                </f:facet>
+                                #{result.probRandom} %
+                            </p:column>              
+                        </p:dataTable>   
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:commandButton value="Ok" onsuccess="PF('resultDlg').hide();" />
+                    </p:column>
+                </p:row>
+            </p:panelGrid>  
+        </h:panelGroup>
+    </p:dialog>  
 </ui:composition>

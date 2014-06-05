@@ -6,6 +6,9 @@
 package br.com.fatecmogidascruzes.saph.service;
 
 import br.com.fatecmogidascruzes.saph.model.Ability;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  *
@@ -53,7 +56,10 @@ public class TestAnalysisDetail {
     }
 
     public Double getProbRandom() {
-        return probRandom;
+        DecimalFormat df = new DecimalFormat("#.00");
+        df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+                
+        return Double.valueOf(df.format(probRandom * 100));
     }
 
     public void setProbRandom(Double probRandom) {

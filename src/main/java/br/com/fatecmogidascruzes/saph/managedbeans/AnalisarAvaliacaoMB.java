@@ -55,6 +55,10 @@ public class AnalisarAvaliacaoMB {
         testResultfacade = (ITestResultFacade) FacadeFactory.getInstance().getFacade(TestResult.class);
 
         fillTestApplicationList();
+        
+        if(!allTestApplications.isEmpty()){
+            selectedTestApp = allTestApplications.get(0);
+        }
 
         testAnalysis = new TestAnalysis();
         
@@ -157,6 +161,14 @@ public class AnalisarAvaliacaoMB {
 
     public void setSelectedTestResult(TestResult selectedTestResult) {
         this.selectedTestResult = selectedTestResult;
+    }
+
+    public List<TestAnalysisDetail> getResultDetails() {
+        return resultDetails;
+    }
+
+    public void setResultDetails(List<TestAnalysisDetail> resultDetails) {
+        this.resultDetails = resultDetails;
     }
 
 }
