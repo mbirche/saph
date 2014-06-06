@@ -33,7 +33,7 @@
                             <h:outputText value="Analisar"/>
                         </f:facet>
                         <p:commandButton value="Analisar" action="#{analisarAvaliacaoMB.analisarProva(testResult)}"
-                                         oncomplete="PF('resultDlg').show();"/>
+                                         oncomplete="PF('resultDlg').show();" update=":formPrincipal:showResult"/>
                     </p:column>
 
                 </p:dataTable>
